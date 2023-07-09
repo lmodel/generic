@@ -1,3 +1,44 @@
+// person, group, organization or project that provides a piece of information (i.e. a knowledge association)
+message Agent
+ {
+  iriType iri = 0
+  string type = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  uriorcurie affiliation = 0
+  string address = 0
+  string id = 0
+  labelType name = 0
+ }
+// A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication
+message Article
+ {
+  iriType iri = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ repeated  string authors = 0
+  string id = 0
+  labelType name = 0
+  string type = 0
+ repeated  string pages = 0
+  string summary = 0
+ repeated  string keywords = 0
+ repeated  uriorcurie lcshTerms = 0
+ repeated  uriorcurie xref = 0
+  uriorcurie publishedIn = 0
+  string isoAbbreviation = 0
+  string volume = 0
+  string issue = 0
+ }
 // A typed association between two entities, supported by evidence
 message Association
  {
@@ -23,48 +64,425 @@ message Association
 message Attribute
  {
   string id = 0
+  string type = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
   labelType name = 0
   ontologyClass hasAttributeType = 0
  repeated  quantityValue hasQuantitativeValue = 0
   namedThing hasQualitativeValue = 0
   iriType iri = 0
  }
-// representation for someone or something by a sign that denotes it
-message Designation
+// Status as female, male, or intersex depending on their chromosomes, reproductive organs, and other characteristics
+message BiologicalSex
  {
   string id = 0
-  labelType name = 0
+  string type = 0
   narrativeText description = 0
-  string hasTextValue = 0
- repeated  informationContentEntity identifies = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  labelType name = 0
+  ontologyClass hasAttributeType = 0
+ repeated  quantityValue hasQuantitativeValue = 0
+  namedThing hasQualitativeValue = 0
+  iriType iri = 0
  }
-// Class of evidence that supports an association
-message EvidenceType
+// This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.
+message Book
  {
+  iriType iri = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ repeated  string authors = 0
+  labelType name = 0
+ repeated  string pages = 0
+  string summary = 0
+ repeated  string keywords = 0
+ repeated  uriorcurie lcshTerms = 0
+ repeated  uriorcurie xref = 0
+  string id = 0
+  string type = 0
+ }
+message BookChapter
+ {
+  iriType iri = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ repeated  string authors = 0
   string id = 0
   labelType name = 0
+  string type = 0
+ repeated  string pages = 0
+  string summary = 0
+ repeated  string keywords = 0
+ repeated  uriorcurie lcshTerms = 0
+ repeated  uriorcurie xref = 0
+  uriorcurie publishedIn = 0
+  string volume = 0
+  string chapter = 0
+ }
+// dividing line between two areas or sets of points in a topological space; difference between the closure and the interior
+message Boundary
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ }
+// The component is the smallest system entity that can be deployed, isolated, and restored independently. A self-contained assembly of parts within a complete operating unit or module, which cannot be further subdivided without loss of identity or function. The compoent is part of a system structurally composed of a set of components bound together. Each component is another system and this recursive definition stops when a component is regarded as atomic."
+message Component
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
+// A role played by the entity or part thereof within a control context.
+message ControlRole
+ {
+  string id = 0
+  string type = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  labelType name = 0
+  ontologyClass hasAttributeType = 0
+ repeated  quantityValue hasQuantitativeValue = 0
+  namedThing hasQualitativeValue = 0
+  iriType iri = 0
+ }
+// an item that refers to a collection of data from a data source.
+message Dataset
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
   string license = 0
   string rights = 0
   string format = 0
   date creationDate = 0
  }
+// an item that holds distribution level information about a dataset
+message DatasetDistribution
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+  string distributionDownloadUrl = 0
+ }
+// an item that holds summary level information about a dataset.
+message DatasetSummary
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+  string sourceWebPage = 0
+  string sourceLogo = 0
+ }
+// an item that holds version level information about a dataset.
+message DatasetVersion
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+  dataset hasDataset = 0
+  string ingestDate = 0
+  datasetDistribution hasDistribution = 0
+ }
+// representation for someone or something by a sign that denotes it
+message Designation
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string hasTextValue = 0
+ repeated  informationContentEntity identifies = 0
+ }
+// A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment.
+message Device
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
+// Part of the universe outside the boundaries of a given system, interacting with that given system.
+message Environment
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
+// Something that happens at a given place and time.
+message Event
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ }
+// Class of evidence that supports an association
+message EvidenceType
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// a location that can be described in lat/long coordinates
+message GeographicLocation
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  float latitude = 0
+  float longitude = 0
+ }
+// all of the processes of governing, whether undertaken by a government, market or network, whether over a family, tribe, formal or informal organization or territory and whether through the laws, norms, power or language of an organized society
+message Governance
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// physical components of a computer
+message Hardware
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
 // Sequence of characters uniquely identifying that with which it is associated
 message Identifier
  {
   string id = 0
+  iriType iri = 0
+  string type = 0
   labelType name = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
   string hasTextValue = 0
  repeated  informationContentEntity identifies = 0
+ }
+// An instance of an system. For example, human. Computer, my pet cat.
+message IndividualSystem
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
  }
 // A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.
 message InformationResource
  {
   string id = 0
+  iriType iri = 0
+  string type = 0
   labelType name = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// message intended to convey a course of action for the audience to follow
+message Instruction
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// A set of knowledge or reproducible skills acquired through study or experience.
+message Knowledge
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// system of rules and guidelines, generally backed by governmental authority
+message Law
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// discrete unit of communication intended by the source for consumption by some recipient or group of recipients
+message Message
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
   string license = 0
   string rights = 0
   string format = 0
@@ -74,22 +492,79 @@ message InformationResource
 message Name
  {
   string id = 0
+  iriType iri = 0
+  string type = 0
   labelType name = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
   string hasTextValue = 0
  repeated  informationContentEntity identifies = 0
  }
-// A generic grouping for any identifiable entity
+// a databased entity or concept/class
 message NamedThing
  {
   string id = 0
+  iriType iri = 0
+  string type = 0
   labelType name = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
  }
-// Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
+// a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question
+message Phenomenon
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ }
+// Any entity or process that exists at the level of the whole planet
+message PlanetaryEntity
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ }
+// collaborative enterprise, frequently involving research or design, that is carefully planned to achieve a particular aim
+message Project
+ {
+  iriType iri = 0
+  string type = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  uriorcurie affiliation = 0
+  string address = 0
+  string id = 0
+  labelType name = 0
+ }
+// Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.
 message Publication
  {
+  iriType iri = 0
   narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  categoryType category = 0
   string license = 0
   string rights = 0
   string format = 0
@@ -109,4 +584,123 @@ message QuantityValue
  {
   unit hasUnit = 0
   double hasNumericValue = 0
+ }
+// general term for rules or controls, including delegated legislation and self-regulation within an organisation
+message Regulation
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// prescription, including laws, regulations, instructions, guidelines, and social conventions; determinate method for performing any operation
+message Rule
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.
+message Serial
+ {
+  iriType iri = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  categoryType category = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ repeated  string authors = 0
+  labelType name = 0
+ repeated  string pages = 0
+  string summary = 0
+ repeated  string keywords = 0
+ repeated  uriorcurie lcshTerms = 0
+ repeated  uriorcurie xref = 0
+  string isoAbbreviation = 0
+  string type = 0
+  string volume = 0
+  string issue = 0
+  string id = 0
+ }
+// describes the severity of a observable feature or fault
+message SeverityValue
+ {
+  string id = 0
+  string type = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  labelType name = 0
+  ontologyClass hasAttributeType = 0
+ repeated  quantityValue hasQuantitativeValue = 0
+  namedThing hasQualitativeValue = 0
+  iriType iri = 0
+ }
+// A set of instructions in a computer programming language that can be executed by a computer, possibly after compilation into another programming language. The term Software includes ComputerPrograms (free-standing software), object methods, subroutines and software packages.
+message Software
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
+// An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
+message System
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+ }
+// describes a characteristic of an SystemEntity.
+message SystemAttribute
+ {
+  string id = 0
+  string type = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+  labelType name = 0
+  ontologyClass hasAttributeType = 0
+ repeated  quantityValue hasQuantitativeValue = 0
+  namedThing hasQualitativeValue = 0
+  iriType iri = 0
  }

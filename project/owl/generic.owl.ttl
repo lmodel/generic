@@ -1,7 +1,9 @@
 @prefix CDAO: <http://purl.obolibrary.org/obo/CDAO_> .
 @prefix CSO: <https://cso.kmi.open.ac.uk/topics/> .
+@prefix CTRL: <https://w3id.org/ibp/CTRLont#> .
+@prefix ECO: <http://purl.obolibrary.org/obo/ECO_> .
 @prefix EFO: <http://identifiers.org/efo/> .
-@prefix IAO: <http://purl.obolibrary.org/obo/IAO_> .
+@prefix GSSO: <http://purl.obolibrary.org/obo/GSSO_> .
 @prefix INO: <http://purl.obolibrary.org/obo/INO_> .
 @prefix LOINC: <http://loinc.org/rdf/> .
 @prefix PATO: <http://purl.obolibrary.org/obo/PATO_> .
@@ -9,24 +11,33 @@
 @prefix RO: <http://purl.obolibrary.org/obo/RO_> .
 @prefix SAN: <https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#> .
 @prefix SIO: <http://identifiers.org/sio/> .
+@prefix T4FS: <http://purl.obolibrary.org/obo/T4FS_> .
 @prefix UO: <http://purl.obolibrary.org/obo/UO_> .
 @prefix WIKIDATA: <https://www.WIKIDATA.org/wiki/> .
 @prefix WIKIDATA.PROPERTY: <https://www.WIKIDATA.org/wiki/Property:> .
 @prefix XAPI: <http://ns.inria.fr/ludo/v1/docs/xapi.html#> .
 @prefix aml: <https://w3id.org/i40/aml#> .
+@prefix astrovocab: <https://www.asc-csa.gc.ca/eng/resources/vocabulary/view.asp?id=> .
 @prefix csrc: <https://csrc.nist.gov/glossary/term/> .
-@prefix ctrl: <https://w3id.org/ibp/CTRLont#> .
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dcid: <https://datacommons.org/browser/> .
 @prefix dcterms: <http://purl.org/dc/terms/> .
 @prefix dwc: <http://rs.tdwg.org/dwc/terms/> .
 @prefix edam.data: <http://edamontology.org/data_> .
+@prefix edam.topic: <http://edamontology.org/topic_> .
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix freedict: <https://www.thefreedictionary.com/> .
+@prefix generic: <https://w3id.org/lmodel/generic/> .
 @prefix geolink: <http://schema.geolink.org/1.0/base/main.html#> .
 @prefix gr: <http://purl.org/goodrelations/v1#> .
 @prefix gvp: <http://vocab.getty.edu/ontology#> .
 @prefix linkml: <https://w3id.org/linkml/> .
+@prefix metasat: <https://schema.space/metasat/> .
+@prefix ns1: <http://purl.obolibrary.org/obo/> .
 @prefix om: <http://www.ontology-of-units-of-measure.org/resource/om-2/> .
 @prefix owl: <http://www.w3.org/2002/07/owl#> .
 @prefix pav: <http://purl.org/pav/> .
+@prefix prov: <http://www.w3.org/ns/prov#> .
 @prefix qud: <http://qudt.org/1.1/schema/qudt#> .
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
@@ -38,86 +49,1222 @@
 @prefix ssn-system: <http://www.w3.org/ns/ssn/systems/> .
 @prefix sumo: <https://w3id.org/sumo/kb/> .
 @prefix uco: <https://w3id.org/lmodel/uco-master> .
-@prefix ucs_landscape: <https://w3id.org/lmodel/generic/> .
+@prefix wgs1: <http://www.w3.org/2003/01/geo/wgs84_pos> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 
-linkml:SubsetDefinition a owl:Class .
-
-linkml:topValue a owl:DatatypeProperty ;
-    rdfs:label "value" .
-
-<https://w3id.org/lmodel/generic> a owl:Ontology ;
+<https://w3id.org/lmodel/generic.owl.ttl> a owl:Ontology ;
     rdfs:label "generic" ;
-    IAO:0000700 ucs_landscape:Annotation,
-        ucs_landscape:Entity,
-        ucs_landscape:NamedThing,
-        ucs_landscape:OntologyClass ;
+    ns1:IAO_0000700 generic:Annotation,
+        generic:Entity,
+        generic:MetaObject,
+        generic:OntologyClass,
+        generic:Outcome,
+        generic:SubjectOfInvestigation,
+        generic:TangibleEssenceOrOccurrent,
+        generic:ThingWithTaxon ;
     linkml:id "https://w3id.org/lmodel/generic" ;
     linkml:imports "linkml:types" .
 
-ucs_landscape:AdministrativeEntity a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "AdministrativeEntity" ;
-    rdfs:subClassOf ucs_landscape:NamedThing .
+generic:Article a owl:Class ;
+    rdfs:label "Article" ;
+    rdfs:comment "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:issue ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:volume ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:iso_abbreviation ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty generic:published_in ;
+            owl:qualifiedCardinality 1 ],
+        generic:Publication .
 
-ucs_landscape:Name a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Name" ;
-    rdfs:subClassOf ucs_landscape:Designation ;
-    skos:definition "distinctive designation for an individual (person, organization or thing)" .
+generic:Book a owl:Class ;
+    rdfs:label "book" ;
+    rdfs:comment "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdf:type ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
+        generic:Publication .
 
-ucs_landscape:copyright a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:Boundary a owl:Class ;
+    rdfs:label "Boundary" ;
+    rdfs:comment "dividing line between two areas or sets of points in a topological space; difference between the closure and the interior" ;
+    rdfs:subClassOf generic:NamedThing ;
+    skos:exactMatch WIKIDATA:Q875399 .
+
+generic:Component a owl:Class ;
+    rdfs:label "Component" ;
+    rdfs:comment "The component is the smallest system entity that can be deployed, isolated, and restored independently. A self-contained assembly of parts within a complete operating unit or module, which cannot be further subdivided without loss of identity or function. The compoent is part of a system structurally composed of a set of components bound together. Each component is another system and this recursive definition stops when a component is regarded as atomic.\"" ;
+    rdfs:subClassOf generic:System ;
+    skos:exactMatch ns1:NCIT_C48792,
+        prov:component,
+        csrc:component,
+        sumo:component,
+        WIKIDATA:Q1310239,
+        astrovocab:36 .
+
+generic:Environment a owl:Class ;
+    rdfs:label "Environment" ;
+    rdfs:comment "Part of the universe outside the boundaries of a given system, interacting with that given system." ;
+    rdfs:subClassOf generic:System ;
+    skos:closeMatch WIKIDATA:Q2572474 ;
+    skos:exactMatch ns1:NCIT_C16551,
+        WIKIDATA:Q2920644 ;
+    skos:narrowMatch edam.topic:3855,
+        SIO:000955 .
+
+generic:Event a owl:Class ;
+    rdfs:label "Event" ;
+    rdfs:comment "Something that happens at a given place and time." ;
+    rdfs:subClassOf generic:NamedThing ;
+    skos:exactMatch ns1:NCIT_C25499 .
+
+generic:GeographicLocation a owl:Class ;
+    rdfs:label "GeographicLocation" ;
+    rdfs:comment "a location that can be described in lat/long coordinates" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:float ;
+            owl:onProperty generic:latitude ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:float ;
+            owl:onProperty generic:longitude ],
+        generic:PlanetaryEntity ;
+    skos:broadMatch dwc:higherGeography,
+        csrc:Location ;
+    skos:exactMatch edam.data:3720,
+        ns1:NCIT_C16632,
+        geolink:Place,
+        schema1:geographicArea,
+        sumo:GeographicArea,
+        WIKIDATA:Q2221906 ;
+    skos:narrowMatch ns1:NCIT_C87189,
+        dwc:coordinateUncertaintyInMeters,
+        dwc:higherGeographyID,
+        prov:Location,
+        csrc:GPRS_Location_Information,
+        csrc:Location_Information,
+        sumo:exactlyLocated,
+        sumo:geographicSubregion,
+        sumo:geopoliticalSubdivision .
+
+generic:Governance a owl:Class ;
+    rdfs:label "Governance" ;
+    rdfs:comment "all of the processes of governing, whether undertaken by a government, market or network, whether over a family, tribe, formal or informal organization or territory and whether through the laws, norms, power or language of an organized society" ;
+    rdfs:subClassOf generic:Regulation ;
+    skos:exactMatch T4FS:0000472,
+        WIKIDATA:Q1553864 .
+
+generic:Hardware a owl:Class ;
+    rdfs:label "Hardware" ;
+    rdfs:comment "physical components of a computer" ;
+    rdfs:subClassOf generic:SoftwareOrDevice ;
+    skos:exactMatch WIKIDATA:Q3966 ;
+    skos:narrowMatch ns1:NCIT_C61402 .
+
+generic:Knowledge a owl:Class ;
+    rdfs:label "Knowledge" ;
+    rdfs:comment "A set of knowledge or reproducible skills acquired through study or experience." ;
+    rdfs:subClassOf generic:InformationResource ;
+    skos:exactMatch WIKIDATA:Q3474605 .
+
+generic:Law a owl:Class ;
+    rdfs:label "Law" ;
+    rdfs:comment "system of rules and guidelines, generally backed by governmental authority" ;
+    rdfs:subClassOf generic:Rule ;
+    skos:exactMatch GSSO:010532,
+        WIKIDATA:Q7748 ;
+    skos:narrowMatch ns1:NCIT_C62503 .
+
+generic:OpenAccess a owl:Class ;
+    rdfs:label "OpenAccess" ;
+    rdfs:comment "Free distribution of knowledge" ;
+    rdfs:subClassOf linkml:mixin,
+        generic:NamedThing ;
+    skos:exactMatch WIKIDATA:Q232932 .
+
+generic:Phenomenon a owl:Class ;
+    rdfs:label "Phenomenon" ;
+    rdfs:comment "a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question" ;
+    rdfs:subClassOf generic:NamedThing,
+        generic:Occurrent ;
+    skos:broadMatch SAN:Process ;
+    skos:exactMatch ns1:NCIT_C61380,
+        WIKIDATA:Q16722960,
+        WIKIDATA:Q483247 ;
+    skos:narrowMatch CSO:chattering_phenomenon,
+        CSO:ultrafast_phenomena ;
+    skos:relatedMatch sosa:phenomenonTime .
+
+generic:Project a owl:Class ;
+    rdfs:label "Project" ;
+    rdfs:comment "collaborative enterprise, frequently involving research or design, that is carefully planned to achieve a particular aim" ;
+    rdfs:subClassOf generic:Agent ;
+    skos:exactMatch GSSO:004441,
+        ns1:NCIT_C47885,
+        WIKIDATA:Q170584 .
+
+generic:Serial a owl:Class ;
+    rdfs:label "Serial" ;
+    rdfs:comment "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:volume ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:iso_abbreviation ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdf:type ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:issue ],
+        generic:Publication ;
+    skos:altLabel "journal" .
+
+generic:Software a owl:Class ;
+    rdfs:label "Software" ;
+    rdfs:comment "A set of instructions in a computer programming language that can be executed by a computer, possibly after compilation into another programming language. The term Software includes ComputerPrograms (free-standing software), object methods, subroutines and software packages." ;
+    rdfs:subClassOf generic:SoftwareOrDevice ;
+    skos:closeMatch ns1:IAO_0000591 ;
+    skos:exactMatch ns1:IAO_0000010,
+        sumo:ComputerProgram,
+        sumo:Software,
+        WIKIDATA:Q7397 .
+
+generic:SystemAttribute a owl:Class ;
+    rdfs:label "SystemAttribute" ;
+    rdfs:comment "describes a characteristic of an SystemEntity." ;
+    rdfs:subClassOf generic:Attribute ;
+    skos:exactMatch ssn-system:SystemProperty ;
+    skos:narrowMatch geolink:isSchedulerOf,
+        ssn-system:Accuracy,
+        ssn-system:ActuationRange,
+        ssn-system:BatteryLifetime,
+        ssn-system:Condition,
+        ssn-system:DetectionLimit,
+        ssn-system:Drift,
+        ssn-system:Frequency,
+        ssn-system:Latency,
+        ssn-system:MaintenanceSchedule,
+        ssn-system:MeasurementRange,
+        ssn-system:OperatingPowerRange,
+        ssn-system:OperatingProperty,
+        ssn-system:OperatingRange,
+        ssn-system:Precision,
+        ssn-system:Resolution,
+        ssn-system:ResponseTime,
+        ssn-system:Selectivity,
+        ssn-system:Sensitivity,
+        ssn-system:SurvivalProperty,
+        ssn-system:SurvivalRange,
+        ssn-system:SystemCapability,
+        ssn-system:SystemLifetime,
+        ssn-system:SystemProperty,
+        ssn-system:qualityOfObservation,
+        csrc:Resource_Starvation,
+        WIKIDATA:Q1554231 .
+
+generic:TangibleEssence a owl:Class ;
+    rdfs:label "TangibleEssence" ;
+    rdfs:comment "Semantic mixin concept. Pertains to entities that have tangible properties such as mass, volume, or charge." ;
+    rdfs:subClassOf linkml:mixin,
+        generic:TangibleEssenceOrOccurrent .
+
+generic:acronym a owl:DatatypeProperty ;
+    rdfs:label "acronym" ;
+    rdfs:comment "abbreviation that is made up of the initial letters of the components of the full form of a term or proper name or from syllables of the full form" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:abbreviation .
+
+generic:aspect_qualifier a owl:DatatypeProperty ;
+    rdfs:label "aspect qualifier" ;
+    rdfs:comment "Composes with the core concept to describe new concepts of a different ontological type. e.g. a process in which the core concept participates, a function/activity/role held by the core concept, or a characteristic/quality that inheres in the core concept.  The purpose of the aspect slot is to indicate what aspect is being affected in an 'affects' association." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:available_from a owl:ObjectProperty ;
+    rdfs:label "available from" ;
+    rdfs:comment "Source where an entity can be obtained." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:broad_matches a owl:DatatypeProperty ;
+    rdfs:label "broad matches" ;
+    rdfs:comment "A list of terms from different schemas or terminology systems that have a broader meaning. Such terms often describe a more general concept from different ontological perspectives." ;
+    rdfs:range xsd:string .
+
+generic:broad_synonym a owl:DatatypeProperty ;
+    rdfs:label "broad synonym" ;
+    rdfs:comment "Word having broadly same meaning as another word in the same language" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym .
+
+generic:coexists_with a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "coexists with" ;
+    rdfs:comment "holds between two entities that are co-located in the same aggregate object, process, or spatio-temporal region" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:narrowMatch SIO:000203,
+        SIO:000204,
+        SIO:000212,
+        LOINC:has_lateral_anatomic_location,
+        LOINC:has_lateral_location_presence,
+        ns1:ENVO_01001307,
+        RO:0002159,
+        RO:0002170,
+        RO:0002177,
+        RO:0002219,
+        RO:0002220,
+        RO:0002221,
+        RO:0002222,
+        RO:0002244,
+        RO:0002255,
+        RO:0002326,
+        RO:0002328,
+        RO:0002337,
+        RO:0002344,
+        RO:0002348,
+        RO:0002371,
+        RO:0002386,
+        RO:0002387,
+        RO:0002388,
+        RO:0002410,
+        RO:0002486,
+        RO:0002514,
+        RO:0002515,
+        RO:0002570,
+        RO:0002602,
+        RO:0002603,
+        RO:0002616,
+        RO:0003302,
+        RO:0003304,
+        RO:0003305,
+        RO:0003306,
+        RO:0004028,
+        RO:0009501,
+        RO:HOM0000019,
+        RO:HOM0000020,
+        RO:HOM0000034,
+        RO:HOM0000036,
+        RO:HOM0000037,
+        RO:HOM0000048,
+        ns1:SO_has_origin,
+        ns1:SWO_0000150 ;
+    generic:canonical_predicate "True" .
+
+generic:command a owl:ObjectProperty ;
+    rdfs:label "command" ;
+    rdfs:comment "instruction that carries a legal duty to obey" ;
+    rdfs:domain generic:Specification ;
+    rdfs:range generic:Instruction .
+
+generic:context_qualifier a owl:DatatypeProperty ;
+    rdfs:label "context qualifier" ;
+    rdfs:comment "Restricts the setting/context/location where the core concept (or qualified core concept) resides or occurs." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:copyright a owl:DatatypeProperty ;
     rdfs:label "copyright" ;
-    rdfs:domain ucs_landscape:InformationContentEntity ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:rights ;
-    skos:definition "Exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same" .
+    rdfs:comment "Exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:rights .
 
-ucs_landscape:provided_by a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "provided by" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph." ;
-    skos:exactMatch pav:providedBy,
-        WIKIDATA:Q68974939 .
+generic:correlated_with a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "correlated with" ;
+    rdfs:comment "A relationship that holds between two concepts represented by variables for which a statistical dependence is demonstrated using a correlation analysis method." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:associated_with ;
+    skos:exactMatch PATO:correlates_with,
+        RO:0002610 ;
+    skos:relatedMatch LOINC:associated_with,
+        csrc:Association,
+        sumo:associateWithStatus,
+        sumo:associatedFunctionality ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:Identifier a owl:Class,
-        linkml:ClassDefinition ;
+generic:created_with a owl:DatatypeProperty ;
+    rdfs:label "created with" ;
+    rdfs:comment "Objects used to create something" ;
+    rdfs:domain generic:Dataset ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch gvp:aat2325_created_by ;
+    skos:closeMatch prov:wasGeneratedBy,
+        aml:wasGeneratedBy ;
+    skos:exactMatch pav:createdWith .
+
+generic:derivative_qualifier a owl:DatatypeProperty ;
+    rdfs:label "derivative qualifier" ;
+    rdfs:comment "A qualifier that composes with a core subject/object  concept to describe something that is derived from the core concept.  For example, the qualifier ‘controller’ combines with a ‘Control X’ core concept to express the composed concept ‘a controller of Control X’." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:device a owl:DatatypeProperty ;
+    rdfs:label "device" ;
+    rdfs:comment "Named device" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:direction_qualifier a owl:DatatypeProperty ;
+    rdfs:label "direction qualifier" ;
+    rdfs:comment "Composes with the core concept (+ aspect if provided) to describe a change in its direction or degree." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:end_coordinate a owl:DatatypeProperty ;
+    rdfs:label "end coordinate" ;
+    rdfs:comment "The position at which the subject entity ends on the entity to which it is located on." ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:base_coordinate ;
+    skos:altLabel "end" .
+
+generic:evidence_count a owl:DatatypeProperty ;
+    rdfs:label "evidence count" ;
+    rdfs:comment "The number of evidence instances that are connected to an association." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:exact_matches a owl:DatatypeProperty ;
+    rdfs:label "exact matches" ;
+    rdfs:comment "A list of terms from different schemas or terminology systems that have an identical meaning. Such terms often describe the same concept from different ontological perspectives." ;
+    rdfs:range xsd:string .
+
+generic:exact_synonym a owl:DatatypeProperty ;
+    rdfs:label "exact synonym" ;
+    rdfs:comment "Word having exactly same meaning as another word in the same language" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym ;
+    skos:exactMatch ns1:EXO_hasExactSynonym .
+
+generic:expected_count a owl:DatatypeProperty ;
+    rdfs:label "expected count" ;
+    rdfs:comment "The expected (calculated) number of instances in a dataset/cohort whose records contain both the subject and object concept of an association if the subject and object concepts are independent." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:file a owl:DatatypeProperty ;
+    rdfs:label "file" ;
+    rdfs:comment "contained block of information on a computer" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    skos:broadMatch uco:File ;
+    skos:exactMatch WIKIDATA:Q82753 .
+
+generic:frequency_qualifier a owl:DatatypeProperty ;
+    rdfs:label "frequency qualifier" ;
+    rdfs:comment "a qualifier used in a observabile association to state how frequent the observable feature is seen in the subject" ;
+    rdfs:domain generic:Association ;
+    rdfs:range UO:0000105 ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:full_name a owl:DatatypeProperty ;
+    rdfs:label "full name" ;
+    rdfs:comment "a long-form human readable name for a thing" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch ns1:NCIT_C42614,
+        uco:AttributedName,
+        REPR:name ;
+    skos:closeMatch sumo:humanName ;
+    skos:exactMatch sumo:conventionalLongName,
+        sumo:fullName,
+        sumo:localLongName ;
+    skos:narrowMatch sumo:fullNameIndexOrder .
+
+generic:has_computational_sequence a owl:DatatypeProperty ;
+    rdfs:label "has computational sequence" ;
+    rdfs:comment "connects a workload feature to its sequence" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:has_control_role a owl:ObjectProperty ;
+    rdfs:label "has control role" ;
+    rdfs:comment "A role is particular behaviour which a control entity may exhibit." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:ControlRole ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:has_count a owl:DatatypeProperty ;
+    rdfs:label "has count" ;
+    rdfs:comment "number of things with a particular property" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:aggregate_statistic ;
+    skos:broadMatch sumo:Counting ;
+    skos:exactMatch SIO:000900,
+        LOINC:has_count,
+        dwc:individualCount ;
+    skos:narrowMatch ns1:IAO_0000596,
+        sumo:memberCount,
+        sumo:memberTypeCount .
+
+generic:has_device a owl:ObjectProperty ;
+    rdfs:label "has device" ;
+    rdfs:comment "connects an entity to one or more devices" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:Device ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:has_formula a owl:DatatypeProperty ;
+    rdfs:label "has formula" ;
+    rdfs:comment "has equation using mathematical or scientific notation" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch WIKIDATA:Q976981 .
+
+generic:has_percentage a owl:DatatypeProperty ;
+    rdfs:label "has percentage" ;
+    rdfs:comment "equivalent to has quotient multiplied by 100" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf generic:aggregate_statistic .
+
+generic:has_quotient a owl:DatatypeProperty ;
+    rdfs:label "has quotient" ;
+    rdfs:comment "Entity has quotient value" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:double ;
+    rdfs:subPropertyOf generic:aggregate_statistic .
+
+generic:has_topic a owl:ObjectProperty ;
+    rdfs:label "has topic" ;
+    rdfs:comment "Connects a node to a vocabulary term or OntologyClass that describes some aspect of the entity. In general specific characterization is preferred." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:OntologyClass ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:altLabel "descriptors",
+        "topic" ;
+    skos:broadMatch SIO:000420,
+        csrc:data_subjects,
+        sumo:FieldOfStudy,
+        WIKIDATA.PROPERTY:P921 ;
+    skos:exactMatch foaf:topic ;
+    skos:narrowMatch SIO:000133,
+        geolink:hasTrack,
+        skos:scopeNote,
+        REPR:Tag .
+
+generic:has_total a owl:DatatypeProperty ;
+    rdfs:label "has total" ;
+    rdfs:comment "total number of things in a particular reference set" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:aggregate_statistic .
+
+generic:has_variant_part a owl:ObjectProperty ;
+    rdfs:label "has variant part" ;
+    rdfs:comment "holds between a entity and a entity that is a subset of it" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:has_part ;
+    skos:narrowMatch SIO:000972,
+        SIO:000974 ;
+    skos:relatedMatch SIO:000053,
+        SIO:000273,
+        SIO:000369 ;
+    generic:canonical_predicate "True" .
+
+generic:image a owl:DatatypeProperty ;
+    rdfs:label "image" ;
+    rdfs:comment "entity or process that portrays something else, usually in a simplified or approximated manner" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    skos:broadMatch uco:Image ;
+    skos:exactMatch ns1:IAO_0000101,
+        ns1:NCIT_C48179,
+        WIKIDATA:Q1272626 .
+
+generic:interacts_with a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "interacts with" ;
+    rdfs:comment "holds between any two entities that directly or indirectly interact with each other" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:closeMatch schema1:InteractAction ;
+    skos:exactMatch RO:0002434 ;
+    skos:narrowMatch ns1:NCIT_has_target,
+        ns1:SWO_0000082,
+        ns1:SWO_0000150,
+        ns1:SWO_0000741,
+        gr:includes,
+        gr:offers,
+        gr:owns,
+        gr:predecessorOf,
+        gr:seeks,
+        sosa:actsOnProperty,
+        csrc:system,
+        aml:contains,
+        CTRL:isConnectedTo,
+        CTRL:isSupervisedBy,
+        sumo:disapproves,
+        sumo:discovers,
+        sumo:dislikes,
+        sumo:displayedUpon,
+        sumo:distrusts,
+        sumo:engineers,
+        sumo:entails,
+        sumo:exploits,
+        sumo:faces,
+        sumo:follows,
+        sumo:involvedInEvent,
+        sumo:links,
+        sumo:needs,
+        sumo:providesDestination,
+        sumo:publishes,
+        SAN:actsOn,
+        SAN:consumes,
+        SAN:impacts,
+        SAN:isImpactedUponBy,
+        SAN:isPropertyOf ;
+    generic:canonical_predicate "True" .
+
+generic:is_name_of a owl:ObjectProperty ;
+    rdfs:label "is name of" ;
+    rdfs:comment "denotes in some context" ;
+    rdfs:domain generic:Name ;
+    rdfs:range generic:InformationContentEntity ;
+    rdfs:subPropertyOf generic:identifies .
+
+generic:issued_date a owl:DatatypeProperty ;
+    rdfs:label "issued date" ;
+    rdfs:comment "date of formal issuance of the resource" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch dcterms:issued .
+
+generic:logical_description a owl:DatatypeProperty ;
+    rdfs:label "logical description" ;
+    rdfs:comment "definition in the form of a formal expression, such as the mathematical or logic representation, for the resource" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:description ;
+    skos:altLabel "logical definition" .
+
+generic:narrow_matches a owl:DatatypeProperty ;
+    rdfs:label "narrow matches" ;
+    rdfs:comment "A list of terms from different schemas or terminology systems that have a narrower meaning. Such terms often describe a more specific concept from different ontological perspectives." ;
+    rdfs:range xsd:string .
+
+generic:narrow_synonym a owl:DatatypeProperty ;
+    rdfs:label "narrow synonym" ;
+    rdfs:comment "Word having narrowly same meaning as another word in the same language" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym .
+
+generic:note a owl:DatatypeProperty ;
+    rdfs:label "note" ;
+    rdfs:comment "general remark, for any purpose" ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf dcterms:description ;
+    skos:broadMatch uco:Note ;
+    skos:narrowMatch skos:changeNote,
+        skos:editorialNote,
+        skos:scopeNote,
+        skos:usageNote .
+
+generic:opposite_of a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "opposite of" ;
+    rdfs:comment "An opposite can be the other side of, reverse of, or something contrary to anything, not just words. Completely different." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:exactMatch RO:0002604 ;
+    generic:canonical_predicate "True" .
+
+generic:paralogous_to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "paralogous to" ;
+    rdfs:comment "a homology relationship that holds between entities that diverged from a common point of origin" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:homologous_to ;
+    skos:exactMatch RO:HOM0000011,
+        gr:isVariantOf ;
+    generic:canonical_predicate "True" .
+
+generic:part_qualifier a owl:DatatypeProperty ;
+    rdfs:label "part qualifier" ;
+    rdfs:comment "defines a specific part/component of the core concept (used in cases there this specific part has no IRI we can use to directly represent it." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:qualified_predicate a owl:DatatypeProperty ;
+    rdfs:label "qualified predicate" ;
+    rdfs:comment "Predicate to be used in an association when subject and object qualifiers are present and the full reading of the statement requires a qualification to the predicate in use in order to refine or increase the specificity of the full statement reading.  This qualifier holds a relationship to be used instead of that expressed by the primary predicate, in a ‘full statement’ reading of the association, where qualifier-based semantics are included.  This is necessary only in cases where the primary predicate does not work in a full statement reading." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:quantifier_qualifier a owl:ObjectProperty ;
+    rdfs:label "quantifier qualifier" ;
+    rdfs:comment "A measurable quantity for the object of the association" ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:OntologyClass ;
+    rdfs:subPropertyOf generic:association_slot ;
+    skos:narrowMatch LOINC:analyzes,
+        LOINC:measured_by,
+        LOINC:property_of .
+
+generic:ratios a owl:DatatypeProperty ;
+    rdfs:label "ratios" ;
+    rdfs:comment "the relationship between relative quantities of substances, typically a ratio of whole integers" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:association_slot ;
+    skos:narrowMatch uco:compressionRatio .
+
+generic:related_condition a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "related condition" ;
+    rdfs:comment "Any state related to another state of something with regard to its appearance, quality, or working order." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:broadMatch ssn-system:Condition ;
+    skos:narrowMatch CSO:post-conditions,
+        CSO:preconditioners,
+        csrc:Predisposing_Condition ;
+    skos:relatedMatch sumo:relatedEvent ;
+    generic:canonical_predicate "True" .
+
+generic:related_synonym a owl:DatatypeProperty ;
+    rdfs:label "related synonym" ;
+    rdfs:comment "Word having related same meaning as another word in the same language" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym .
+
+generic:retrieved_on a owl:DatatypeProperty ;
+    rdfs:label "retrieved on" ;
+    rdfs:comment "Date on which dataset was retrieved" ;
+    rdfs:domain generic:Dataset ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch pav:retrievedOn .
+
+generic:severity_qualifier a owl:ObjectProperty ;
+    rdfs:label "severity qualifier" ;
+    rdfs:comment "a qualifier used in a observable association to state how severe the observable feature is in the subject" ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:SeverityValue ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:sex_qualifier a owl:ObjectProperty ;
+    rdfs:label "sex qualifier" ;
+    rdfs:comment "a qualifier used in a entity association to state whether the association is specific to a particular sex." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:BiologicalSex ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:start_coordinate a owl:DatatypeProperty ;
+    rdfs:label "start coordinate" ;
+    rdfs:comment "The position at which the subject entity starts on the entity to which it is located on. i.e., the start of the sequence being referenced is 1." ;
+    rdfs:range xsd:integer ;
+    rdfs:subPropertyOf generic:base_coordinate ;
+    skos:altLabel "start" .
+
+generic:state a owl:ObjectProperty ;
+    rdfs:label "state" ;
+    rdfs:comment "The way something is with respect to its main attributes." ;
+    rdfs:domain generic:IndividualSystem ;
+    rdfs:range generic:System ;
+    rdfs:subPropertyOf generic:association_slot ;
+    skos:exactMatch ns1:NCIT_C25687,
+        WIKIDATA:Q813912 ;
+    skos:narrowMatch uco:actionStatus .
+
+generic:statement_qualifier a owl:DatatypeProperty ;
+    rdfs:label "statement qualifier" ;
+    rdfs:comment "connects an statement to qualifier that modifies or qualifies the meaning of that statement" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:supporting_data_set a owl:ObjectProperty ;
+    rdfs:label "supporting data set" ;
+    rdfs:comment "A set of data used as evidence to generate the knowledge expressed in an Association (e.g. through computation on, reasoning or inference over the retrieved data)." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationResource ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:supporting_data_source a owl:ObjectProperty ;
+    rdfs:label "supporting data source" ;
+    rdfs:comment "An Information Resource from which data was retrieved and subsequently used as evidence to generate the knowledge expressed in an Association (e.g. through computation on, reasoning or inference over the retrieved data)." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationResource ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:symbol a owl:DatatypeProperty ;
+    rdfs:label "symbol" ;
+    rdfs:comment "Symbol for a particular thing" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym ;
+    skos:closeMatch skos:notation ;
+    skos:exactMatch SIO:000105,
+        ns1:IAO_0000028,
+        gvp:Symbol,
+        om:alternativeSymbol,
+        WIKIDATA.PROPERTY:P4878 ;
+    skos:narrowMatch CSO:data_symbols .
+
+generic:systematic_synonym a owl:DatatypeProperty ;
+    rdfs:label "systematic synonym" ;
+    rdfs:comment "most commonly used for classes" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch sumo:synonymousExternalConcept ;
+    skos:narrowMatch WIKIDATA.PROPERTY:P1420 .
+
+generic:temporal_interval_qualifier a owl:DatatypeProperty ;
+    rdfs:label "temporal interval qualifier" ;
+    rdfs:comment "a constraint of a time interval placed upon the truth value of an association" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:time ;
+    rdfs:subPropertyOf generic:temporal_context_qualifier .
+
+generic:trade_name a owl:ObjectProperty ;
+    rdfs:label "trade name" ;
+    rdfs:comment "Pseudonym used by companies not operating under their registered company name" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:update_date a owl:DatatypeProperty ;
+    rdfs:label "update date" ;
+    rdfs:comment "date on which an entity was updated. This can be applied to nodes or edges" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:altLabel "modified" ;
+    skos:broadMatch sumo:date ;
+    skos:exactMatch dcterms:modified,
+        geolink:hasLastUpdateDate,
+        geolink:hasUpdateDate,
+        schema1:dateModified,
+        uco:updatedDate,
+        sumo:dateUsed ;
+    skos:narrowMatch sumo:dataProcessed,
+        sumo:dateDissolved .
+
+generic:version a owl:DatatypeProperty ;
+    rdfs:label "version" ;
+    rdfs:comment "Connects a resource with its official edition or version name; this name is not considered part of the title or subtitle of the resource" ;
+    rdfs:domain generic:Dataset ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch pav:version,
+        owl:versionInfo ;
+    skos:exactMatch schema1:version,
+        uco:version,
+        sumo:version,
+        WIKIDATA.PROPERTY:P9767 ;
+    skos:narrowMatch schema1:softwareVersion ;
+    skos:relatedMatch WIKIDATA.PROPERTY:P348 .
+
+generic:version_of a owl:ObjectProperty ;
+    rdfs:label "version of" ;
+    rdfs:comment "Connects an entity with its official edition or version name" ;
+    rdfs:domain generic:DatasetVersion ;
+    rdfs:range generic:DatasetSummary ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch dcterms:isVersionOf ;
+    skos:narrowMatch WIKIDATA.PROPERTY:P629 .
+
+dcat:downloadURL a owl:DatatypeProperty ;
+    rdfs:label "download url" ;
+    rdfs:comment "Identifier pointing to Internet location where digital data can be downloaded from using get-request" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:closeMatch WIKIDATA:Q102014 ;
+    skos:exactMatch dcat:downloadURL ;
+    skos:relatedMatch WIKIDATA:Q1227459 .
+
+generic:AdministrativeEntity a owl:Class ;
+    rdfs:label "AdministrativeEntity" ;
+    rdfs:comment "Entity responsible for managing the affairs of an organization" ;
+    rdfs:subClassOf generic:NamedThing .
+
+generic:BiologicalSex a owl:Class ;
+    rdfs:label "BiologicalSex" ;
+    rdfs:comment "Status as female, male, or intersex depending on their chromosomes, reproductive organs, and other characteristics" ;
+    rdfs:subClassOf generic:Attribute ;
+    skos:exactMatch PATO:0000047 .
+
+generic:BookChapter a owl:Class ;
+    rdfs:label "book chapter" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:volume ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty generic:published_in ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:chapter ],
+        generic:Publication .
+
+generic:ControlRole a owl:Class ;
+    rdfs:label "ControlRole" ;
+    rdfs:comment "A role played by the entity or part thereof within a control context." ;
+    rdfs:subClassOf generic:Attribute .
+
+generic:Device a owl:Class ;
+    rdfs:label "Device" ;
+    rdfs:comment "A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment." ;
+    rdfs:subClassOf generic:System ;
+    skos:exactMatch SIO:000956,
+        ns1:NCIT_C62103,
+        schema1:device,
+        ssn:device,
+        csrc:Device,
+        metasat:device,
+        sumo:Device,
+        WIKIDATA:Q1183543,
+        SAN:device ;
+    skos:narrowMatch ns1:NCIT_C16830,
+        ns1:NCIT_C49831,
+        ns1:NCIT_C49918,
+        ns1:NCIT_C49927,
+        sosa:Actuator,
+        sosa:Sensor,
+        CSO:access_routers,
+        CSO:acoustic_device,
+        CSO:acoustic_surface_wave_device,
+        CSO:acquisition_device,
+        CSO:assistive_device,
+        CSO:bluetooth_device,
+        CSO:clamping_device,
+        CSO:compute_unified_device_architecture,
+        CSO:cryptographic_device,
+        CSO:device_architecture,
+        CSO:device_driver,
+        CSO:digital_device,
+        CSO:digital_micro-mirror_device,
+        CSO:display_device,
+        CSO:electric_sensing_device,
+        CSO:electromagnetic_device,
+        CSO:electromechanical_device,
+        CSO:electrooptical_device,
+        CSO:embedded_device,
+        CSO:energy_harvesting_device,
+        CSO:facts_device,
+        CSO:force_feedback_device,
+        CSO:fpga_device,
+        CSO:hand_held_device,
+        CSO:haptic_device,
+        CSO:logic_device,
+        CSO:magnetostrictive_device,
+        CSO:memsdevice,
+        CSO:microstrip_device,
+        CSO:mim_device,
+        CSO:mis_device,
+        CSO:mobile_device,
+        CSO:mobile_handheld_device,
+        CSO:mram_device,
+        CSO:optoelectronic_device,
+        CSO:portable_device,
+        CSO:programmable_logic_device,
+        CSO:radio_frequency_identification_device,
+        CSO:reconfigurable_device,
+        CSO:sensor_device,
+        CSO:storage_device,
+        CSO:timing_device,
+        CSO:wearable_device,
+        csrc:Bring_Your_Own_Device,
+        csrc:Computing_Device,
+        csrc:Consumer_Device,
+        csrc:Cryptographic_device,
+        csrc:Data_Transfer_Device,
+        csrc:Personal_Computer,
+        csrc:Router,
+        csrc:boundary_protection_device,
+        csrc:common_fill_device,
+        csrc:embedded_computer,
+        sumo:CommunicationDevice,
+        sumo:DataStorageDevice,
+        sumo:FlashDrive,
+        sumo:HardwareSystem,
+        WIKIDATA.PROPERTY:P6948,
+        WIKIDATA.PROPERTY:P7501,
+        WIKIDATA:Q178648,
+        WIKIDATA:Q2858615 .
+
+generic:Identifier a owl:Class ;
     rdfs:label "Identifier" ;
-    rdfs:subClassOf ucs_landscape:Designation ;
-    skos:definition "Sequence of characters uniquely identifying that with which it is associated" .
+    rdfs:comment "Sequence of characters uniquely identifying that with which it is associated" ;
+    rdfs:subClassOf generic:Designation .
 
-ucs_landscape:aggregator_knowledge_source a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:IndividualSystem a owl:Class ;
+    rdfs:label "IndividualSystem" ;
+    rdfs:comment "An instance of an system. For example, human. Computer, my pet cat." ;
+    rdfs:subClassOf generic:System ;
+    skos:broadMatch csrc:IT_System .
+
+generic:Instruction a owl:Class ;
+    rdfs:label "Instruction" ;
+    rdfs:comment "message intended to convey a course of action for the audience to follow" ;
+    rdfs:subClassOf generic:Message ;
+    skos:exactMatch ns1:NCIT_C42688,
+        WIKIDATA:Q12772763 .
+
+generic:MetaObject a owl:Class ;
+    rdfs:label "MetaObject" ;
+    rdfs:comment "linkml:Any type is an experimental feature for allowing arbitrary objects" ;
+    skos:exactMatch linkml:Any .
+
+generic:Name a owl:Class ;
+    rdfs:label "Name" ;
+    rdfs:comment "distinctive designation for an individual (person, organization or thing)" ;
+    rdfs:subClassOf generic:Designation .
+
+generic:Outcome a owl:Class ;
+    rdfs:label "outcome" ;
+    rdfs:comment "An entity that has the role of being the consequence of an exposure event. This is an abstract mixin grouping of various categories of possible biological or non-biological (e.g. clinical) outcomes" ;
+    rdfs:subClassOf linkml:mixin .
+
+generic:PlanetaryEntity a owl:Class ;
+    rdfs:label "PlanetaryEntity" ;
+    rdfs:comment "Any entity or process that exists at the level of the whole planet" ;
+    rdfs:subClassOf generic:NamedThing ;
+    skos:exactMatch ns1:ENVO_01000800,
+        sumo:Planet .
+
+generic:Regulation a owl:Class ;
+    rdfs:label "Regulation" ;
+    rdfs:comment "general term for rules or controls, including delegated legislation and self-regulation within an organisation" ;
+    rdfs:subClassOf generic:Rule ;
+    skos:exactMatch INO:0000157,
+        ns1:NCIT_C68821,
+        WIKIDATA:Q428148 .
+
+generic:SeverityValue a owl:Class ;
+    rdfs:label "SeverityValue" ;
+    rdfs:comment "describes the severity of a observable feature or fault" ;
+    rdfs:subClassOf generic:Attribute .
+
+generic:Specification a owl:Class ;
+    rdfs:label "Specification" ;
+    rdfs:comment "A detailed description of criteria for a piece of work." ;
+    rdfs:subClassOf linkml:mixin,
+        generic:InformationContentEntity ;
+    skos:broadMatch ns1:IAO_0000033 ;
+    skos:exactMatch ns1:NCIT_C73537,
+        WIKIDATA:Q317623 ;
+    skos:narrowMatch ns1:IAO_0000005,
+        ns1:IAO_0000007 .
+
+generic:SubjectOfInvestigation a owl:Class ;
+    rdfs:label "SubjectOfInvestigation" ;
+    rdfs:comment "An entity that has the role of being studied in an investigation, study, or experiment" ;
+    rdfs:subClassOf linkml:mixin .
+
+generic:abbreviation a owl:DatatypeProperty ;
+    rdfs:label "abbreviation" ;
+    rdfs:comment "designation formed by omitting parts from the full form of a term that denotes the same concept" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:synonym ;
+    skos:narrowMatch uco:abbreviation .
+
+generic:address a owl:DatatypeProperty ;
+    rdfs:label "address" ;
+    rdfs:comment "the particulars of the place where someone or an organization is situated. For now, this slot is a simple text \"blob\" containing all relevant details of the given location for fitness of purpose. For the moment, this \"address\" can include other contact details such as email and phone number(?)." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch uco:address .
+
+generic:affected_by a owl:ObjectProperty ;
+    rdfs:label "affected by" ;
+    rdfs:comment "describes an entity of which the state or quality is affected by another existing entity." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:affects ;
+    skos:exactMatch SIO:001159 .
+
+generic:affects a owl:ObjectProperty ;
+    rdfs:label "affects" ;
+    rdfs:comment "describes an entity that has a direct affect on the state or quality of another existing entity. Use of the 'affects' predicate implies that the affected entity already exists, unlike predicates such as 'affects risk for' and 'prevents', where the outcome is something that may or may not come to be." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:affected_by ;
+    skos:broadMatch SAN:Effect ;
+    skos:exactMatch SIO:001158,
+        WIKIDATA.PROPERTY:P689,
+        SAN:hasEffect,
+        SAN:impacts ;
+    skos:narrowMatch RO:0002343,
+        RO:0002355,
+        RO:0002591,
+        RO:0002592,
+        RO:0012003,
+        sumo:PathologicProcess,
+        sumo:resourceExhausted ;
+    generic:canonical_predicate "True" .
+
+generic:affiliation a owl:DatatypeProperty ;
+    rdfs:label "affiliation" ;
+    rdfs:comment "a professional relationship between one provider (x) within another provider (often an organization). Target provider identity should be specified by a CURIE. Providers may have multiple affiliations." ;
+    rdfs:domain generic:Agent ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch SIO:000173,
+        ns1:NCIT_C25412,
+        schema1:affiliation,
+        WIKIDATA.PROPERTY:P1268 ;
+    skos:relatedMatch uco:AffiliationFacet .
+
+generic:aggregator_knowledge_source a owl:ObjectProperty ;
     rdfs:label "aggregator knowledge source" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:InformationResource ;
-    rdfs:subPropertyOf ucs_landscape:knowledge_source ;
+    rdfs:comment "An intermediate aggregator resource from which knowledge expressed in an Association was retrieved downstream of the original source, on its path to its current serialized form." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationResource ;
+    rdfs:subPropertyOf generic:knowledge_source ;
     skos:altLabel "secondary references",
         "secondary sources" ;
-    skos:broadMatch dcterms:references ;
-    skos:definition "An intermediate aggregator resource from which knowledge expressed in an Association was retrieved downstream of the original source, on its path to its current serialized form." .
+    skos:broadMatch dcterms:references .
 
-ucs_landscape:authors a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:assesses a owl:ObjectProperty ;
+    rdfs:label "assesses" ;
+    rdfs:comment "The effect of a thing on a target was interrogated in some assay.  A relationship between some perturbing agent (usually a control agent) and some target entity, where the affect of the perturbing agent on the target entity was interrogated in a particular assay.  The target might be a particular observable feature, whole system, or other type of computational entity." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:is_assessed_by ;
+    skos:altLabel "was assayed against" ;
+    generic:canonical_predicate "True" .
+
+generic:associated_with a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "associated with" ;
+    rdfs:comment "Expresses a relationship between two named things where the relationship is typically generated statistically (though not in all cases), and is weaker than its child, 'correlated with', but stronger than its parent, 'related to'. This relationship holds between two concepts represented by variables for which a statistical dependence is demonstrated. E.g. the statement “A is associated with B\" asserts that having A is not statistically independent from whether a patient will also have B. Note that in Translator associations, the subject and object concepts may map exactly to the statistical variables, or represent related entities for which the variables serve as proxies in an Association (e.g. faults, contro entities or processes)" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:exactMatch LOINC:associated_with ;
+    skos:narrowMatch sumo:associateWithStatus ;
+    generic:canonical_predicate "True" .
+
+generic:author a owl:ObjectProperty ;
+    rdfs:label "author" ;
+    rdfs:comment "an instance of one (co-)creator primarily responsible for a written work" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range generic:Agent ;
+    rdfs:subPropertyOf generic:contributor ;
+    owl:inverseOf generic:has_author ;
+    skos:altLabel "creator" ;
+    skos:closeMatch sumo:authors ;
+    skos:exactMatch schema1:author,
+        WIKIDATA.PROPERTY:P50 ;
+    skos:relatedMatch dcterms:creator,
+        geolink:isAuthorOf,
+        skos:creator .
+
+generic:authors a owl:DatatypeProperty ;
     rdfs:label "authors" ;
-    rdfs:domain ucs_landscape:Publication ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication." .
+    rdfs:comment "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication." ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property .
 
-ucs_landscape:creation_date a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:catalyzes a owl:ObjectProperty ;
+    rdfs:label "catalyzes" ;
+    rdfs:comment "Causes or accelerates (a reaction) by acting as a catalyst." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:Occurrent ;
+    rdfs:subPropertyOf generic:participates_in ;
+    owl:inverseOf generic:has_catalyst ;
+    generic:canonical_predicate "True" .
+
+generic:chapter a owl:DatatypeProperty ;
+    rdfs:label "chapter" ;
+    rdfs:comment "chapter of a book" ;
+    rdfs:domain generic:BookChapter ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch schema1:Chapter,
+        sumo:Chapter,
+        WIKIDATA:Q1980247 .
+
+generic:completed_by a owl:ObjectProperty ;
+    rdfs:label "completed by" ;
+    rdfs:comment "Entity responsible for completion of something" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:has_completed .
+
+generic:contains_process a owl:ObjectProperty ;
+    rdfs:label "contains process" ;
+    rdfs:comment "Entity containing a process" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:occurs_in .
+
+generic:creation_date a owl:DatatypeProperty ;
     rdfs:label "creation date" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range linkml:Date ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
+    rdfs:comment "date on which an entity was created. This can be applied to nodes or edges" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:date ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:altLabel "publication date" ;
     skos:broadMatch sumo:date ;
-    skos:definition "date on which an entity was created. This can be applied to nodes or edges" ;
     skos:exactMatch dcterms:createdOn,
         dwc:dateIdentified,
         schema1:dateCreated,
@@ -130,34 +1277,62 @@ ucs_landscape:creation_date a owl:ObjectProperty,
         dwc:verbatimEventDate,
         WIKIDATA:Q115748455 .
 
-ucs_landscape:format a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:defines a owl:ObjectProperty ;
+    rdfs:label "defines" ;
+    rdfs:comment "specifies the meaning of something in terms of one or more of its essential qualities" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:is_defined_by .
+
+generic:distribution_download_url a owl:DatatypeProperty ;
+    rdfs:label "distribution download url" ;
+    rdfs:comment "Identifier pointing to Internet location used to distribute of digital assets" ;
+    rdfs:domain generic:DatasetDistribution ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch dcterms:downloadURL .
+
+generic:editor a owl:ObjectProperty ;
+    rdfs:label "editor" ;
+    rdfs:comment "editor of a compiled work such as a book or a periodical (newspaper or an academic journal).  Note that in the case of publications which have a containing \"published in\" node property, the editor association may not be attached directly to the embedded child publication, but only made in between the parent's publication node and the editorial agent of the encompassing publication (e.g. only from the Book referenced by the 'published_in' property of a book chapter Publication node)." ;
+    rdfs:domain generic:Publication ;
+    rdfs:range generic:Agent ;
+    rdfs:subPropertyOf generic:contributor ;
+    owl:inverseOf generic:has_editor ;
+    skos:exactMatch schema1:editor,
+        sumo:editor,
+        WIKIDATA.PROPERTY:P98 ;
+    skos:relatedMatch geolink:isEditorOf .
+
+generic:format a owl:DatatypeProperty ;
     rdfs:label "format" ;
-    rdfs:domain ucs_landscape:InformationContentEntity ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:exactMatch <http://purl.obolibrary.org/obo/NCIT_C42761>,
-        <http://purl.obolibrary.org/obo/SWO_0004002>,
+    rdfs:comment "arrangement of data for presentation" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch ns1:NCIT_C42761,
+        ns1:SWO_0004002,
         dcterms:format,
         sumo:format ;
     skos:narrowMatch schema1:fileFormat,
         CSO:storage_formats,
+        uco:format,
         REPR:ImageFormat,
         WIKIDATA.PROPERTY:P2701,
         WIKIDATA:Q935809 .
 
-ucs_landscape:has_attribute a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_attribute a owl:ObjectProperty ;
     rdfs:label "has attribute" ;
-    rdfs:domain ucs_landscape:Entity ;
-    rdfs:range ucs_landscape:Attribute ;
+    rdfs:comment "connects any entity to an attribute" ;
+    rdfs:domain generic:Entity ;
+    rdfs:range generic:Attribute ;
     skos:closeMatch sumo:hasVariable,
         sumo:property ;
-    skos:definition "connects any entity to an attribute" ;
     skos:exactMatch SIO:000008,
         ssn:hasProperty,
         aml:hasAttribute,
-        ctrl:hasParameter ;
+        CTRL:hasParameter ;
     skos:narrowMatch EFO:0006351,
         EFO:is_executed_in,
         SIO:000008,
@@ -233,14 +1408,14 @@ ucs_landscape:has_attribute a owl:ObjectProperty,
         CDAO:has_Remaining_Coordinate_List,
         CDAO:has_Root,
         CDAO:has_State,
-        IAO:0000039,
-        IAO:0000407,
-        <http://purl.obolibrary.org/obo/NCIT_C62618>,
-        <http://purl.obolibrary.org/obo/NCIT_has_data_element>,
-        <http://purl.obolibrary.org/obo/NCIT_is_qualified_by>,
-        <http://purl.obolibrary.org/obo/NCIT_qualifier_applies_to>,
-        <http://purl.obolibrary.org/obo/NCIT_role_has_domain>,
-        <http://purl.obolibrary.org/obo/NCIT_role_has_range>,
+        ns1:IAO_0000039,
+        ns1:IAO_0000407,
+        ns1:NCIT_C62618,
+        ns1:NCIT_has_data_element,
+        ns1:NCIT_is_qualified_by,
+        ns1:NCIT_qualifier_applies_to,
+        ns1:NCIT_role_has_domain,
+        ns1:NCIT_role_has_range,
         RO:0000053,
         RO:0000086,
         RO:0000087,
@@ -258,16 +1433,16 @@ ucs_landscape:has_attribute a owl:ObjectProperty,
         RO:0002566,
         RO:0002573,
         RO:0009004,
-        <http://purl.obolibrary.org/obo/SWO_0000086>,
-        <http://purl.obolibrary.org/obo/SWO_0000087>,
-        <http://purl.obolibrary.org/obo/SWO_0000741>,
-        <http://purl.obolibrary.org/obo/SWO_0004000>,
-        <http://purl.obolibrary.org/obo/SWO_0004001>,
-        <http://purl.obolibrary.org/obo/SWO_0004002>,
-        <http://purl.obolibrary.org/obo/SWO_0004004>,
-        <http://purl.obolibrary.org/obo/SWO_3000054>,
-        <http://purl.obolibrary.org/obo/SWO_9000067>,
-        <http://purl.obolibrary.org/obo/SWO_9001002>,
+        ns1:SWO_0000086,
+        ns1:SWO_0000087,
+        ns1:SWO_0000741,
+        ns1:SWO_0004000,
+        ns1:SWO_0004001,
+        ns1:SWO_0004002,
+        ns1:SWO_0004004,
+        ns1:SWO_3000054,
+        ns1:SWO_9000067,
+        ns1:SWO_9001002,
         dcterms:hasFormat,
         dcterms:hasPart,
         dcterms:hasVersion,
@@ -335,12 +1510,12 @@ ucs_landscape:has_attribute a owl:ObjectProperty,
         aml:hasUnit,
         aml:hasVersionSUC,
         aml:hasWriterVersion,
-        ctrl:hasApplicationLogic,
-        ctrl:hasInput,
-        ctrl:hasMedium,
-        ctrl:hasOutput,
-        ctrl:isConnectedTo,
-        ctrl:isSupervisedBy,
+        CTRL:hasApplicationLogic,
+        CTRL:hasInput,
+        CTRL:hasMedium,
+        CTRL:hasOutput,
+        CTRL:isConnectedTo,
+        CTRL:isSupervisedBy,
         sumo:hasAccount,
         sumo:hasAcrossVariable,
         sumo:hasAward,
@@ -362,13 +1537,12 @@ ucs_landscape:has_attribute a owl:ObjectProperty,
         SAN:hasEffect,
         SAN:hasWriter .
 
-ucs_landscape:has_attribute_type a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_attribute_type a owl:ObjectProperty ;
     rdfs:label "has attribute type" ;
-    rdfs:domain ucs_landscape:Attribute ;
-    rdfs:range ucs_landscape:OntologyClass ;
+    rdfs:comment "connects an attribute to a class that describes it" ;
+    rdfs:domain generic:Attribute ;
+    rdfs:range generic:OntologyClass ;
     skos:closeMatch sumo:havePartTypes ;
-    skos:definition "connects an attribute to a class that describes it" ;
     skos:exactMatch aml:hasAttributeDataType ;
     skos:narrowMatch LOINC:has_modality_type,
         LOINC:has_view_type,
@@ -406,13 +1580,13 @@ ucs_landscape:has_attribute_type a owl:ObjectProperty,
         aml:hasRefSemAttribute,
         aml:hasRoleClass,
         aml:hasRoleRequirement,
-        ctrl:hasDataType,
-        ctrl:hasSemanticType,
+        CTRL:hasDataType,
+        CTRL:hasSemanticType,
         sumo:havePartTypes,
         sumo:ipAddressOf ;
     skos:relatedMatch INO:0000154,
-        <http://purl.obolibrary.org/obo/NCIT_C115618>,
-        <http://purl.obolibrary.org/obo/NCIT_C42854>,
+        ns1:NCIT_C115618,
+        ns1:NCIT_C42854,
         dcterms:isFormatOf,
         dcterms:isVersionOf,
         schema1:Float,
@@ -460,29 +1634,80 @@ ucs_landscape:has_attribute_type a owl:ObjectProperty,
         sumo:viewType,
         SAN:QuantityKind .
 
-ucs_landscape:has_evidence a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_author a owl:ObjectProperty ;
+    rdfs:label "has author" ;
+    rdfs:comment "Published entity has author" ;
+    rdfs:domain generic:Agent ;
+    rdfs:range generic:Publication ;
+    rdfs:subPropertyOf generic:has_contributor ;
+    owl:inverseOf generic:author .
+
+generic:has_catalyst a owl:ObjectProperty ;
+    rdfs:label "has catalyst" ;
+    rdfs:comment "Can be catalized" ;
+    rdfs:domain generic:Occurrent ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:has_participant ;
+    owl:inverseOf generic:catalyzes .
+
+generic:has_completed a owl:ObjectProperty ;
+    rdfs:label "has completed" ;
+    rdfs:comment "holds between an entity and a process that the entity is capable of and has completed" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:completed_by ;
+    skos:exactMatch schema1:Completed ;
+    skos:narrowMatch gvp:estEnd,
+        csrc:Turing_complete ;
+    skos:relatedMatch sumo:finishes ;
+    generic:canonical_predicate "True" ;
+    generic:opposite_of "has not completed" .
+
+generic:has_editor a owl:ObjectProperty ;
+    rdfs:label "has editor" ;
+    rdfs:comment "Publication has editor" ;
+    rdfs:domain generic:Agent ;
+    rdfs:range generic:Publication ;
+    rdfs:subPropertyOf generic:has_contributor ;
+    owl:inverseOf generic:editor .
+
+generic:has_evidence a owl:ObjectProperty ;
     rdfs:label "has evidence" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:EvidenceType ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "connects an association to an instance of supporting evidence" ;
+    rdfs:comment "connects an association to an instance of supporting evidence" ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:EvidenceType ;
+    rdfs:subPropertyOf generic:association_slot ;
     skos:exactMatch RO:0002558 .
 
-ucs_landscape:has_numeric_value a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_not_completed a owl:ObjectProperty ;
+    rdfs:label "has not completed" ;
+    rdfs:comment "holds between an entity and a process that the entity is capable of, but has not completed" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:not_completed_by ;
+    skos:closeMatch ns1:IAO_0000125 ;
+    skos:exactMatch ns1:CL_has_not_completed,
+        WIKIDATA:Q20734200 ;
+    skos:narrowMatch WIKIDATA:Q2910675 ;
+    skos:relatedMatch ns1:SWO_9000067 ;
+    generic:canonical_predicate "True" ;
+    generic:opposite_of "has completed" .
+
+generic:has_numeric_value a owl:DatatypeProperty ;
     rdfs:label "has numeric value" ;
-    rdfs:domain ucs_landscape:QuantityValue ;
-    rdfs:range linkml:Double ;
-    skos:broadMatch <http://purl.obolibrary.org/obo/NCIT_C81274>,
+    rdfs:comment "connects a quantity value to a number" ;
+    rdfs:domain generic:QuantityValue ;
+    rdfs:range xsd:double ;
+    skos:broadMatch ns1:NCIT_C81274,
         qud:numericValue,
         schema1:Number,
         sumo:number ;
-    skos:definition "connects a quantity value to a number" ;
     skos:exactMatch qud:quantityValue ;
     skos:narrowMatch gr:weight,
         gr:width,
-        ctrl:Quantity,
+        CTRL:Quantity,
         sumo:FiniteQuantity,
         sumo:InfiniteQuantity,
         sumo:Quantity,
@@ -500,100 +1725,177 @@ ucs_landscape:has_numeric_value a owl:ObjectProperty,
         sumo:unitNumber,
         sumo:unitPrice .
 
-ucs_landscape:has_qualitative_value a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_part a owl:ObjectProperty ;
+    rdfs:label "has part" ;
+    rdfs:comment "holds between wholes and their parts (entities or processes)" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:overlaps ;
+    skos:broadMatch RO:0001019 ;
+    skos:exactMatch ns1:BFO_0000051,
+        ns1:BFO_0000055,
+        RO:0001019,
+        dcterms:hasPart,
+        geolink:hasPart,
+        schema1:hasPart,
+        WIKIDATA.PROPERTY:P527 ;
+    skos:narrowMatch LOINC:has_component,
+        LOINC:has_member,
+        ns1:BFO_0000117,
+        ns1:NCIT_complex_has_physical_part,
+        RO:0002180,
+        RO:0002351,
+        RO:0002473,
+        RO:0002524 ;
+    generic:canonical_predicate "True" ;
+    generic:opposite_of "lacks part" .
+
+generic:has_provider a owl:ObjectProperty ;
+    rdfs:label "has provider" ;
+    rdfs:comment "Information content entity has provider" ;
+    rdfs:domain generic:Agent ;
+    rdfs:range generic:InformationContentEntity ;
+    rdfs:subPropertyOf generic:has_contributor ;
+    owl:inverseOf generic:provider .
+
+generic:has_publisher a owl:ObjectProperty ;
+    rdfs:label "has publisher" ;
+    rdfs:comment "Publication has publisher" ;
+    rdfs:domain generic:Agent ;
+    rdfs:range generic:Publication ;
+    rdfs:subPropertyOf generic:has_contributor ;
+    owl:inverseOf generic:publisher .
+
+generic:has_qualitative_value a owl:ObjectProperty ;
     rdfs:label "has qualitative value" ;
-    rdfs:domain ucs_landscape:Attribute ;
-    rdfs:range ucs_landscape:NamedThing ;
+    rdfs:comment "connects an attribute to a value" ;
+    rdfs:domain generic:Attribute ;
+    rdfs:range generic:NamedThing ;
     skos:closeMatch schema1:QualitativeValue,
         sumo:greaterThanByQuality ;
-    skos:definition "connects an attribute to a value" ;
     skos:narrowMatch SIO:000216,
-        IAO:0000221,
+        ns1:IAO_0000221,
         gr:hasMaxValue,
         gr:hasMinValue,
         aml:hasAttributeValue .
 
-ucs_landscape:has_quantitative_value a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_quantitative_value a owl:ObjectProperty ;
     rdfs:label "has quantitative value" ;
-    rdfs:domain ucs_landscape:Attribute ;
-    rdfs:range ucs_landscape:QuantityValue ;
-    skos:broadMatch <http://purl.obolibrary.org/obo/NCIT_C70589> ;
-    skos:definition "connects an attribute to a value" ;
+    rdfs:comment "connects an attribute to a value" ;
+    rdfs:domain generic:Attribute ;
+    rdfs:range generic:QuantityValue ;
+    skos:broadMatch ns1:NCIT_C70589 ;
     skos:exactMatch gr:QuantitativeValue,
         qud:quantityValue,
         schema1:QuantitativeValue,
         om:hasQuantity,
-        ctrl:hasQuantity,
+        CTRL:hasQuantity,
         WIKIDATA:Q17627912 ;
     skos:narrowMatch gr:QuantitativeValueFloat,
         gr:QuantitativeValueInteger,
         om:hasBaseQuantity,
         om:hasDerivedQuantity .
 
-ucs_landscape:has_unit a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:has_unit a owl:DatatypeProperty ;
     rdfs:label "has unit" ;
-    rdfs:domain ucs_landscape:QuantityValue ;
-    rdfs:range ucs_landscape:Unit ;
+    rdfs:comment "connects a quantity value to a unit" ;
+    rdfs:domain generic:QuantityValue ;
+    rdfs:range UO:0000000 ;
     skos:closeMatch EFO:0001697,
         UO:is_unit_of ;
-    skos:definition "connects a quantity value to a unit" ;
     skos:exactMatch SIO:000221,
-        IAO:0000039,
+        ns1:IAO_0000039,
         qud:unit,
         om:hasUnit,
         aml:hasUnit,
-        ctrl:hasUnit,
-        ctrl:unit,
+        CTRL:hasUnit,
+        CTRL:unit,
         sumo:UnitFn ;
     skos:narrowMatch gr:hasUnitOfMeasurement .
 
-ucs_landscape:identifies a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "identifies" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:InformationContentEntity ;
-    rdfs:subPropertyOf ucs_landscape:related_to_at_instance_level ;
-    skos:altLabel "denotes",
-        "identifier of" ;
-    skos:closeMatch SIO:000020,
-        IAO:0000219 ;
-    skos:definition "a relationship that identifies, or serves as a sign, for something" ;
-    skos:exactMatch <http://identifiers.org/edam/is_identifier_of>,
-        SIO:000672,
-        WIKIDATA.PROPERTY:P10476 ;
-    ucs_landscape:canonical_predicate "True" .
+generic:homologous_to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "homologous to" ;
+    rdfs:comment "holds between two named things with same relation, relative position, or structure" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:similar_to ;
+    skos:altLabel "in homology relationship with" ;
+    skos:broadMatch gr:isSimilarTo,
+        sumo:models ;
+    skos:exactMatch SIO:010302,
+        RO:HOM0000001 ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:keywords a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:iri a owl:DatatypeProperty ;
+    rdfs:label "iri" ;
+    rdfs:comment "An IRI for an entity. This is determined by the id using expansion rules." ;
+    rdfs:range xsd:anyURI ;
+    skos:closeMatch ns1:NCIT_C165071,
+        uco:url,
+        sumo:UniformResourceLocator ;
+    skos:exactMatch XAPI:IRI,
+        rr:IRI,
+        WIKIDATA.PROPERTY:P854,
+        WIKIDATA:Q424583 ;
+    skos:narrowMatch RO:0002617 ;
+    skos:relatedMatch dwc:usewithiri .
+
+generic:is_assessed_by a owl:ObjectProperty ;
+    rdfs:label "is assessed by" ;
+    rdfs:comment "Entity responsible for assessing another entity" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:assesses .
+
+generic:is_defined_by a owl:ObjectProperty ;
+    rdfs:label "is defined by" ;
+    rdfs:comment "indicates something that specifies the meaning associated with the subject" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:InformationContentEntity ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:defines ;
+    skos:altLabel "is defined in" ;
+    skos:narrowMatch GSSO:isDefinedBy .
+
+generic:keywords a owl:DatatypeProperty ;
     rdfs:label "keywords" ;
-    rdfs:domain ucs_landscape:Publication ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
+    rdfs:comment "keywords tagging a publication" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:closeMatch csrc:keyword,
         sumo:keyName,
         WIKIDATA:Q1072684 ;
-    skos:definition "keywords tagging a publication" ;
     skos:exactMatch schema1:keywords ;
     skos:relatedMatch uco:keywordSearchTerm .
 
-ucs_landscape:lcsh_terms a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "lcsh terms" ;
-    rdfs:domain ucs_landscape:Publication ;
-    rdfs:range linkml:Uriorcurie ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "Library of Congress Subject Headings (lcsh) terms tagging a publication" .
+generic:latitude a owl:DatatypeProperty ;
+    rdfs:label "latitude" ;
+    rdfs:comment "latitude" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch schema1:latitude,
+        wgs1:lat,
+        uco:latitude,
+        sumo:Latitude,
+        WIKIDATA:Q34027 .
 
-ucs_landscape:license a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:lcsh_terms a owl:DatatypeProperty ;
+    rdfs:label "lcsh terms" ;
+    rdfs:comment "Library of Congress Subject Headings (lcsh) terms tagging a publication" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:license a owl:DatatypeProperty ;
     rdfs:label "license" ;
-    rdfs:domain ucs_landscape:InformationContentEntity ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "legal document giving official permission to do something with the resource" ;
+    rdfs:comment "legal document giving official permission to do something with the resource" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:exactMatch dcterms:license,
         gr:License,
         schema1:license,
@@ -608,65 +1910,268 @@ ucs_landscape:license a owl:ObjectProperty,
         WIKIDATA.PROPERTY:Q334661,
         WIKIDATA:Q7603 .
 
-ucs_landscape:negated a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "negated" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range linkml:Boolean ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "if set to true, then the association is negated i.e. is not true" .
+generic:located_in a owl:ObjectProperty ;
+    rdfs:label "located in" ;
+    rdfs:comment "holds between a material entity and a material entity or site within which it is located (but of which it is not considered a part)" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:location_of ;
+    skos:exactMatch RO:0001025 ;
+    skos:narrowMatch LOINC:has_imaging_focus,
+        ns1:NCIT_is_location_of_anatomic_structure,
+        RO:0002303 ;
+    skos:relatedMatch schema1:memberOf,
+        skos:member,
+        sumo:member ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:pages a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:location_of a owl:ObjectProperty ;
+    rdfs:label "location of" ;
+    rdfs:comment "holds between material entity or site and a material entity that is located within it (but not considered a part of it)" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:located_in ;
+    skos:altLabel "site of" ;
+    skos:exactMatch RO:0001015,
+        WIKIDATA.PROPERTY:P276 .
+
+generic:longitude a owl:DatatypeProperty ;
+    rdfs:label "longitude" ;
+    rdfs:comment "longitude" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:float ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch schema1:longtitude,
+        wgs1:long,
+        uco:longitude,
+        sumo:Longitude,
+        WIKIDATA:Q36477 .
+
+generic:mentioned_by a owl:ObjectProperty ;
+    rdfs:label "mentioned by" ;
+    rdfs:comment "refers to is a relation between one named thing and the InformationContentEntity that it makes reference to." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:mentions .
+
+generic:mentions a owl:ObjectProperty ;
+    rdfs:label "mentions" ;
+    rdfs:comment "refers to is a relation between one InformationContentEntity and the named thing that it makes reference to." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:mentioned_by ;
+    skos:exactMatch ns1:IAO_0000142 ;
+    skos:narrowMatch SIO:000628 .
+
+generic:model_of a owl:ObjectProperty ;
+    rdfs:label "model of" ;
+    rdfs:comment "holds between a thing and some other thing it approximates for purposes of scientific study, in virtue of its exhibiting similar features of the studied entity." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:models ;
+    skos:broadMatch sumo:models ;
+    skos:exactMatch RO:0003301 ;
+    skos:narrowMatch ns1:NCIT_C142622,
+        CSO:equivalent_circuit_model,
+        WIKIDATA:Q392811 ;
+    generic:canonical_predicate "True" .
+
+generic:models a owl:ObjectProperty ;
+    rdfs:label "models" ;
+    rdfs:comment "Entity, physical or conceptual, being modeled" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:model_of ;
+    skos:relatedMatch uco:model .
+
+generic:negated a owl:DatatypeProperty ;
+    rdfs:label "negated" ;
+    rdfs:comment "if set to true, then the association is negated i.e. is not true" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:not_completed_by a owl:ObjectProperty ;
+    rdfs:label "not completed by" ;
+    rdfs:comment "holds between a process an entity is capable of, but did not completed" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:has_not_completed .
+
+generic:occurs_in a owl:ObjectProperty ;
+    rdfs:label "occurs in" ;
+    rdfs:comment "holds between a process and an material entity or site within which the process occurs" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:contains_process ;
+    skos:broadMatch SIO:000202,
+        RO:0001019 ;
+    skos:narrowMatch LOINC:has_imaged_location,
+        RO:0002231,
+        RO:0002232,
+        geolink:isProgramOf ;
+    generic:canonical_predicate "True" .
+
+generic:overlaps a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "overlaps" ;
+    rdfs:comment "holds between entities that overlap in their extents (entities or processes)" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:exactMatch RO:0002131 ;
+    skos:narrowMatch SIO:000325 ;
+    generic:canonical_predicate "True" .
+
+generic:pages a owl:DatatypeProperty ;
     rdfs:label "pages" ;
-    rdfs:domain ucs_landscape:Publication ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "page number of source referenced for statement or publication" ;
+    rdfs:comment "page number of source referenced for statement or publication" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:exactMatch WIKIDATA.PROPERTY:P304 ;
     skos:narrowMatch sumo:Page .
 
-ucs_landscape:primary_knowledge_source a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:preceded_by a owl:ObjectProperty ;
+    rdfs:label "preceded by" ;
+    rdfs:comment "holds between two processes, where the other is completed before the one begins" ;
+    rdfs:domain generic:Occurrent ;
+    rdfs:range generic:Occurrent ;
+    rdfs:subPropertyOf generic:temporally_related_to ;
+    owl:inverseOf generic:precedes ;
+    skos:exactMatch ns1:BFO_0000062 ;
+    skos:narrowMatch RO:0002087,
+        RO:0002285 .
+
+generic:precedes a owl:ObjectProperty ;
+    rdfs:label "precedes" ;
+    rdfs:comment "holds between two processes, where one completes before the other begins" ;
+    rdfs:domain generic:Occurrent ;
+    rdfs:range generic:Occurrent ;
+    rdfs:subPropertyOf generic:temporally_related_to ;
+    owl:inverseOf generic:preceded_by ;
+    skos:broadMatch WIKIDATA.PROPERTY:P156 ;
+    skos:closeMatch RO:0002263,
+        RO:0002264 ;
+    skos:exactMatch ns1:BFO_0000063 ;
+    skos:narrowMatch ns1:IAO_0000424,
+        RO:0002090,
+        RO:0002411,
+        RO:0002412 ;
+    generic:canonical_predicate "True" ;
+    generic:opposite_of "preceded by" .
+
+generic:primary_knowledge_source a owl:ObjectProperty ;
     rdfs:label "primary knowledge source" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:InformationResource ;
-    rdfs:subPropertyOf ucs_landscape:knowledge_source ;
+    rdfs:comment "The most upstream source of the knowledge expressed in an Association that can be identified. Performing a rigorous analysis of upstream data providers is expected; every effort is made to catalog the most upstream source of data in this property.  Only one data source should be declared primary in any association.  \"aggregator knowledge source\" can be used to capture non-primary sources." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationResource ;
+    rdfs:subPropertyOf generic:knowledge_source ;
     skos:altLabel "primary reference",
         "primary source" ;
-    skos:broadMatch dcterms:references ;
-    skos:definition "The most upstream source of the knowledge expressed in an Association that can be identified. Performing a rigorous analysis of upstream data providers is expected; every effort is made to catalog the most upstream source of data in this property.  Only one data source should be declared primary in any association.  \"aggregator knowledge source\" can be used to capture non-primary sources." .
+    skos:broadMatch dcterms:references .
 
-ucs_landscape:publications a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:produced_by a owl:ObjectProperty ;
+    rdfs:label "produced by" ;
+    rdfs:comment "holds between a product and the material entity that generates the product through the intentional actions or functioning of the material entity" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:produces ;
+    skos:closeMatch prov:wasGeneratedBy,
+        prov:wasInformedBy,
+        aml:wasGeneratedBy ;
+    skos:exactMatch RO:0003001,
+        ssn:wasOriginatedBy,
+        sumo:issuedBy .
+
+generic:produces a owl:ObjectProperty ;
+    rdfs:label "produces" ;
+    rdfs:comment "holds between a material entity and a product that is generated through the intentional actions or functioning of the material entity" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:produced_by ;
+    skos:exactMatch RO:0003000,
+        schema1:produces,
+        sumo:produced,
+        WIKIDATA.PROPERTY:P1056 ;
+    generic:canonical_predicate "True" .
+
+generic:provided_by a owl:DatatypeProperty ;
+    rdfs:label "provided by" ;
+    rdfs:comment "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch pav:providedBy,
+        WIKIDATA:Q68974939 .
+
+generic:provider a owl:ObjectProperty ;
+    rdfs:label "provider" ;
+    rdfs:comment "service, person, group, organization or project that provides a piece of information (e.g. a knowledge association)." ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range generic:Agent ;
+    rdfs:subPropertyOf generic:contributor ;
+    owl:inverseOf generic:has_provider ;
+    skos:closeMatch csrc:supplier ;
+    skos:exactMatch schema1:provider,
+        csrc:Provider ;
+    skos:narrowMatch CSO:Service_Provider,
+        CSO:Third_party_Providers,
+        CSO:computer_Service_Provider,
+        CSO:computer_provider_or_provider,
+        uco:carrier .
+
+generic:publications a owl:ObjectProperty ;
     rdfs:label "publications" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:Publication ;
-    rdfs:subPropertyOf ucs_landscape:supporting_documents ;
-    skos:altLabel "supporting publications" ;
-    skos:definition "One or more publications that report the statement expressed in an Association, or provide information used as evidence supporting this statement." .
+    rdfs:comment "One or more publications that report the statement expressed in an Association, or provide information used as evidence supporting this statement." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:Publication ;
+    rdfs:subPropertyOf generic:supporting_documents ;
+    skos:altLabel "supporting publications" .
 
-ucs_landscape:qualifiers a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:publisher a owl:ObjectProperty ;
+    rdfs:label "publisher" ;
+    rdfs:comment "organization or person responsible for publishing books, periodicals, componentcasts, games or software. Note that in the case of publications which have a containing \"published in\" node property, the publisher association may not be attached directly to the embedded child publication, but only made in between the parent's publication node and the publisher agent of the encompassing publication (e.g. only from the Journal referenced by the 'published_in' property of an journal article Publication node)." ;
+    rdfs:domain generic:Publication ;
+    rdfs:range generic:Agent ;
+    rdfs:subPropertyOf generic:contributor ;
+    owl:inverseOf generic:has_publisher ;
+    skos:exactMatch dcterms:publisher,
+        geolink:isPublisherOf,
+        schema1:publisher,
+        gvp:ulan2651_publisher_of,
+        sumo:Publisher,
+        WIKIDATA.PROPERTY:P123 .
+
+generic:qualifiers a owl:ObjectProperty ;
     rdfs:label "qualifiers" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:OntologyClass ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "connects an association to qualifiers that modify or qualify the meaning of that association" .
+    rdfs:comment "connects an association to qualifiers that modify or qualify the meaning of that association" ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:OntologyClass ;
+    rdfs:subPropertyOf generic:association_slot .
 
-ucs_landscape:related_to a owl:ObjectProperty,
-        owl:SymmetricProperty,
-        linkml:SlotDefinition ;
+generic:related_to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
     rdfs:label "related to" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range ucs_landscape:NamedThing ;
-    skos:broadMatch <http://purl.obolibrary.org/obo/ECO_0000041>,
-        <http://purl.obolibrary.org/obo/SWO_topObjectProperty>,
+    rdfs:comment "A relationship that is asserted between two named things" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    skos:broadMatch ECO:0000041,
+        ns1:SWO_topObjectProperty,
         schema1:isSimilarTo,
         gvp:aat2900_miscellaneous_relationship,
         owl:topObjectProperty ;
     skos:closeMatch dwc:ResourceRelationship ;
-    skos:definition "A relationship that is asserted between two named things" ;
     skos:exactMatch SIO:000001,
         schema1:isRelatedTo,
         schema1:relatedTo,
@@ -683,12 +2188,12 @@ ucs_landscape:related_to a owl:ObjectProperty,
         SIO:000734,
         SIO:000735,
         SIO:000774,
-        <http://purl.obolibrary.org/obo/BFO_0000054>,
-        <http://purl.obolibrary.org/obo/BFO_0000068>,
-        <http://purl.obolibrary.org/obo/BFO_0000069>,
-        <http://purl.obolibrary.org/obo/BTO_related_to>,
-        IAO:0000136,
-        <http://purl.obolibrary.org/obo/NCIT_is_related_to_endogenous_product>,
+        ns1:BFO_0000054,
+        ns1:BFO_0000068,
+        ns1:BFO_0000069,
+        ns1:BTO_related_to,
+        ns1:IAO_0000136,
+        ns1:NCIT_is_related_to_endogenous_product,
         PATO:decreased_in_magnitude_relative_to,
         PATO:has_cross_section,
         PATO:has_relative_magnitude,
@@ -728,7 +2233,7 @@ ucs_landscape:related_to a owl:ObjectProperty,
         RO:0002495,
         RO:0002573,
         RO:0009004,
-        <http://purl.obolibrary.org/obo/UBERON_protects>,
+        ns1:UBERON_protects,
         dcterms:isReferencedBy,
         dcterms:isReplacedBy,
         dcterms:isRequiredBy,
@@ -767,9 +2272,9 @@ ucs_landscape:related_to a owl:ObjectProperty,
         CSO:semantic_relatedness,
         csrc:Relatively_prime,
         aml:contains,
-        ctrl:isConnectedTo,
-        ctrl:isSupervisedBy,
-        ctrl:supervises,
+        CTRL:isConnectedTo,
+        CTRL:isSupervisedBy,
+        CTRL:supervises,
         sumo:Above,
         sumo:Adjacent,
         sumo:Below,
@@ -814,44 +2319,66 @@ ucs_landscape:related_to a owl:ObjectProperty,
         SAN:isActedUponBy,
         SAN:isImpactedUponBy,
         SAN:isPropertyOf ;
-    ucs_landscape:canonical_predicate "True" .
+    generic:canonical_predicate "True" .
 
-ucs_landscape:related_to_at_instance_level a owl:ObjectProperty,
-        owl:SymmetricProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "related to at instance level" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range ucs_landscape:NamedThing ;
-    rdfs:subPropertyOf ucs_landscape:related_to ;
-    skos:definition "Represents a relationship held between two instances of a data classes. Much like an assertion component, in an ABox, these represent facts associated with the conceptual model" ;
-    ucs_landscape:canonical_predicate "True" .
+generic:similar_to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "similar to" ;
+    rdfs:comment "holds between an entity and some other entity with similar features." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:exactMatch RO:HOM0000000,
+        ns1:SO_similar_to ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:summary a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:source_web_page a owl:DatatypeProperty ;
+    rdfs:label "source web page" ;
+    rdfs:comment "A web page with specific collection of information provided by a website and displayed to a user in a web browser, with Dataset summary." ;
+    rdfs:domain generic:DatasetSummary ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch dcterms:source,
+        uco:WebPage .
+
+generic:summary a owl:DatatypeProperty ;
     rdfs:label "summary" ;
-    rdfs:domain ucs_landscape:Publication ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
+    rdfs:comment "executive summary of a resource or publication" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:altLabel "abstract" ;
-    skos:definition "executive summary of a resource or publication" ;
     skos:exactMatch dcterms:abstract,
         sumo:Summary,
         WIKIDATA:Q333291 .
 
-ucs_landscape:supporting_documents a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:supporting_documents a owl:DatatypeProperty ;
     rdfs:label "supporting documents" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range linkml:Uriorcurie ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "One or more referencable documents that report the statement expressed in an Association, or provide information used as evidence supporting this statement." .
+    rdfs:comment "One or more referencable documents that report the statement expressed in an Association, or provide information used as evidence supporting this statement." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:association_slot .
 
-ucs_landscape:timepoint a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:taxon_of a owl:ObjectProperty ;
+    rdfs:label "taxon of" ;
+    rdfs:comment "connects a taxonomic classification to an entity" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:ThingWithTaxon ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:in_taxon .
+
+generic:temporal_context_qualifier a owl:DatatypeProperty ;
+    rdfs:label "temporal context qualifier" ;
+    rdfs:comment "a constraint of time placed upon the truth value of an association. for time intervales, use temporal interval qualifier." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:time ;
+    rdfs:subPropertyOf generic:association_slot .
+
+generic:timepoint a owl:DatatypeProperty ;
     rdfs:label "timepoint" ;
-    rdfs:range ucs_landscape:TimeType ;
+    rdfs:comment "a point in time" ;
+    rdfs:range xsd:time ;
     skos:altLabel "duration" ;
-    skos:definition "a point in time" ;
     skos:exactMatch sumo:TimePoint,
         WIKIDATA.PROPERTY:P585 ;
     skos:narrowMatch dwc:eventTime,
@@ -859,51 +2386,72 @@ ucs_landscape:timepoint a owl:ObjectProperty,
         sosa:resultTime,
         SAN:ActuatingTime .
 
-ucs_landscape:xref a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:xref a owl:DatatypeProperty ;
     rdfs:label "xref" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range linkml:Uriorcurie ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
+    rdfs:comment "Alternate CURIEs for a thing" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:altLabel "DbXref",
         "Dbxref",
         "dbxref" ;
     skos:broadMatch uco:ExternalReference ;
-    skos:definition "Alternate CURIEs for a thing" ;
     skos:exactMatch WIKIDATA:Q1302249 ;
-    skos:narrowMatch <http://purl.obolibrary.org/obo/NCIT_hasDbXref>,
+    skos:narrowMatch ns1:NCIT_hasDbXref,
         gr:relatedWebService,
         dwc:identificationReferences .
 
-rdf:object a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+WIKIDATA.PROPERTY:P4945 a owl:DatatypeProperty ;
+    rdfs:label "dataset download url" ;
+    rdfs:comment "Identifier pointing to Internet location where digital dataset can be downloaded from using get-request" ;
+    rdfs:domain generic:Dataset ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch WIKIDATA.PROPERTY:P4945 .
+
+dcterms:distribution a owl:ObjectProperty ;
+    rdfs:label "has distribution" ;
+    rdfs:comment "Dataset version has distribution" ;
+    rdfs:domain generic:DatasetVersion ;
+    rdfs:range generic:DatasetDistribution ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch dcterms:distribution .
+
+schema1:logo a owl:DatatypeProperty ;
+    rdfs:label "source logo" ;
+    rdfs:comment "A graphic mark or emblem associated with Web page for Dataset distribution" ;
+    rdfs:domain generic:DatasetSummary ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch WIKIDATA:Q1886349 ;
+    skos:exactMatch schema1:logo .
+
+rdf:object a owl:ObjectProperty ;
     rdfs:label "object" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:NamedThing ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "connects an association to the object of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
+    rdfs:comment "connects an association to the object of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:association_slot ;
     skos:exactMatch rdf:object,
         owl:annotatedTarget .
 
-rdf:predicate a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+rdf:predicate a owl:DatatypeProperty ;
     rdfs:label "predicate" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:PredicateType ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes." ;
+    rdfs:comment "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes." ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:association_slot ;
     skos:exactMatch rdf:predicate,
         owl:annotatedProperty,
         sumo:Predicate .
 
-rdf:subject a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+rdf:subject a owl:ObjectProperty ;
     rdfs:label "subject" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:NamedThing ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:definition "connects an association to the subject of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
-    skos:exactMatch <http://purl.obolibrary.org/obo/NCIT_C48910>,
+    rdfs:comment "connects an association to the subject of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:association_slot ;
+    skos:exactMatch ns1:NCIT_C48910,
         dcterms:subject,
         gvp:subject,
         rdf:subject,
@@ -921,116 +2469,259 @@ rdf:subject a owl:ObjectProperty,
         sumo:Proposition ;
     skos:relatedMatch schema1:about .
 
-xsd:string a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "has text value" ;
-    rdfs:domain ucs_landscape:InformationContentEntity ;
-    rdfs:range linkml:String ;
-    skos:definition "connects some information to a string" ;
-    skos:exactMatch xsd:string .
-
-ucs_landscape:Annotation a owl:Class,
-        linkml:ClassDefinition ;
+generic:Annotation a owl:Class ;
     rdfs:label "Annotation" ;
-    skos:definition "Generic Model root class for entity annotations." ;
+    rdfs:comment "Universal Model root class for entity annotations." ;
     skos:exactMatch WIKIDATA:Q857525 .
 
-ucs_landscape:Designation a owl:Class,
-        linkml:ClassDefinition ;
+generic:Designation a owl:Class ;
     rdfs:label "Designation" ;
+    rdfs:comment "representation for someone or something by a sign that denotes it" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:InformationContentEntity ;
-            owl:onProperty ucs_landscape:identifies ],
+            owl:allValuesFrom generic:InformationContentEntity ;
+            owl:onProperty generic:identifies ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
+            owl:onDataRange xsd:string ;
             owl:onProperty xsd:string ],
-        ucs_landscape:NamedThing ;
-    skos:definition "representation for someone or something by a sign that denotes it" .
+        generic:NamedThing .
 
-ucs_landscape:EvidenceType a owl:Class,
-        linkml:ClassDefinition ;
+generic:EvidenceType a owl:Class ;
     rdfs:label "EvidenceType" ;
-    rdfs:subClassOf ucs_landscape:InformationContentEntity ;
+    rdfs:comment "Class of evidence that supports an association" ;
+    rdfs:subClassOf generic:InformationContentEntity ;
     skos:altLabel "evidence code" ;
-    skos:definition "Class of evidence that supports an association" ;
-    skos:exactMatch <http://purl.obolibrary.org/obo/ECO_0000000> .
+    skos:exactMatch ECO:0000000 .
 
-ucs_landscape:PredicateType a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "predicate type" ;
-    rdfs:subClassOf linkml:Uriorcurie .
+generic:Message a owl:Class ;
+    rdfs:label "Message" ;
+    rdfs:comment "discrete unit of communication intended by the source for consumption by some recipient or group of recipients" ;
+    rdfs:subClassOf generic:InformationContentEntity ;
+    skos:exactMatch ns1:NCIT_C62608,
+        schema1:Message,
+        WIKIDATA:Q628523 ;
+    skos:narrowMatch uco:Message .
 
-ucs_landscape:TimeType a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "time type" ;
-    rdfs:subClassOf linkml:Time .
+generic:Rule a owl:Class ;
+    rdfs:label "Rule" ;
+    rdfs:comment "prescription, including laws, regulations, instructions, guidelines, and social conventions; determinate method for performing any operation" ;
+    rdfs:subClassOf generic:Message ;
+    skos:exactMatch ns1:IAO_0000055,
+        ns1:NCIT_C78269,
+        WIKIDATA:Q1151067 .
 
-ucs_landscape:Unit a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "unit" ;
-    rdfs:subClassOf linkml:String .
+generic:SoftwareOrDevice a owl:Class ;
+    rdfs:label "SoftwareOrDevice" ;
+    rdfs:comment "Either software or hardware" ;
+    rdfs:subClassOf linkml:mixin,
+        generic:System .
 
-ucs_landscape:category a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "category" ;
-    rdfs:domain ucs_landscape:Entity ;
-    rdfs:range ucs_landscape:CategoryType ;
-    rdfs:subPropertyOf rdf:type ;
-    skos:definition """Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
- * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a generic model class URI.
-This field is multi-valued. It should include values for ancestors of the generic class
-In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.""" ;
-    skos:exactMatch gr:category,
-        schema1:category ;
-    skos:narrowMatch schema1:CategoryCode,
-        CSO:access_category .
+generic:base_coordinate a owl:DatatypeProperty ;
+    rdfs:label "base coordinate" ;
+    rdfs:comment "A position in the universal coordinate system. Base coordinates start at position 1 instead of position 0." ;
+    rdfs:range xsd:integer ;
+    skos:altLabel "fully-closed",
+        "one-based" .
 
-ucs_landscape:iri a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "iri" ;
-    rdfs:range ucs_landscape:IriType ;
-    skos:closeMatch <http://purl.obolibrary.org/obo/NCIT_C165071>,
-        uco:url,
-        sumo:UniformResourceLocator ;
-    skos:definition "An IRI for an entity. This is determined by the id using expansion rules." ;
-    skos:exactMatch XAPI:IRI,
-        rr:IRI,
-        WIKIDATA.PROPERTY:P854,
-        WIKIDATA:Q424583 ;
-    skos:narrowMatch RO:0002617 ;
-    skos:relatedMatch dwc:usewithiri .
+generic:has_participant a owl:ObjectProperty ;
+    rdfs:label "has participant" ;
+    rdfs:comment "holds between a process and a continuant, where the continuant is somehow involved in the process" ;
+    rdfs:domain generic:Occurrent ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:participates_in ;
+    skos:closeMatch WIKIDATA.PROPERTY:P2283 ;
+    skos:exactMatch RO:0000057,
+        RO:has_participant,
+        geolink:hasParticipant ;
+    skos:narrowMatch LOINC:has_subject,
+        ns1:BFO_0000167,
+        RO:0004007 ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:knowledge_source a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:identifies a owl:ObjectProperty ;
+    rdfs:label "identifies" ;
+    rdfs:comment "a relationship that identifies, or serves as a sign, for something" ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationContentEntity ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:altLabel "denotes",
+        "identifier of" ;
+    skos:closeMatch SIO:000020,
+        ns1:IAO_0000219 ;
+    skos:exactMatch <http://identifiers.org/edam/is_identifier_of>,
+        SIO:000672,
+        WIKIDATA.PROPERTY:P10476 ;
+    generic:canonical_predicate "True" .
+
+generic:iso_abbreviation a owl:DatatypeProperty ;
+    rdfs:label "iso abbreviation" ;
+    rdfs:comment "Standard abbreviation for periodicals in the International Organization for Standardization (ISO) 4 system See https://www.issn.org/services/online-services/access-to-the-ltwa/. If the 'published in' property is set, then the iso abbreviation pertains to the broader publication context (the journal) within which the given publication node is embedded, not the publication itself." ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch WIKIDATA.PROPERTY:P1160 .
+
+generic:issue a owl:DatatypeProperty ;
+    rdfs:label "issue" ;
+    rdfs:comment "issue of a newspaper, a scientific journal or magazine for reference purpose" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch schema1:PublicationIssue,
+        WIKIDATA.PROPERTY:P433 .
+
+generic:knowledge_source a owl:ObjectProperty ;
     rdfs:label "knowledge source" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range ucs_landscape:InformationResource ;
-    rdfs:subPropertyOf ucs_landscape:association_slot ;
-    skos:closeMatch pav:providedBy ;
-    skos:definition "An Information Resource from which the knowledge expressed in an Association was retrieved, directly or indirectly. This can be any resource through which the knowledge passed on its way to its currently serialized form. In practice, implementers should use one of the more specific subtypes of this generic property." .
+    rdfs:comment "An Information Resource from which the knowledge expressed in an Association was retrieved, directly or indirectly. This can be any resource through which the knowledge passed on its way to its currently serialized form. In practice, implementers should use one of the more specific subtypes of this generic property." ;
+    rdfs:domain generic:Association ;
+    rdfs:range generic:InformationResource ;
+    rdfs:subPropertyOf generic:association_slot ;
+    skos:closeMatch pav:providedBy .
 
-ucs_landscape:rights a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:participates_in a owl:ObjectProperty ;
+    rdfs:label "participates in" ;
+    rdfs:comment "holds between a continuant and a process, where the continuant is somehow involved in the process" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:Occurrent ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:has_participant ;
+    skos:exactMatch ns1:BFO_0000056,
+        RO:0000056 ;
+    skos:narrowMatch RO:0002216,
+        RO:0002505,
+        RO:0002565,
+        sumo:playsRoleInEventOfType .
+
+generic:published_in a owl:DatatypeProperty ;
+    rdfs:label "published in" ;
+    rdfs:comment "CURIE identifier of a broader publication context within which the publication may be placed, e.g. a specified book or journal." ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch sumo:Publication,
+        WIKIDATA.PROPERTY:P1433 ;
+    skos:narrowMatch schema1:PublicationIssue .
+
+generic:rights a owl:DatatypeProperty ;
     rdfs:label "rights" ;
-    rdfs:domain ucs_landscape:InformationContentEntity ;
-    rdfs:range linkml:String ;
-    rdfs:subPropertyOf ucs_landscape:node_property ;
-    skos:definition "provides information about rights held in and over the resource" ;
+    rdfs:comment "provides information about rights held in and over the resource" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
     skos:exactMatch dcterms:rights,
         WIKIDATA:Q780687 ;
     skos:narrowMatch CSO:access_rights,
         CSO:cyber_rights .
 
-dcterms:description a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:temporally_related_to a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "temporally related to" ;
+    rdfs:comment "holds between two entities with a temporal relationship" ;
+    rdfs:domain generic:Occurrent ;
+    rdfs:range generic:Occurrent ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    skos:narrowMatch RO:0002082,
+        RO:0002083,
+        RO:0002092,
+        RO:0002093,
+        RO:0002223,
+        RO:0002224,
+        RO:0002229,
+        RO:0002230,
+        RO:0002488,
+        RO:0002489,
+        RO:0002492,
+        RO:0002493,
+        RO:0002496,
+        RO:0002497,
+        schema1:temporalCoverage,
+        sumo:holdsDuring,
+        sumo:locatedAtTime,
+        sumo:loggedInDuring,
+        sumo:meetsSpatially,
+        sumo:meetsTemporally,
+        sumo:overlapsTemporally,
+        sumo:temporalPart,
+        sumo:temporallyBetween,
+        sumo:temporallyBetweenOrEqual ;
+    generic:canonical_predicate "True" .
+
+dcterms:source a owl:ObjectProperty ;
+    rdfs:label "has dataset" ;
+    rdfs:comment "Entity has a dataset" ;
+    rdfs:domain generic:DatasetVersion ;
+    rdfs:range generic:Dataset ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch dcterms:source,
+        geolink:hasDataset .
+
+pav:version a owl:DatatypeProperty ;
+    rdfs:label "ingest date" ;
+    rdfs:comment "Date when dataset version was ingested" ;
+    rdfs:domain generic:DatasetVersion ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:broadMatch uco:date ;
+    skos:exactMatch pav:version .
+
+generic:DatasetDistribution a owl:Class ;
+    rdfs:label "DatasetDistribution" ;
+    rdfs:comment "an item that holds distribution level information about a dataset" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:distribution_download_url ],
+        generic:InformationContentEntity ;
+    skos:exactMatch schema1:distribution,
+        dcat:Distribution .
+
+generic:DatasetSummary a owl:Class ;
+    rdfs:label "DatasetSummary" ;
+    rdfs:comment "an item that holds summary level information about a dataset." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:source_web_page ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty schema1:logo ],
+        generic:InformationContentEntity .
+
+generic:TangibleEssenceOrOccurrent a owl:Class ;
+    rdfs:label "TangibleEssenceOrOccurrent" ;
+    rdfs:comment "Either a physical or processual entity." ;
+    rdfs:subClassOf linkml:mixin .
+
+generic:in_taxon a owl:ObjectProperty ;
+    rdfs:label "in taxon" ;
+    rdfs:comment "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'" ;
+    rdfs:domain generic:ThingWithTaxon ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:taxon_of ;
+    skos:exactMatch RO:0002162,
+        WIKIDATA.PROPERTY:P703 ;
+    skos:narrowMatch RO:0002160 ;
+    generic:canonical_predicate "True" .
+
+generic:volume a owl:DatatypeProperty ;
+    rdfs:label "volume" ;
+    rdfs:comment "volume of a book or music release in a collection/series or a published collection of journal issues in a serial publication" ;
+    rdfs:domain generic:Publication ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch schema1:PublicationVolume,
+        WIKIDATA.PROPERTY:P478 .
+
+dcterms:description a owl:DatatypeProperty ;
     rdfs:label "description" ;
-    rdfs:range ucs_landscape:NarrativeText ;
+    rdfs:comment "a human-readable description of an entity" ;
+    rdfs:range xsd:string ;
     skos:altLabel "definition" ;
     skos:closeMatch sumo:Descriptor ;
-    skos:definition "a human-readable description of an entity" ;
-    skos:exactMatch IAO:0000115,
+    skos:exactMatch ns1:IAO_0000115,
         dcterms:description,
         schema1:description,
         skos:definitions,
@@ -1043,69 +2734,215 @@ dcterms:description a owl:ObjectProperty,
         CSO:shape_description,
         csrc:architecture_description .
 
-ucs_landscape:CategoryType a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "category type" ;
-    rdfs:subClassOf linkml:Uriorcurie .
+generic:DatasetVersion a owl:Class ;
+    rdfs:label "DatasetVersion" ;
+    rdfs:comment "an item that holds version level information about a dataset." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty pav:version ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:Dataset ;
+            owl:onProperty dcterms:source ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:DatasetDistribution ;
+            owl:onProperty dcterms:distribution ],
+        generic:InformationContentEntity .
 
-ucs_landscape:IriType a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "iri type" ;
-    rdfs:subClassOf linkml:Uriorcurie .
+generic:QuantityValue a owl:Class ;
+    rdfs:label "QuantityValue" ;
+    rdfs:comment "A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange UO:0000000 ;
+            owl:onProperty generic:has_unit ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:double ;
+            owl:onProperty generic:has_numeric_value ],
+        generic:Annotation .
 
-ucs_landscape:NarrativeText a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "narrative text" ;
-    rdfs:subClassOf linkml:String .
+generic:ThingWithTaxon a owl:Class ;
+    rdfs:label "ThingWithTaxon" ;
+    rdfs:comment "A mixin that can be used on any entity that can be taxonomically classified. This includes individual entities, their products, and other operational entities and processes." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom generic:NamedThing ;
+            owl:onProperty generic:in_taxon ],
+        linkml:mixin .
 
-rdf:type a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:aggregate_statistic a owl:DatatypeProperty ;
+    rdfs:label "aggregate statistic" ;
+    rdfs:comment "Number expressing numbers gathered and processed for statistical purposes (i.e. total or average)." ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property .
+
+generic:category a owl:DatatypeProperty ;
+    rdfs:label "category" ;
+    rdfs:comment """Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
+ * In a neo4j database this MAY correspond to the neo4j label tag.
+ * In an RDF database it should be a universal model class URI.
+This field is multi-valued. It should include values for ancestors of the universal class
+In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.""" ;
+    rdfs:domain generic:Entity ;
+    rdfs:range xsd:anyURI ;
+    rdfs:subPropertyOf rdf:type ;
+    skos:exactMatch gr:category,
+        schema1:category ;
+    skos:narrowMatch schema1:CategoryCode,
+        CSO:access_category .
+
+rdfs:label a owl:DatatypeProperty ;
+    rdfs:label "name" ;
+    rdfs:comment "A human-readable name for an attribute or entity." ;
+    rdfs:domain generic:Entity ;
+    rdfs:range xsd:string ;
+    skos:altLabel "alt label",
+        "display name",
+        "label",
+        "title" ;
+    skos:broadMatch CSO:named_entity ;
+    skos:closeMatch ns1:IAO_0000111,
+        ns1:IAO_0000118,
+        skos:altLabel,
+        sumo:originalTitle ;
+    skos:exactMatch SIO:000116,
+        gr:name,
+        schema1:name,
+        om:name,
+        rdfs:label,
+        CSO:named_entity,
+        uco:name,
+        REPR:name,
+        sumo:Name,
+        WIKIDATA.PROPERTY:P2561 ;
+    skos:narrowMatch ns1:NCIT_P386,
+        dcterms:title,
+        schema1:recordLabel,
+        rr:column,
+        rr:tableName,
+        aml:hasAttributeName,
+        WIKIDATA.PROPERTY:P1476 .
+
+generic:contributor a owl:ObjectProperty ;
+    rdfs:label "contributor" ;
+    rdfs:comment "Party that has made contributions to the resource" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range generic:Agent ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:has_contributor ;
+    skos:closeMatch geolink:isContributorOf ;
+    skos:exactMatch dcterms:contributor,
+        schema1:contributor,
+        sumo:contributor,
+        WIKIDATA.PROPERTY:P767 ;
+    skos:narrowMatch gvp:contributorAlternatePreferred,
+        csrc:Dictionary_Contributor .
+
+generic:has_contributor a owl:ObjectProperty ;
+    rdfs:label "has contributor" ;
+    rdfs:comment "Has one or more contributors" ;
+    rdfs:domain generic:Agent ;
+    rdfs:range generic:InformationContentEntity ;
+    rdfs:subPropertyOf generic:related_to_at_instance_level ;
+    owl:inverseOf generic:contributor .
+
+rdf:type a owl:DatatypeProperty ;
     rdfs:label "type" ;
-    rdfs:range linkml:String ;
+    rdfs:comment "Clasification of an entity, or anchoring point (of a name) in taxonomy" ;
+    rdfs:range xsd:string ;
     skos:broadMatch SIO:000011,
-        IAO:0006011,
+        ns1:IAO_0006011,
         RO:0002473 ;
-    skos:exactMatch IAO:0000219,
-        <http://purl.obolibrary.org/obo/NCIT_C25284>,
-        <http://purl.obolibrary.org/obo/SWO_type>,
+    skos:exactMatch ns1:IAO_0000219,
+        ns1:NCIT_C25284,
+        ns1:SWO_type,
         dcterms:type,
         schema1:type,
         rdf:type,
         sumo:Class,
         WIKIDATA.PROPERTY:P427,
         WIKIDATA:Q21146257 ;
-    skos:narrowMatch IAO:0000411,
+    skos:narrowMatch ns1:IAO_0000411,
         gr:typeOfGood,
         dwc:measurementType,
-        ctrl:DataType,
-        ctrl:SemanticType,
+        CTRL:DataType,
+        CTRL:SemanticType,
         sumo:hardwareType,
         WIKIDATA:Q190087 .
 
-ucs_landscape:QuantityValue a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "QuantityValue" ;
+generic:Dataset a owl:Class ;
+    rdfs:label "Dataset" ;
+    rdfs:comment "an item that refers to a collection of data from a data source." ;
+    rdfs:subClassOf generic:InformationContentEntity ;
+    skos:exactMatch EFO:0004095,
+        SIO:000089,
+        ns1:IAO_0000100,
+        dcterms:Dataset,
+        schema1:Dataset,
+        csrc:Dataset,
+        dcid:Dataset,
+        WIKIDATA:Q1172284 ;
+    skos:narrowMatch CSO:spatial_datasets,
+        csrc:Static_Analysis_Reference_Dataset,
+        csrc:limited_dataset .
+
+generic:Entity a owl:Class ;
+    rdfs:label "Entity" ;
+    rdfs:comment "Root Universal Model class for all things and informational relationships, real or imagined." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Double ;
-            owl:onProperty ucs_landscape:has_numeric_value ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:Unit ;
-            owl:onProperty ucs_landscape:has_unit ],
-        ucs_landscape:Annotation ;
-    skos:definition "A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value" .
+            owl:onDataRange xsd:string ;
+            owl:onProperty dcterms:description ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdf:type ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:Attribute ;
+            owl:onProperty generic:has_attribute ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:category ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty generic:iri ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdfs:label ] .
 
-ucs_landscape:id a owl:ObjectProperty,
-        linkml:SlotDefinition ;
+generic:System a owl:Class ;
+    rdfs:label "System" ;
+    rdfs:comment "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom generic:NamedThing ;
+            owl:onProperty generic:in_taxon ],
+        generic:NamedThing,
+        generic:ThingWithTaxon ;
+    skos:broadMatch WIKIDATA:Q99527517 ;
+    skos:exactMatch ns1:NCIT_C25700,
+        RO:0002577,
+        ssn:System,
+        csrc:system,
+        WIKIDATA:Q58778 .
+
+generic:id a owl:DatatypeProperty ;
     rdfs:label "id" ;
-    rdfs:domain ucs_landscape:Identifier ;
-    rdfs:range linkml:String ;
-    skos:broadMatch IAO:0000119,
-        IAO:0000603,
+    rdfs:comment "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+    rdfs:domain generic:Identifier ;
+    rdfs:range xsd:string ;
+    skos:broadMatch ns1:IAO_0000119,
+        ns1:IAO_0000603,
         CSO:catalogue_identifiers,
         sumo:identityElement ;
-    skos:definition "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
     skos:exactMatch edam.data:0842,
         EFO:id,
         SIO:000115,
@@ -1118,9 +2955,9 @@ ucs_landscape:id a owl:ObjectProperty,
         SIO:000672,
         SIO:000674,
         SIO:000729,
-        <http://purl.obolibrary.org/obo/ERO_0000044>,
-        <http://purl.obolibrary.org/obo/ERO_0000480>,
-        <http://purl.obolibrary.org/obo/NCIT_C94069>,
+        ns1:ERO_0000044,
+        ns1:ERO_0000480,
+        ns1:NCIT_C94069,
         dwc:eventID,
         dwc:identificationID,
         dwc:parentEventID,
@@ -1145,67 +2982,63 @@ ucs_landscape:id a owl:ObjectProperty,
         sumo:userIDString,
         WIKIDATA.PROPERTY:P3743 .
 
-rdfs:label a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "name" ;
-    rdfs:domain ucs_landscape:Entity ;
-    rdfs:range ucs_landscape:LabelType ;
-    skos:altLabel "alt label",
-        "display name",
-        "label",
-        "title" ;
-    skos:broadMatch CSO:named_entity ;
-    skos:closeMatch IAO:0000111,
-        IAO:0000118,
+generic:synonym a owl:DatatypeProperty ;
+    rdfs:label "synonym" ;
+    rdfs:comment "Alternate human-readable names for a thing" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:altLabel "alias" ;
+    skos:broadMatch dcterms:alternative ;
+    skos:exactMatch ns1:NCIT_C52469,
+        WIKIDATA.PROPERTY:P1420 ;
+    skos:narrowMatch ns1:EXO_hasRelatedSynonym,
+        ns1:IAO_0000136,
+        om:unofficialAbbreviation,
+        om:unofficialLabel,
         skos:altLabel,
-        sumo:originalTitle ;
-    skos:definition "A human-readable name for an attribute or entity." ;
-    skos:exactMatch SIO:000116,
-        gr:name,
-        schema1:name,
-        om:name,
-        rdfs:label,
-        CSO:named_entity,
-        uco:name,
-        REPR:name,
-        sumo:Name,
-        WIKIDATA.PROPERTY:P2561 ;
-    skos:narrowMatch <http://purl.obolibrary.org/obo/NCIT_P386>,
-        dcterms:title,
-        schema1:recordLabel,
-        rr:column,
-        rr:tableName,
-        aml:hasAttributeName,
-        WIKIDATA.PROPERTY:P1476 .
+        uco:nickname .
 
-ucs_landscape:Attribute a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Attribute" ;
+generic:InformationResource a owl:Class ;
+    rdfs:label "InformationResource" ;
+    rdfs:comment "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases." ;
+    rdfs:subClassOf generic:InformationContentEntity ;
+    skos:altLabel "knowledgebase" .
+
+generic:OntologyClass a owl:Class ;
+    rdfs:label "OntologyClass" ;
+    rdfs:comment "a concept or class in an ontology, vocabulary or thesaurus. Note that nodes in a base compatible KG can be considered both instances of base classes, and OWL classes in their own right. In general you should not need to use this class directly. Instead, use the appropriate base class." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:QuantityValue ;
-            owl:onProperty ucs_landscape:has_quantitative_value ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
+        linkml:mixin ;
+    skos:exactMatch schema1:Class,
+        owl:Class .
+
+generic:Attribute a owl:Class ;
+    rdfs:label "Attribute" ;
+    rdfs:comment "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:NamedThing ;
+            owl:onProperty generic:has_qualitative_value ],
+        [ a owl:Restriction ;
+            owl:onClass generic:OntologyClass ;
+            owl:onProperty generic:has_attribute_type ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:IriType ;
-            owl:onProperty ucs_landscape:iri ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:NamedThing ;
-            owl:onProperty ucs_landscape:has_qualitative_value ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:LabelType ;
+            owl:onDataRange xsd:string ;
             owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
-            owl:onClass ucs_landscape:OntologyClass ;
-            owl:onProperty ucs_landscape:has_attribute_type ;
-            owl:qualifiedCardinality 1 ],
-        ucs_landscape:NamedThing,
-        ucs_landscape:OntologyClass ;
+            owl:allValuesFrom generic:QuantityValue ;
+            owl:onProperty generic:has_quantitative_value ],
+        generic:NamedThing,
+        generic:OntologyClass ;
     skos:closeMatch schema1:property,
         ssn:Property,
         SAN:property ;
-    skos:definition "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material." ;
     skos:exactMatch SIO:000614,
         csrc:attribute,
         sumo:Attribute,
@@ -1277,205 +3110,179 @@ ucs_landscape:Attribute a owl:Class,
         sumo:validityPeriod,
         SAN:impactedProperty .
 
-ucs_landscape:Entity a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "Entity" ;
+generic:Occurrent a owl:Class ;
+    rdfs:label "Occurrent" ;
+    rdfs:comment "A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing" ;
+    rdfs:subClassOf linkml:mixin,
+        generic:TangibleEssenceOrOccurrent ;
+    skos:exactMatch ns1:BFO_0000003,
+        WIKIDATA:Q67518978,
+        freedict:occurrent .
+
+generic:Agent a owl:Class ;
+    rdfs:label "Agent" ;
+    rdfs:comment "person, group, organization or project that provides a piece of information (i.e. a knowledge association)" ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:IriType ;
-            owl:onProperty ucs_landscape:iri ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty rdf:type ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:NarrativeText ;
-            owl:onProperty dcterms:description ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:CategoryType ;
-            owl:onProperty ucs_landscape:category ],
-        [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:id ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:LabelType ;
+            owl:onDataRange xsd:string ;
             owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:Attribute ;
-            owl:onProperty ucs_landscape:has_attribute ] ;
-    skos:definition "Root Generic Model class for all things and informational relationships, real or imagined." .
-
-ucs_landscape:InformationResource a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "InformationResource" ;
-    rdfs:subClassOf ucs_landscape:InformationContentEntity ;
-    skos:altLabel "knowledgebase" ;
-    skos:definition "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases." .
-
-ucs_landscape:LabelType a owl:Class,
-        linkml:TypeDefinition ;
-    rdfs:label "label type" ;
-    rdfs:subClassOf linkml:String .
-
-ucs_landscape:OntologyClass a owl:Class,
-        linkml:ClassDefinition ;
-    rdfs:label "OntologyClass" ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:id ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
             owl:qualifiedCardinality 1 ],
-        linkml:mixin ;
-    skos:definition "a concept or class in an ontology, vocabulary or thesaurus. Note that nodes in a base compatible KG can be considered both instances of base classes, and OWL classes in their own right. In general you should not need to use this class directly. Instead, use the appropriate base class." ;
-    skos:exactMatch schema1:Class,
-        owl:Class .
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:address ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:affiliation ],
+        generic:AdministrativeEntity ;
+    skos:altLabel "group" ;
+    skos:exactMatch dcterms:Agent,
+        schema1:agent,
+        prov:Agent,
+        CSO:single-agent,
+        csrc:Agent,
+        sumo:Agent,
+        WIKIDATA:Q24229398 ;
+    skos:narrowMatch schema1:department,
+        csrc:Healthcare_Delivery_Organization,
+        csrc:Information_Sharing_and_Analysis_Organization,
+        csrc:Organizational_Unit,
+        csrc:organization,
+        sumo:CopyrightAuthority,
+        sumo:ProfessionalOrganizations,
+        sumo:affiliatedOrganization .
 
-linkml:TypeDefinition a owl:Class .
-
-ucs_landscape:Publication a owl:Class,
-        linkml:ClassDefinition ;
+generic:Publication a owl:Class ;
     rdfs:label "Publication" ;
+    rdfs:comment "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:id ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ucs_landscape:pages ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:LabelType ;
+            owl:onDataRange xsd:string ;
             owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ucs_landscape:authors ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:summary ],
         [ a owl:Restriction ;
-            owl:onClass linkml:String ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:authors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:pages ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
             owl:onProperty dcterms:type ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ucs_landscape:lcsh_terms ],
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:keywords ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:summary ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom linkml:Uriorcurie ;
-            owl:onProperty ucs_landscape:xref ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom linkml:String ;
-            owl:onProperty ucs_landscape:keywords ],
-        ucs_landscape:InformationContentEntity ;
-    skos:definition "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses." ;
-    skos:exactMatch IAO:0000311,
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:lcsh_terms ],
+        generic:InformationContentEntity ;
+    skos:exactMatch ns1:IAO_0000311,
         schema1:publication,
         csrc:Publication,
         sumo:Publication,
         WIKIDATA:Q732577 ;
-    skos:narrowMatch IAO:0000013,
+    skos:narrowMatch ns1:IAO_0000013,
         geolink:Document .
 
-ucs_landscape:association_slot a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "association slot" ;
-    rdfs:domain ucs_landscape:Association ;
-    rdfs:range linkml:String ;
-    skos:altLabel "edge property",
-        "edge qualifier",
-        "node qualifier",
-        "statement property",
-        "statement qualifier" ;
-    skos:definition "any slot that relates an association to another entity" .
-
-ucs_landscape:InformationContentEntity a owl:Class,
-        linkml:ClassDefinition ;
+generic:InformationContentEntity a owl:Class ;
     rdfs:label "InformationContentEntity" ;
+    rdfs:comment "a piece of information that typically describes some topic of discourse or is used as support." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:rights ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:license ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Date ;
-            owl:onProperty ucs_landscape:creation_date ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:format ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:format ],
+            owl:onDataRange xsd:date ;
+            owl:onProperty generic:creation_date ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:license ],
-        ucs_landscape:NamedThing ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:rights ],
+        generic:NamedThing ;
     skos:altLabel "information",
         "information artefact",
         "information entity" ;
-    skos:definition "a piece of information that typically describes some topic of discourse or is used as support." ;
-    skos:exactMatch IAO:0000030,
+    skos:exactMatch ns1:IAO_0000030,
         WIKIDATA:Q286583 ;
     skos:narrowMatch schema1:Language,
         schema1:inCodeSet,
         sumo:Language .
 
-ucs_landscape:node_property a owl:ObjectProperty,
-        linkml:SlotDefinition ;
-    rdfs:label "node property" ;
-    rdfs:domain ucs_landscape:NamedThing ;
-    rdfs:range linkml:String ;
-    skos:definition "A grouping for any property that holds between a node and a value" .
+generic:association_slot a owl:DatatypeProperty ;
+    rdfs:label "association slot" ;
+    rdfs:comment "any slot that relates an association to another entity" ;
+    rdfs:domain generic:Association ;
+    rdfs:range xsd:string ;
+    skos:altLabel "edge property",
+        "edge qualifier",
+        "node qualifier",
+        "statement property",
+        "statement qualifier" .
 
-ucs_landscape:Association a owl:Class,
-        linkml:ClassDefinition ;
+generic:Association a owl:Class ;
     rdfs:label "Association" ;
+    rdfs:comment "A typed association between two entities, supported by evidence" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass ucs_landscape:NamedThing ;
-            owl:onProperty rdf:object ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:InformationResource ;
+            owl:onProperty generic:primary_knowledge_source ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:InformationResource ;
+            owl:onProperty generic:aggregator_knowledge_source ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:time ;
+            owl:onProperty generic:timepoint ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty generic:negated ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty rdf:predicate ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:InformationResource ;
-            owl:onProperty ucs_landscape:aggregator_knowledge_source ],
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:category ],
         [ a owl:Restriction ;
-            owl:onClass ucs_landscape:NamedThing ;
+            owl:allValuesFrom generic:Publication ;
+            owl:onProperty generic:publications ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdf:type ],
+        [ a owl:Restriction ;
+            owl:onClass generic:NamedThing ;
             owl:onProperty rdf:subject ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:Publication ;
-            owl:onProperty ucs_landscape:publications ],
+            owl:allValuesFrom generic:OntologyClass ;
+            owl:onProperty generic:qualifiers ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:String ;
-            owl:onProperty rdf:type ],
+            owl:allValuesFrom generic:EvidenceType ;
+            owl:onProperty generic:has_evidence ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:InformationResource ;
-            owl:onProperty ucs_landscape:primary_knowledge_source ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:TimeType ;
-            owl:onProperty ucs_landscape:timepoint ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:EvidenceType ;
-            owl:onProperty ucs_landscape:has_evidence ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:OntologyClass ;
-            owl:onProperty ucs_landscape:qualifiers ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom ucs_landscape:CategoryType ;
-            owl:onProperty ucs_landscape:category ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass linkml:Boolean ;
-            owl:onProperty ucs_landscape:negated ],
-        [ a owl:Restriction ;
-            owl:onClass ucs_landscape:PredicateType ;
-            owl:onProperty rdf:predicate ;
+            owl:onClass generic:NamedThing ;
+            owl:onProperty rdf:object ;
             owl:qualifiedCardinality 1 ],
-        ucs_landscape:Entity ;
+        generic:Entity ;
     skos:broadMatch WIKIDATA:Q186290 ;
-    skos:definition "A typed association between two entities, supported by evidence" ;
     skos:exactMatch <http://purl.org/oban/association>,
         rdf:Statement,
         owl:Axiom,
@@ -1483,26 +3290,46 @@ ucs_landscape:Association a owl:Class,
     skos:narrowMatch CSO:data_association,
         WIKIDATA:Q382571 .
 
-linkml:ClassDefinition a owl:Class .
+generic:related_to_at_instance_level a owl:ObjectProperty,
+        owl:SymmetricProperty ;
+    rdfs:label "related to at instance level" ;
+    rdfs:comment "Represents a relationship held between two instances of a data classes. Much like an assertion component, in an ABox, these represent facts associated with the conceptual model" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range generic:NamedThing ;
+    rdfs:subPropertyOf generic:related_to ;
+    generic:canonical_predicate "True" .
 
-ucs_landscape:NamedThing a owl:Class,
-        linkml:ClassDefinition ;
+generic:node_property a owl:DatatypeProperty ;
+    rdfs:label "node property" ;
+    rdfs:comment "A grouping for any property that holds between a node and a value" ;
+    rdfs:domain generic:NamedThing ;
+    rdfs:range xsd:string .
+
+xsd:string a owl:DatatypeProperty ;
+    rdfs:label "has text value" ;
+    rdfs:comment "connects some information to a string" ;
+    rdfs:domain generic:InformationContentEntity ;
+    rdfs:range xsd:string ;
+    skos:exactMatch xsd:string .
+
+generic:NamedThing a owl:Class ;
     rdfs:label "NamedThing" ;
+    rdfs:comment "a databased entity or concept/class" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onClass linkml:String ;
-            owl:onProperty ucs_landscape:id ;
-            owl:qualifiedCardinality 1 ],
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:xref ],
+        [ a owl:Class ;
+            owl:intersectionOf ( [ a owl:Restriction ;
+                        owl:allValuesFrom xsd:anyURI ;
+                        owl:onProperty generic:category ] [ a owl:Restriction ;
+                        owl:onProperty generic:category ;
+                        owl:someValuesFrom xsd:anyURI ] ) ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:NarrativeText ;
-            owl:onProperty dcterms:description ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass ucs_landscape:LabelType ;
-            owl:onProperty rdfs:label ] ;
-    skos:definition "A generic grouping for any identifiable entity" ;
-    skos:exactMatch schema1:Thing .
-
-linkml:SlotDefinition a owl:Class .
-
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:provided_by ],
+        generic:Entity ;
+    skos:exactMatch ns1:BFO_0000001,
+        schema1:Thing,
+        dcid:Thing,
+        WIKIDATA:Q35120 .
 

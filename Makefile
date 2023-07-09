@@ -16,7 +16,7 @@ DEST = project
 PYMODEL = $(SRC)/$(SCHEMA_NAME)/datamodel
 DOCDIR = docs
 EXAMPLEDIR = examples
-SHEET_MODULE = entity_enums
+SHEET_MODULE = {{cookiecutter.__google_sheet_module}}
 SHEET_ID = $(shell ${SHELL} ./utils/get-value.sh google_sheet_id)
 SHEET_TABS = $(shell ${SHELL} ./utils/get-value.sh google_sheet_tabs)
 SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
@@ -24,14 +24,24 @@ SHEET_MODULE_PATH = $(SOURCE_SCHEMA_DIR)/$(SHEET_MODULE).yaml
 # environment variables
 include config.env
 
-GEN_PARGS =
-ifdef LINKML_GENERATORS_PROJECT_ARGS
-GEN_PARGS = ${LINKML_GENERATORS_PROJECT_ARGS}
-endif
-
 GEN_DARGS =
 ifdef LINKML_GENERATORS_MARKDOWN_ARGS
 GEN_DARGS = ${LINKML_GENERATORS_MARKDOWN_ARGS}
+endif
+
+GEN_JARGS=
+ifdef LINKML_GENERATORS_JAVA_ARGS
+GEN_JARGS = ${LINKML_GENERATORS_JAVA_ARGS}
+endif
+
+GEN_TARGS=
+ifdef LINKML_GENERATORS_TYPESCRIPT_ARGS
+GEN_TARGS = ${LINKML_GENERATORS_TYPESCRIPT_ARGS}
+endif
+
+GEN_OARGS=
+ifdef LINKML_GENERATORS_OWL_ARGS
+GEN_OARGS = ${LINKML_GENERATORS_OWL_ARGS}
 endif
 
 
@@ -102,15 +112,30 @@ gen-examples:
 	cp src/data/examples/* $(EXAMPLEDIR)
 
 # generates all project files
-
 gen-project: $(PYMODEL)
-	$(RUN) gen-project ${GEN_PARGS} -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
+	$(RUN) gen-project --config-file config.yaml -d $(DEST) $(SOURCE_SCHEMA_PATH) && mv $(DEST)/*.py $(PYMODEL)
 
+#### gen-project does not run java/typescript generators
+#### you can trigger generation using config.env
+ifneq ($(strip ${GEN_JARGS}),)
+	mkdir project/java || true
+	$(RUN) gen-java ${GEN_JARGS} --output-directory $(DEST)/java/ $(SOURCE_SCHEMA_PATH)
+endif
+ifneq ($(strip ${GEN_TARGS}),)
+	mkdir project/typescript || true
+	$(RUN) gen-typescript ${GEN_TARGS} $(SOURCE_SCHEMA_PATH) >${DEST}/typescript/generic.ts
+endif
+
+#### To workaround https://github.com/linkml/linkml/issues/1453
+#### you can trigger generation using config.env
+ifneq ($(strip ${GEN_OARGS}),)
+	$(RUN) gen-owl ${GEN_OARGS} -o $(DEST)/owl/generic.owl.ttl $(SOURCE_SCHEMA_PATH)
+endif
 
 test: test-schema test-python test-examples
 
 test-schema:
-	$(RUN) gen-project ${GEN_PARGS} -d tmp $(SOURCE_SCHEMA_PATH)
+	$(RUN) gen-project --config-file config.yaml -d tmp $(SOURCE_SCHEMA_PATH)
 
 test-python:
 	$(RUN) python -m unittest discover
@@ -164,15 +189,15 @@ MKDOCS = $(RUN) mkdocs
 mkd-%:
 	$(MKDOCS) $*
 
-PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel
+PROJECT_FOLDERS = sqlschema shex shacl protobuf prefixmap owl jsonschema jsonld graphql excel java typescript
 git-init-add: git-init git-add git-commit git-status
 git-init:
 	git init
 git-add: .cruft.json
-	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/generic/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py
-	git add $(patsubst %, project/%, $(PROJECT_FOLDERS))
+	git add .gitignore .github .cruft.json Makefile LICENSE *.md examples utils about.yaml mkdocs.yml poetry.lock project.Makefile pyproject.toml src/generic/schema/*yaml src/*/datamodel/*py src/data src/docs tests src/*/_version.py project config.env config.yaml
+	git add $(patsubst %, project/%, $(PROJECT_FOLDERS)) || true
 git-commit:
-	git commit -m 'chore: initial commit' -a
+	git commit -m 'chore: make setup was run' -a
 git-status:
 	git status
 

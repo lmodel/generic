@@ -1,5 +1,205 @@
 {
     "$defs": {
+        "Agent": {
+            "additionalProperties": false,
+            "description": "person, group, organization or project that provides a piece of information (i.e. a knowledge association)",
+            "properties": {
+                "address": {
+                    "description": "the particulars of the place where someone or an organization is situated. For now, this slot is a simple text \"blob\" containing all relevant details of the given location for fitness of purpose. For the moment, this \"address\" can include other contact details such as email and phone number(?).",
+                    "type": "string"
+                },
+                "affiliation": {
+                    "description": "a professional relationship between one provider (x) within another provider (often an organization). Target provider identity should be specified by a CURIE. Providers may have multiple affiliations.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Different classes of agents have distinct preferred identifiers.  For publishers, use the ISBN publisher code.  See https://grp.isbn-international.org/ for publisher code lookups.  For editors, authors and  individual providers, use the individual's ORCID if available; Otherwise, a ScopusID, publons.researcher or Google Scholar ID ('GSID') may be used if the author ORCID is unknown. Institutional agents could be identified by an International Standard Name Identifier ('ISNI') code.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "it is recommended that an author's 'name' property be formatted as \"surname, firstname initial.\"",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Agent",
+            "type": "object"
+        },
+        "Article": {
+            "additionalProperties": false,
+            "description": "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication",
+            "properties": {
+                "authors": {
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "iso_abbreviation": {
+                    "description": "Optional value, if used locally as a convenience, is set to the iso abbreviation of the 'published in' parent.",
+                    "type": "string"
+                },
+                "issue": {
+                    "description": "issue of a newspaper, a scientific journal or magazine for reference purpose",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "keywords tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lcsh_terms": {
+                    "description": "Library of Congress Subject Headings (lcsh) terms tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "published_in": {
+                    "description": "The enclosing parent serial containing the article should have industry-standard identifier from ISSN.",
+                    "type": "string"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "executive summary of a resource or publication",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "type": "string"
+                },
+                "volume": {
+                    "description": "volume of a book or music release in a collection/series or a published collection of journal issues in a serial publication",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "published_in",
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "Article",
+            "type": "object"
+        },
         "Association": {
             "additionalProperties": false,
             "description": "A typed association between two entities, supported by evidence",
@@ -12,7 +212,7 @@
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
                         "type": "string"
                     },
@@ -88,7 +288,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "rdf:type of generic:Association should be fixed at rdf:Statement",
+                    "description": "rdf:type of universal:Association should be fixed at rdf:Statement",
                     "type": "string"
                 }
             },
@@ -105,9 +305,24 @@
             "additionalProperties": false,
             "description": "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.",
             "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "a human-readable description of an entity",
                     "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 },
                 "has_attribute_type": {
                     "description": "connects an attribute to a class that describes it",
@@ -135,225 +350,126 @@
                 "name": {
                     "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
                     "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
                 }
             },
             "required": [
                 "has_attribute_type",
-                "id"
+                "id",
+                "category"
             ],
             "title": "Attribute",
             "type": "object"
         },
-        "Designation": {
+        "BiologicalSex": {
             "additionalProperties": false,
-            "description": "representation for someone or something by a sign that denotes it",
+            "description": "Status as female, male, or intersex depending on their chromosomes, reproductive organs, and other characteristics",
             "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "description": {
                     "description": "a human-readable description of an entity",
                     "type": "string"
                 },
-                "has_text_value": {
-                    "description": "connects some information to a string",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "identifies": {
-                    "description": "a relationship that identifies, or serves as a sign, for something",
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "Designation",
-            "type": "object"
-        },
-        "EvidenceType": {
-            "additionalProperties": false,
-            "description": "Class of evidence that supports an association",
-            "properties": {
-                "creation_date": {
-                    "description": "date on which an entity was created. This can be applied to nodes or edges",
-                    "format": "date",
+                "has_attribute_type": {
+                    "description": "connects an attribute to a class that describes it",
                     "type": "string"
                 },
-                "description": {
-                    "description": "a human-readable description of an entity",
+                "has_qualitative_value": {
+                    "description": "connects an attribute to a value",
                     "type": "string"
                 },
-                "format": {
-                    "type": "string"
+                "has_quantitative_value": {
+                    "description": "connects an attribute to a value",
+                    "items": {
+                        "$ref": "#/$defs/QuantityValue"
+                    },
+                    "type": "array"
                 },
                 "id": {
                     "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
                     "type": "string"
                 },
-                "license": {
-                    "description": "legal document giving official permission to do something with the resource",
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
                     "type": "string"
                 },
                 "name": {
-                    "description": "A human-readable name for an attribute or entity.",
+                    "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
                     "type": "string"
                 },
-                "rights": {
-                    "description": "provides information about rights held in and over the resource",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "EvidenceType",
-            "type": "object"
-        },
-        "Identifier": {
-            "additionalProperties": false,
-            "description": "Sequence of characters uniquely identifying that with which it is associated",
-            "properties": {
-                "description": {
-                    "description": "a human-readable description of an entity",
-                    "type": "string"
-                },
-                "has_text_value": {
-                    "description": "connects some information to a string",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "identifies": {
-                    "description": "a relationship that identifies, or serves as a sign, for something",
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "Identifier",
-            "type": "object"
-        },
-        "InformationResource": {
-            "additionalProperties": false,
-            "description": "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.",
-            "properties": {
-                "creation_date": {
-                    "description": "date on which an entity was created. This can be applied to nodes or edges",
-                    "format": "date",
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
                     "type": "string"
                 },
-                "description": {
-                    "description": "a human-readable description of an entity",
-                    "type": "string"
-                },
-                "format": {
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "license": {
-                    "description": "legal document giving official permission to do something with the resource",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
-                },
-                "rights": {
-                    "description": "provides information about rights held in and over the resource",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "InformationResource",
-            "type": "object"
-        },
-        "Name": {
-            "additionalProperties": false,
-            "description": "distinctive designation for an individual (person, organization or thing)",
-            "properties": {
-                "description": {
-                    "description": "a human-readable description of an entity",
-                    "type": "string"
-                },
-                "has_text_value": {
-                    "description": "connects some information to a string",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "identifies": {
-                    "description": "a relationship that identifies, or serves as a sign, for something",
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
-                },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
                 }
             },
             "required": [
-                "id"
+                "has_attribute_type",
+                "id",
+                "category"
             ],
-            "title": "Name",
+            "title": "BiologicalSex",
             "type": "object"
         },
-        "NamedThing": {
+        "Book": {
             "additionalProperties": false,
-            "description": "A generic grouping for any identifiable entity",
-            "properties": {
-                "description": {
-                    "description": "a human-readable description of an entity",
-                    "type": "string"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
-                }
-            },
-            "required": [
-                "id"
-            ],
-            "title": "NamedThing",
-            "type": "object"
-        },
-        "Publication": {
-            "additionalProperties": false,
-            "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.",
+            "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -368,10 +484,22 @@
                     "type": "string"
                 },
                 "format": {
+                    "description": "arrangement of data for presentation",
                     "type": "string"
                 },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "id": {
-                    "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
+                    "description": "Books should have industry-standard identifier such as from ISBN.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
                     "type": "string"
                 },
                 "keywords": {
@@ -403,6 +531,13 @@
                     },
                     "type": "array"
                 },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
                 "rights": {
                     "description": "provides information about rights held in and over the resource",
                     "type": "string"
@@ -412,7 +547,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
+                    "description": "Should generally be set to an OntologyClass defined term for 'book'.",
                     "type": "string"
                 },
                 "xref": {
@@ -425,7 +560,2210 @@
             },
             "required": [
                 "id",
-                "type"
+                "type",
+                "category"
+            ],
+            "title": "Book",
+            "type": "object"
+        },
+        "BookChapter": {
+            "additionalProperties": false,
+            "description": "",
+            "properties": {
+                "authors": {
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "chapter": {
+                    "description": "chapter of a book",
+                    "type": "string"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "keywords tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lcsh_terms": {
+                    "description": "Library of Congress Subject Headings (lcsh) terms tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "published_in": {
+                    "description": "The enclosing parent book containing the chapter should have industry-standard identifier from ISBN.",
+                    "type": "string"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "executive summary of a resource or publication",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "type": "string"
+                },
+                "volume": {
+                    "description": "volume of a book or music release in a collection/series or a published collection of journal issues in a serial publication",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "published_in",
+                "id",
+                "type",
+                "category"
+            ],
+            "title": "BookChapter",
+            "type": "object"
+        },
+        "Boundary": {
+            "additionalProperties": false,
+            "description": "dividing line between two areas or sets of points in a topological space; difference between the closure and the interior",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Boundary",
+            "type": "object"
+        },
+        "Component": {
+            "additionalProperties": false,
+            "description": "The component is the smallest system entity that can be deployed, isolated, and restored independently. A self-contained assembly of parts within a complete operating unit or module, which cannot be further subdivided without loss of identity or function. The compoent is part of a system structurally composed of a set of components bound together. Each component is another system and this recursive definition stops when a component is regarded as atomic.\"",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Component",
+            "type": "object"
+        },
+        "ControlRole": {
+            "additionalProperties": false,
+            "description": "A role played by the entity or part thereof within a control context.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_attribute_type": {
+                    "description": "connects an attribute to a class that describes it",
+                    "type": "string"
+                },
+                "has_qualitative_value": {
+                    "description": "connects an attribute to a value",
+                    "type": "string"
+                },
+                "has_quantitative_value": {
+                    "description": "connects an attribute to a value",
+                    "items": {
+                        "$ref": "#/$defs/QuantityValue"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "has_attribute_type",
+                "id",
+                "category"
+            ],
+            "title": "ControlRole",
+            "type": "object"
+        },
+        "Dataset": {
+            "additionalProperties": false,
+            "description": "an item that refers to a collection of data from a data source.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Dataset",
+            "type": "object"
+        },
+        "DatasetDistribution": {
+            "additionalProperties": false,
+            "description": "an item that holds distribution level information about a dataset",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "distribution_download_url": {
+                    "description": "Identifier pointing to Internet location used to distribute of digital assets",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "DatasetDistribution",
+            "type": "object"
+        },
+        "DatasetSummary": {
+            "additionalProperties": false,
+            "description": "an item that holds summary level information about a dataset.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "source_logo": {
+                    "description": "A graphic mark or emblem associated with Web page for Dataset distribution",
+                    "type": "string"
+                },
+                "source_web_page": {
+                    "description": "A web page with specific collection of information provided by a website and displayed to a user in a web browser, with Dataset summary.",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "DatasetSummary",
+            "type": "object"
+        },
+        "DatasetVersion": {
+            "additionalProperties": false,
+            "description": "an item that holds version level information about a dataset.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_dataset": {
+                    "description": "Entity has a dataset",
+                    "type": "string"
+                },
+                "has_distribution": {
+                    "description": "Dataset version has distribution",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "ingest_date": {
+                    "description": "Date when dataset version was ingested",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "DatasetVersion",
+            "type": "object"
+        },
+        "Designation": {
+            "additionalProperties": false,
+            "description": "representation for someone or something by a sign that denotes it",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_text_value": {
+                    "description": "connects some information to a string",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "identifies": {
+                    "description": "a relationship that identifies, or serves as a sign, for something",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Designation",
+            "type": "object"
+        },
+        "Device": {
+            "additionalProperties": false,
+            "description": "A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Device",
+            "type": "object"
+        },
+        "Environment": {
+            "additionalProperties": false,
+            "description": "Part of the universe outside the boundaries of a given system, interacting with that given system.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Environment",
+            "type": "object"
+        },
+        "Event": {
+            "additionalProperties": false,
+            "description": "Something that happens at a given place and time.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Event",
+            "type": "object"
+        },
+        "EvidenceType": {
+            "additionalProperties": false,
+            "description": "Class of evidence that supports an association",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "EvidenceType",
+            "type": "object"
+        },
+        "GeographicLocation": {
+            "additionalProperties": false,
+            "description": "a location that can be described in lat/long coordinates",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "latitude": {
+                    "description": "latitude",
+                    "type": "number"
+                },
+                "longitude": {
+                    "description": "longitude",
+                    "type": "number"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "GeographicLocation",
+            "type": "object"
+        },
+        "Governance": {
+            "additionalProperties": false,
+            "description": "all of the processes of governing, whether undertaken by a government, market or network, whether over a family, tribe, formal or informal organization or territory and whether through the laws, norms, power or language of an organized society",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Governance",
+            "type": "object"
+        },
+        "Hardware": {
+            "additionalProperties": false,
+            "description": "physical components of a computer",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Hardware",
+            "type": "object"
+        },
+        "Identifier": {
+            "additionalProperties": false,
+            "description": "Sequence of characters uniquely identifying that with which it is associated",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_text_value": {
+                    "description": "connects some information to a string",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "identifies": {
+                    "description": "a relationship that identifies, or serves as a sign, for something",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Identifier",
+            "type": "object"
+        },
+        "IndividualSystem": {
+            "additionalProperties": false,
+            "description": "An instance of an system. For example, human. Computer, my pet cat.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "IndividualSystem",
+            "type": "object"
+        },
+        "InformationResource": {
+            "additionalProperties": false,
+            "description": "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "InformationResource",
+            "type": "object"
+        },
+        "Instruction": {
+            "additionalProperties": false,
+            "description": "message intended to convey a course of action for the audience to follow",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Instruction",
+            "type": "object"
+        },
+        "Knowledge": {
+            "additionalProperties": false,
+            "description": "A set of knowledge or reproducible skills acquired through study or experience.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Knowledge",
+            "type": "object"
+        },
+        "Law": {
+            "additionalProperties": false,
+            "description": "system of rules and guidelines, generally backed by governmental authority",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Law",
+            "type": "object"
+        },
+        "Message": {
+            "additionalProperties": false,
+            "description": "discrete unit of communication intended by the source for consumption by some recipient or group of recipients",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Message",
+            "type": "object"
+        },
+        "MetaObject": {
+            "additionalProperties": true,
+            "description": "linkml:Any type is an experimental feature for allowing arbitrary objects",
+            "title": "MetaObject",
+            "type": "object"
+        },
+        "Name": {
+            "additionalProperties": false,
+            "description": "distinctive designation for an individual (person, organization or thing)",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_text_value": {
+                    "description": "connects some information to a string",
+                    "type": "string"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "identifies": {
+                    "description": "a relationship that identifies, or serves as a sign, for something",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Name",
+            "type": "object"
+        },
+        "NamedThing": {
+            "additionalProperties": false,
+            "description": "a databased entity or concept/class",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "NamedThing",
+            "type": "object"
+        },
+        "Phenomenon": {
+            "additionalProperties": false,
+            "description": "a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Phenomenon",
+            "type": "object"
+        },
+        "PlanetaryEntity": {
+            "additionalProperties": false,
+            "description": "Any entity or process that exists at the level of the whole planet",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "PlanetaryEntity",
+            "type": "object"
+        },
+        "Project": {
+            "additionalProperties": false,
+            "description": "collaborative enterprise, frequently involving research or design, that is carefully planned to achieve a particular aim",
+            "properties": {
+                "address": {
+                    "description": "the particulars of the place where someone or an organization is situated. For now, this slot is a simple text \"blob\" containing all relevant details of the given location for fitness of purpose. For the moment, this \"address\" can include other contact details such as email and phone number(?).",
+                    "type": "string"
+                },
+                "affiliation": {
+                    "description": "a professional relationship between one provider (x) within another provider (often an organization). Target provider identity should be specified by a CURIE. Providers may have multiple affiliations.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Different classes of agents have distinct preferred identifiers.  For publishers, use the ISBN publisher code.  See https://grp.isbn-international.org/ for publisher code lookups.  For editors, authors and  individual providers, use the individual's ORCID if available; Otherwise, a ScopusID, publons.researcher or Google Scholar ID ('GSID') may be used if the author ORCID is unknown. Institutional agents could be identified by an International Standard Name Identifier ('ISNI') code.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "it is recommended that an author's 'name' property be formatted as \"surname, firstname initial.\"",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Project",
+            "type": "object"
+        },
+        "Publication": {
+            "additionalProperties": false,
+            "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.",
+            "properties": {
+                "authors": {
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "keywords tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lcsh_terms": {
+                    "description": "Library of Congress Subject Headings (lcsh) terms tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "executive summary of a resource or publication",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "type",
+                "category"
             ],
             "title": "Publication",
             "type": "object"
@@ -444,6 +2782,575 @@
                 }
             },
             "title": "QuantityValue",
+            "type": "object"
+        },
+        "Regulation": {
+            "additionalProperties": false,
+            "description": "general term for rules or controls, including delegated legislation and self-regulation within an organisation",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Regulation",
+            "type": "object"
+        },
+        "Rule": {
+            "additionalProperties": false,
+            "description": "prescription, including laws, regulations, instructions, guidelines, and social conventions; determinate method for performing any operation",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Rule",
+            "type": "object"
+        },
+        "Serial": {
+            "additionalProperties": false,
+            "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
+            "properties": {
+                "authors": {
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "creation_date": {
+                    "description": "date on which an entity was created. This can be applied to nodes or edges",
+                    "format": "date",
+                    "type": "string"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "format": {
+                    "description": "arrangement of data for presentation",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "Serials (journals) should have industry-standard identifier such as from ISSN.",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "iso_abbreviation": {
+                    "description": "Standard abbreviation for periodicals in the International Organization for Standardization (ISO) 4 system See https://www.issn.org/services/online-services/access-to-the-ltwa/. If the 'published in' property is set, then the iso abbreviation pertains to the broader publication context (the journal) within which the given publication node is embedded, not the publication itself.",
+                    "type": "string"
+                },
+                "issue": {
+                    "description": "issue of a newspaper, a scientific journal or magazine for reference purpose",
+                    "type": "string"
+                },
+                "keywords": {
+                    "description": "keywords tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "lcsh_terms": {
+                    "description": "Library of Congress Subject Headings (lcsh) terms tagging a publication",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "license": {
+                    "description": "legal document giving official permission to do something with the resource",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).",
+                    "type": "string"
+                },
+                "pages": {
+                    "description": "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "rights": {
+                    "description": "provides information about rights held in and over the resource",
+                    "type": "string"
+                },
+                "summary": {
+                    "description": "executive summary of a resource or publication",
+                    "type": "string"
+                },
+                "type": {
+                    "description": "Should generally be set to an OntologyClass defined term for 'serial' or 'journal'.",
+                    "type": "string"
+                },
+                "volume": {
+                    "description": "volume of a book or music release in a collection/series or a published collection of journal issues in a serial publication",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "type",
+                "id",
+                "category"
+            ],
+            "title": "Serial",
+            "type": "object"
+        },
+        "SeverityValue": {
+            "additionalProperties": false,
+            "description": "describes the severity of a observable feature or fault",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_attribute_type": {
+                    "description": "connects an attribute to a class that describes it",
+                    "type": "string"
+                },
+                "has_qualitative_value": {
+                    "description": "connects an attribute to a value",
+                    "type": "string"
+                },
+                "has_quantitative_value": {
+                    "description": "connects an attribute to a value",
+                    "items": {
+                        "$ref": "#/$defs/QuantityValue"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "has_attribute_type",
+                "id",
+                "category"
+            ],
+            "title": "SeverityValue",
+            "type": "object"
+        },
+        "Software": {
+            "additionalProperties": false,
+            "description": "A set of instructions in a computer programming language that can be executed by a computer, possibly after compilation into another programming language. The term Software includes ComputerPrograms (free-standing software), object methods, subroutines and software packages.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "Software",
+            "type": "object"
+        },
+        "System": {
+            "additionalProperties": false,
+            "description": "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "System",
+            "type": "object"
+        },
+        "SystemAttribute": {
+            "additionalProperties": false,
+            "description": "describes a characteristic of an SystemEntity.",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "has_attribute_type": {
+                    "description": "connects an attribute to a class that describes it",
+                    "type": "string"
+                },
+                "has_qualitative_value": {
+                    "description": "connects an attribute to a value",
+                    "type": "string"
+                },
+                "has_quantitative_value": {
+                    "description": "connects an attribute to a value",
+                    "items": {
+                        "$ref": "#/$defs/QuantityValue"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "has_attribute_type",
+                "id",
+                "category"
+            ],
+            "title": "SystemAttribute",
             "type": "object"
         }
     },
