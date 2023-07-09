@@ -225,18 +225,6 @@ enums: {}
 ## ------------
 subsets:
 
-  model_system_database:
-    description: >-
-      Subset that is relevant for a typical System Model Database
-
-  translator_minimal:
-    description: >-
-      Minimum subset of translator work
-
-  samples:
-    description: >-
-      Sample datamodel
-
 ## ------------
 ## SLOTS
 ## ------------
@@ -253,8 +241,6 @@ slots:
     domain: Entity
     range: Attribute
     multivalued: true
-    in_subset:
-      - samples
     close_mappings:
       - sumo:hasVariable
       - sumo:property
@@ -479,8 +465,6 @@ slots:
     range: OntologyClass
     multivalued: false
     required: true
-    in_subset:
-      - samples
     close_mappings:
       - sumo:havePartTypes
     exact_mappings:
@@ -590,8 +574,6 @@ slots:
     domain: Attribute
     range: NamedThing
     multivalued: false
-    in_subset:
-      - samples
     close_mappings:
       - schema:QualitativeValue
       - sumo:greaterThanByQuality
@@ -627,8 +609,6 @@ slots:
       - gr:QuantitativeValueInteger
       - om:hasBaseQuantity
       - om:hasDerivedQuantity
-    in_subset:
-      - samples
 
   has numeric value:
     description: >-
@@ -665,8 +645,6 @@ slots:
       - sumo:unitPrice
       - gr:weight
       - gr:width
-    in_subset:
-      - samples
 
   has text value:
     description: >-
@@ -696,8 +674,6 @@ slots:
       - sumo:UnitFn
     narrow_mappings:
       - gr:hasUnitOfMeasurement
-    in_subset:
-      - samples
 
   base coordinate:
     aliases: ['one-based', 'fully-closed']
@@ -719,8 +695,6 @@ slots:
     domain: Identifier
     description: >-
       A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI
-    in_subset:
-      - translator_minimal
     required: true
     broad_mappings:
       - CSO:catalogue_identifiers
@@ -775,9 +749,6 @@ slots:
     comments:
       see also https://url.spec.whatwg.org/#goals
     range: iri type
-    in_subset:
-      - translator_minimal
-      - samples
     related_mappings:
       - dwc:usewithiri
     close_mappings:
@@ -833,8 +804,6 @@ slots:
       In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.
     is_class_field: true
     multivalued: true
-    in_subset:
-      - translator_minimal
     exact_mappings:
       - gr:category
       - schema:category
@@ -850,9 +819,6 @@ slots:
       This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource.
     domain: Entity
     range: label type
-    in_subset:
-      - translator_minimal
-      - samples
     slot_uri: rdfs:label
     broad_mappings:
       - CSO:named_entity
@@ -935,8 +901,6 @@ slots:
     description: >-
       Alternate human-readable names for a thing
     multivalued: true
-    in_subset:
-      - translator_minimal
     broad_mappings:
       - dcterms:alternative
     exact_mappings:
@@ -1045,8 +1009,6 @@ slots:
     description: >-
       Alternate CURIEs for a thing
     multivalued: true
-    in_subset:
-      - translator_minimal
     broad_mappings:
       - uco:ExternalReference
     exact_mappings:
@@ -1080,8 +1042,6 @@ slots:
     range: narrative text
     description: >-
       a human-readable description of an entity
-    in_subset:
-      - translator_minimal
     slot_uri: dcterms:description
     exact_mappings:
       - dcterms:description
@@ -2176,8 +2136,6 @@ slots:
     description: >-
       holds between any two entities that directly or indirectly interact with each other
     is_a: related to at instance level
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2225,8 +2183,6 @@ slots:
     is_a: related to at instance level
     description: >-
       describes an entity that has a direct affect on the state or quality of another existing entity. Use of the 'affects' predicate implies that the affected entity already exists, unlike predicates such as 'affects risk for' and 'prevents', where the outcome is something that may or may not come to be.
-    in_subset:
-      - translator_minimal
     annotations:
       canonical_predicate: true
     broad_mappings:
@@ -2306,8 +2262,6 @@ slots:
       holds between two named things with same relation, relative position, or structure
     comments:
       - typically describes homology relationships between named things or groups
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2322,8 +2276,6 @@ slots:
     is_a: homologous to
     description: >-
       a homology relationship that holds between entities that diverged from a common point of origin
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2335,8 +2287,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between two entities that are co-located in the same aggregate object, process, or spatio-temporal region
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2399,8 +2349,6 @@ slots:
       These concepts may map exactly to the statistical variables, or represent related entities for which the variables serve as proxies in an Association (e.g. faults, control entities or processes).
     domain: NamedThing
     range: NamedThing
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2418,8 +2366,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between a process and an material entity or site within which the process occurs
-    in_subset:
-      - translator_minimal
     annotations:
       canonical_predicate: true
     broad_mappings:
@@ -2446,8 +2392,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between a material entity and a material entity or site within which it is located (but of which it is not considered a part)
-    in_subset:
-      - translator_minimal
     domain: NamedThing
     range: NamedThing
     annotations:
@@ -2471,8 +2415,6 @@ slots:
     range: NamedThing
     description: >-
       holds between material entity or site and a material entity that is located within it (but not considered a part of it)
-    in_subset:
-      - translator_minimal
     inverse: located in
     exact_mappings:
       - RO:0001015   # location of
@@ -2483,8 +2425,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between an entity and some other entity with similar features.
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2498,8 +2438,6 @@ slots:
       holds between a thing and some other thing it approximates for purposes of scientific study, in virtue of its exhibiting similar features of the studied entity.
     annotations:
       canonical_predicate: true
-    in_subset:
-      - translator_minimal
     broad_mappings:
       - sumo:models
     exact_mappings:
@@ -2521,8 +2459,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between entities that overlap in their extents (entities or processes)
-    in_subset:
-      - translator_minimal
     symmetric: true
     annotations:
       canonical_predicate: true
@@ -2538,8 +2474,6 @@ slots:
       opposite_of: lacks part
     description: >-
       holds between wholes and their parts (entities or processes)
-    in_subset:
-      - translator_minimal
     exact_mappings:
       - BFO:0000051   # has part
       - BFO:0000055   # realizes
@@ -2572,8 +2506,6 @@ slots:
     domain: Occurrent
     annotations:
       canonical_predicate: true
-    in_subset:
-      - translator_minimal
     close_mappings:
       - WIKIDATA.PROPERTY:P2283
     exact_mappings:
@@ -2608,8 +2540,6 @@ slots:
       holds between a continuant and a process, where the continuant is somehow involved in the process
     range: Occurrent
     inverse: has participant
-    in_subset:
-      - translator_minimal
     exact_mappings:
       - RO:0000056     # participates in
       - BFO:0000056     # participates in
@@ -2624,8 +2554,6 @@ slots:
     is_a: related to at instance level
     description: >-
       holds between a material entity and a product that is generated through the intentional actions or functioning of the material entity
-    in_subset:
-      - translator_minimal
     annotations:
       canonical_predicate: true
     related_mappings: []
@@ -2696,8 +2624,6 @@ slots:
     annotations:
       canonical_predicate: true
       opposite_of: preceded by
-    in_subset:
-      - translator_minimal
     close_mappings:
       # the subject of these terms is an entity, not a process,
       # but affects a process which is cause a second process to occur
@@ -2722,8 +2648,6 @@ slots:
     domain: Occurrent
     range: Occurrent
     inverse: precedes
-    in_subset:
-      - translator_minimal
     exact_mappings:
       - BFO:0000062    # preceded by
     broad_mappings: []
@@ -2821,8 +2745,6 @@ slots:
     description: >-
       connects an entity to its taxonomic classification. Only certain kinds
       of entities can be taxonomically classified; see 'ThingWithTaxon'
-    in_subset:
-      - translator_minimal
     exact_mappings:
       - RO:0002162    # in taxon
       - WIKIDATA.PROPERTY:P703    # found in taxon
@@ -3185,8 +3107,6 @@ classes:
       - sumo:publishes
       - sumo:validityPeriod
       - sumo:VirtualAddress
-    in_subset:
-      - samples
 
   ControlRole:
     is_a: Attribute
@@ -3464,8 +3384,6 @@ classes:
     aliases: ['knowledgebase',]
     description: >-
       A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.
-    in_subset:
-      - translator_minimal
 
   OpenAccess:
     mixin: true
@@ -3524,8 +3442,6 @@ classes:
       - geolink:Document
       - IAO:0000013    # journal article
     id_prefixes: []
-    in_subset:
-      - model_system_database
 
   book:
     is_a: Publication
@@ -3541,8 +3457,6 @@ classes:
           Should generally be set to an OntologyClass defined term for 'book'.
     id_prefixes:
       - isbn
-    in_subset:
-      - model_system_database
 
   book chapter:
     is_a: Publication
@@ -3555,8 +3469,6 @@ classes:
         required: true
         description: >-
           The enclosing parent book containing the chapter should have industry-standard identifier from ISBN.
-    in_subset:
-      - model_system_database
 
   Serial:
     aliases: ['journal']
@@ -3578,8 +3490,6 @@ classes:
           Should generally be set to an OntologyClass defined term for 'serial' or 'journal'.
     id_prefixes:
       - issn
-    in_subset:
-      - model_system_database
 
   Article:
     description: >-
@@ -3601,8 +3511,6 @@ classes:
     id_prefixes:
       # By inheritance, a DOI may be used as a publication identifier; there may be other relevant namespaces
       - PMID
-    in_subset:
-      - model_system_database
 
   ## Top Level Abstractions of Material & Process Entities
 
