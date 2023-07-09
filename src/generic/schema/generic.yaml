@@ -1,0 +1,1749 @@
+---
+id: https://w3id.org/lmodel/generic
+name: generic
+title: generic
+description: |-
+  Entity and association taxonomy and datamodel for generic data
+license: Apache Software License 2.0
+see_also:
+  - https://lmodel.github.io/generic
+
+prefixes:
+  ucs_landscape: https://w3id.org/lmodel/generic/
+  aml: https://w3id.org/i40/aml#
+  linkml: https://w3id.org/linkml/
+  CDAO: http://purl.obolibrary.org/obo/CDAO_
+  CSO: https://cso.kmi.open.ac.uk/topics/
+  ctrl: https://w3id.org/ibp/CTRLont#
+  # dbo: https://dbpedia.org/ontology/
+  # dcat: http://www.w3.org/ns/dcat#
+  # dcid: https://datacommons.org/browser/
+  doi: https://doi.org/
+  csrc: https://csrc.nist.gov/glossary/term/
+  # CVE: https://cve.mitre.org/cgi-bin/cvekey.cgi?keyword=
+  dwc: http://rs.tdwg.org/dwc/terms/
+  # ECO: http://purl.obolibrary.org/obo/ECO_
+  # edam: http://edamontology.org/
+  edam.data: http://edamontology.org/data_
+  edam.format: http://edamontology.org/format_
+  edam.operation: http://edamontology.org/operation_
+  edam.topic: http://edamontology.org/topic_
+  EFO: http://identifiers.org/efo/
+  # foaf: http://xmlns.com/foaf/0.1/
+  # freedict: https://www.thefreedictionary.com/
+  geolink: http://schema.geolink.org/1.0/base/main.html#
+  gr: http://purl.org/goodrelations/v1#
+  # GSID: https://scholar.google.com/citations?user=
+  # GSSO: http://purl.obolibrary.org/obo/GSSO_
+  gvp: http://vocab.getty.edu/ontology#
+  INO: http://purl.obolibrary.org/obo/INO_
+  # isbn: https://www.isbn-international.org/identifier/
+  # isni: https://isni.org/isni/
+  # issn: https://portal.issn.org/resource/ISSN/
+  LOINC: http://loinc.org/rdf/
+  lcsh: http://id.loc.gov/authorities/subjects/
+  # publons.researcher: https://publons.com/researcher/
+  # metasat: https://schema.space/metasat/
+  # openvocab: https://vocab.org/open/#
+  # ORCID: http://identifiers.org/orcid/
+  om: http://www.ontology-of-units-of-measure.org/resource/om-2/
+  # os: http://www.w3.org/2000/10/swap/os#
+  PATO: http://purl.obolibrary.org/obo/PATO_
+  pav: http://purl.org/pav/
+  # prov: http://www.w3.org/ns/prov#
+  qud: http://qudt.org/1.1/schema/qudt#
+  RO: http://purl.obolibrary.org/obo/RO_
+  REPR: https://w3id.org/reproduceme#
+  rr: http://www.w3.org/ns/r2rml#
+  SAN: https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#
+  schema: http://schema.org/
+  # ScopusID: https://www.scopus.com/authid/detail.uri?authorId=
+  SIO: http://identifiers.org/sio/
+  sosa: http://www.w3.org/ns/sosa/
+  ssn: http://www.w3.org/ns/ssn/
+  ssn-system: http://www.w3.org/ns/ssn/systems/
+  # sumo-wn: https://w3id.org/sumo/wn/
+  sumo: https://w3id.org/sumo/kb/
+  uco: 'https://w3id.org/lmodel/uco-master'
+  UO: http://purl.obolibrary.org/obo/UO_
+  WIKIDATA: https://www.WIKIDATA.org/wiki/
+  WIKIDATA.PROPERTY: 'https://www.WIKIDATA.org/wiki/Property:'
+  # wgs: http://www.w3.org/2003/01/geo/wgs84_pos
+  XAPI: http://ns.inria.fr/ludo/v1/docs/xapi.html#
+
+default_curi_maps:
+  - obo_context
+  - idot_context
+  - monarch_context
+  - semweb_context
+
+default_prefix: ucs_landscape
+default_range: string
+
+imports:
+  - linkml:types
+
+types:
+
+  category type:
+    typeof: uriorcurie
+    description: >-
+      A primitive type in which the value denotes a class within the generic model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the generic class, for example generic:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service
+    exact_mappings:
+      - NCIT:C115618    # Category Type
+      - schema:categoryCode
+      - sumo:categoryID
+    narrow_mappings:
+      - aml:InterfaceClass
+      - aml:RoleClass
+      - aml:SystemUnitClass
+      - schema:MapCategoryType
+      - schema:occupationalCode
+
+  iri type:
+    typeof: uriorcurie
+    description: >-
+      An IRI
+
+  label type:
+    typeof: string
+    description: >-
+      A string that provides a human-readable name for an entity
+
+  predicate type:
+    typeof: uriorcurie
+    description: >-
+      A CURIE from the generic related_to hierarchy. For example, generic:related_to
+
+  narrative text:
+    typeof: string
+    description: >-
+      A string that provides a human-readable description of something
+    exact_mappings:
+      - sumo:NarrativeText
+    close_mappings:
+      - geolink:description
+      - schema:description
+
+  unit:
+    typeof: string
+    uri: UO:0000000   # unit
+    id_prefixes:
+      - UO
+    broad_mappings:
+      - schema:unitText
+    exact_mappings:
+      - ctrl:Unit
+      - qud:Unit
+      - schema:unit
+      - sumo:UnitOfInformation
+    close_mappings:
+      - SIO:000074       # unit of measurement
+      - sumo:UnitOfMeasure
+    narrow_mappings:
+      - sumo:Bit
+      - sumo:Byte
+      - sumo:businessUnit
+      - sumo:UnitFn
+      - sumo:UnitOfAngularMeasure
+      - sumo:UnitOfArea
+      - sumo:UnitOfAtmosphericPressure
+      - sumo:UnitOfCurrency
+      - sumo:UnitOfDuration
+      - sumo:UnitOfFrequency
+      - sumo:UnitOfInformation
+      - sumo:UnitOfLength
+      - sumo:UnitOfMass
+      - sumo:UnitOfMeasure
+      - sumo:UnitOfMeasureMultiplier
+      - sumo:UnitOfTemperature
+      - sumo:UnitOfVolume
+      - WIKIDATA.PROPERTY:P8111  # recommended unit of measurement
+
+  time type:
+    typeof: time
+    exact_mappings:
+      - uco:Time
+
+subsets:
+
+  model_system_database:
+    description: >-
+      Subset that is relevant for a typical System Model Database
+
+  translator_minimal:
+    description: >-
+      Minimum subset of translator work
+
+  samples:
+    description: >-
+      Sample datamodel
+
+classes:
+
+  ## ----------
+  ## ATTRIBUTES
+  ## ----------
+  ## Ontology Classes
+
+  OntologyClass:
+    mixin: true
+    slots:
+      - id
+    description: >-
+      a concept or class in an ontology, vocabulary or thesaurus. Note that nodes in a base compatible KG can be considered both instances of base classes, and OWL classes in their own right. In general you should not need to use this class directly. Instead, use the appropriate base class.
+    exact_mappings:
+      - owl:Class
+      - schema:Class
+    comments:
+      - >-
+         This is modeled as a mixin. 'OntologyClass' should not be the primary type of a node in the KG. Instead you should use an informative base category, such as DeploymentEntity
+      - >-
+         Note that formally this is a metaclass. Instances of this class are instances in the graph, but can be the object of 'type' edges.
+    examples: []
+    id_prefixes:
+      - lcsh
+
+  Annotation:
+    description: >-
+      Generic Model root class for entity annotations.
+    abstract: true
+    exact_mappings:
+      - WIKIDATA:Q857525
+
+  QuantityValue:
+    is_a: Annotation
+    description: >-
+      A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value
+    slots:
+      - has unit
+      - has numeric value
+
+  Attribute:
+    is_a: NamedThing
+    mixins:
+      - OntologyClass
+    description: >-
+      A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.
+    slots:
+      - name                   # 'attribute_name'
+      - has attribute type     # 'attribute_type'
+      # 'value', 'value_type', 'value_type_name'
+      # extracted from either of the next two slots
+      - has quantitative value
+      - has qualitative value
+      - iri                    # 'url'
+    slot_usage:
+      name:
+        description: >-
+          The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.
+    id_prefixes:
+      - edam.data
+      - edam.format
+      - edam.operation
+      - edam.topic
+    exact_mappings:
+      - csrc:attribute
+      - SIO:000614    # attribute
+      - sumo:Attribute
+      - sumo:attribute
+      - WIKIDATA:Q758243    # attribute
+    close_mappings:
+      - SAN:property
+      - schema:property
+      - ssn:Property
+    narrow_mappings:
+      - CSO:quantitative_attributes
+      - csrc:Application_virtualization
+      - csrc:Capability
+      - csrc:Capability_Anomalous_Event_Detection_Management
+      - csrc:Capability_Anomalous_Event_Response_and_Recovery_Management
+      - csrc:Capability_Behavior_Management
+      - csrc:Capability_Boundary_Management
+      - csrc:Capability_Configuration_Settings_Management
+      - csrc:Capability_Credentials_and_Authentication_Management
+      - csrc:Capability_Event_Preparation_Management
+      - csrc:Capability_Hardware_Asset_Management
+      - csrc:Capability_ISCM
+      - csrc:Capability_Manage_and_Assess_Risk
+      - csrc:Capability_Perform_Resilient_Systems_Engineering
+      - csrc:Capability_Privilege_and_Account_Management
+      - csrc:Capability_Software_Asset_Management
+      - csrc:Capability_Trust_Management
+      - csrc:Capability_Vulnerability_Management
+      - CSO:release_date
+      - csrc:security_attribute
+      - dwc:identificationQualifier
+      - dwc:typeStatus
+      - dwc:usewithiri
+      - gr:UnitPriceSpecification
+      - PATO:0000001  # quality
+      - SAN:impactedProperty
+      - sumo:TimeMeasure
+      - schema:releaseDate
+      - schema:Softwareapplication
+      - sosa:actsOnProperty
+      - sosa:ActuatableProperty
+      - sosa:DateTime
+      - sosa:FeatureOfInterest
+      - sosa:implementedBy
+      - sosa:ObservableProperty
+      - sosa:observedProperty
+      - ssn:Stimulus
+      - ssn:detects
+      - ssn:MeasurementProperty
+      - ssn:OperatingProperty
+      - ssn:SurvivalProperty
+      - sumo:criticalityLevel
+      - sumo:duration
+      - sumo:deviceAccount
+      - sumo:deviceOS
+      - sumo:DeviceClosed
+      - sumo:deviceState
+      - sumo:DeviceDamaged
+      - sumo:DeviceOff
+      - sumo:DeviceOn
+      - sumo:DeviceOff
+      - sumo:DeviceOpen
+      - sumo:DeviceStateAttribute
+      - sumo:FormOfAdaptationAttribute
+      - sumo:greaterThan
+      - sumo:greaterThanOrEqualTo
+      - sumo:lessThan
+      - sumo:lessThanOrEqualTo
+      - sumo:load
+      - sumo:most
+      - sumo:magneticVariation
+      - sumo:onboard
+      - sumo:providesDestination
+      - sumo:publishes
+      - sumo:validityPeriod
+      - sumo:VirtualAddress
+    in_subset:
+      - samples
+
+  ## ------
+  ## THINGS
+  ## ------
+  Entity:
+    description: >-
+      Root Generic Model class for all things and informational relationships, real or imagined.
+    abstract: true
+    slots:
+      - id
+      - iri
+      - category
+      - type   # rdf:type
+      - name
+      - description
+      - has attribute
+      # evidence code(s)?
+
+  NamedThing:
+    description: >-
+      A generic grouping for any identifiable entity
+    slots:
+      - id
+      - name
+      - description
+    class_uri: schema:Thing
+
+  Designation:
+    is_a: NamedThing
+    description: >-
+      representation for someone or something by a sign that denotes it
+    slots:
+      - has text value
+      - identifies
+    slot_usage:
+      has text value:
+        minimum_cardinality: 0
+        required: false
+    notes:
+      - can be a term including appellations, a proper name, or a symbol.
+      - can be linguistic or non-linguistic, with various character types
+
+  Name:
+    is_a: Designation
+    description: >-
+      distinctive designation for an individual (person, organization or thing)
+
+  Identifier:
+    is_a: Designation
+    description: >-
+      Sequence of characters uniquely identifying that with which it is associated
+    disjoint_with: Name
+
+  ## Administrative Entities
+
+  AdministrativeEntity:
+    is_a: NamedThing
+    abstract: true
+
+  ## General Information Entities
+
+  InformationContentEntity:
+    aliases: ['information', 'information artefact', 'information entity']
+    abstract: true
+    is_a: NamedThing
+    description: >-
+      a piece of information that typically describes some topic of discourse or is used as support.
+    slots:
+      - license
+      - rights
+      - format
+      - creation date
+    id_prefixes:
+      - doi
+    exact_mappings:
+      - IAO:0000030  # InformationContentEntity
+      - WIKIDATA:Q286583
+    narrow_mappings:
+      # Conceptual Entity
+      # Idea or Concept
+      # Temporal Concept
+      # Qualitative Concept
+      # Quantitative Concept
+      # Spatial Concept
+      # Regulation or Law
+      # Group Attribute
+      # Functional Concept
+      # Language
+      - schema:Language
+      - sumo:Language
+      # Classification
+      - schema:inCodeSet
+
+  EvidenceType:
+    is_a: InformationContentEntity
+    aliases: ['evidence code',]
+    description: >-
+      Class of evidence that supports an association
+    values_from:
+      - eco
+    exact_mappings:
+      - ECO:0000000
+
+  InformationResource:
+    is_a: InformationContentEntity
+    aliases: ['knowledgebase',]
+    description: >-
+      A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.
+    in_subset:
+      - translator_minimal
+
+  ## Publications
+
+  Publication:
+    is_a: InformationContentEntity
+    description: >-
+      Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
+    slots:
+      - authors
+      - id
+      - name
+      - type
+      - pages
+      - summary
+      - keywords
+      - lcsh terms
+      - xref
+    # In addition to embedded slots, instances of 'contributor association'
+    # may be used to more extensively document publisher, editor and author details
+    slot_usage:
+      id:
+        description: >-
+          Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.
+      name:
+        description: >-
+          the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).
+      type:
+        slot_uri: dcterms:type
+        required: true
+        description: >-
+          Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.
+        values_from:  # Not sure which takes precedence, if any...
+          - dctermsypes
+          - lcsh
+          - COAR_RESOURCE
+          - WIKIDATA
+      pages:
+        multivalued: true
+        description: >-
+          When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.
+    exact_mappings:
+      - csrc:Publication
+      - IAO:0000311    # publication
+      - schema:publication
+      - sumo:Publication
+      - WIKIDATA:Q732577    # publication
+    narrow_mappings:
+      - geolink:Document
+      - IAO:0000013    # journal article
+    id_prefixes: []
+    in_subset:
+      - model_system_database
+ 
+  ## Top Level Abstractions of Material & Process Entities
+
+  ## Earth Sciences
+
+  ## ------------
+  ## ASSOCIATIONS
+  ## ------------
+
+  Association:
+    is_a: Entity
+    description: >-
+      A typed association between two entities, supported by evidence
+    comments:
+      - This is roughly the model used by base and ontobio at the moment
+    slots:
+      - subject
+      - predicate
+      - object
+      - negated
+      - qualifiers
+      - publications
+      - has evidence
+      - primary knowledge source
+      - aggregator knowledge source
+      - timepoint
+      - type
+      - category
+    slot_usage:
+      type:
+        description: rdf:type of generic:Association should be fixed at rdf:Statement
+      category:
+        range: category type
+        required: false
+    broad_mappings:
+      - WIKIDATA:Q186290  # correlation
+    exact_mappings:
+      - csrc:Association
+      - OBAN:association
+      - rdf:Statement
+      - owl:Axiom
+    narrow_mappings:
+      - CSO:data_association
+      - WIKIDATA:Q382571  # association (OOP)
+
+slots:
+  ## --------------------
+  ## ATTRIBUTE SLOTS
+  ## --------------------
+  has attribute:
+    description: >-
+      connects any entity to an attribute
+    domain: Entity
+    range: Attribute
+    multivalued: true
+    in_subset:
+      - samples
+    close_mappings:
+      - sumo:hasVariable
+      - sumo:property
+      # specifices value of
+    exact_mappings:
+      - aml:hasAttribute
+      - ctrl:hasParameter
+      - ssn:hasProperty
+      - SIO:000008    # has attribute
+    narrow_mappings:
+      - aml:hasAttributeName
+      - aml:hasDescription
+      - aml:hasICID    # uid for interface class
+      - aml:hasName
+      - aml:hasProject
+      - aml:hasUnit
+      - aml:hasSchemaVersion
+      - aml:hasVersionSUC        # system unit class
+      - aml:hasWriterVersion     # writer=tool
+      - schema:hasPart
+      - CDAO:has_Character
+      - CDAO:has_Root
+      - CDAO:has_First_Coordinate_Item
+      - CDAO:has_Coordinate
+      - CDAO:has_Change_Component
+      - CDAO:has_Datum
+      - CDAO:has_Node
+      - CDAO:has_Annotation
+      - CDAO:has_Remaining_Coordinate_List
+      - CDAO:has_State
+      - CDAO:has_Element
+      - ctrl:hasApplicationLogic
+      - ctrl:hasInput
+      - ctrl:hasMedium
+      - ctrl:hasOutput
+      - ctrl:isConnectedTo
+      - ctrl:isSupervisedBy
+      - dcterms:hasPart
+      - dcterms:hasFormat
+      - dcterms:hasVersion
+      - EFO:is_executed_in
+      - EFO:0006351    # has_about_it
+      - geolink:hasAuthoritativeDigitalRepository
+      - geolink:hasRelatedSample
+      - geolink:hasAffiliation
+      - geolink:hasAuthor
+      - geolink:hasCollector
+      - geolink:hasContact
+      - geolink:hasContributor
+      - geolink:hasCollectionEndDate
+      - geolink:hasCollectionStartDate
+      - geolink:hasCreator
+      - geolink:hasDataset
+      - geolink:hasEditor
+      - geolink:hasEducator
+      - geolink:hasFirstAppearance
+      - geolink:hasIdentifierScheme
+      - geolink:hasObserver
+      - geolink:hasObservationArea
+      - geolink:hasOwner
+      - geolink:hasParticipant
+      - geolink:hasParticipationEndTime
+      - geolink:hasParticipationStartTime
+      - geolink:hasPart
+      - geolink:hasPublicationDate
+      - geolink:hasRegistrationDate
+      - geolink:hasStartDate
+      - geolink:hasRepository
+      - geolink:hasRightsHolder
+      - geolink:hasScheduler
+      - geolink:hasTimeStamp
+      - geolink:hasVendor
+      - gr:hasBusinessFunction
+      - gr:hasBrand
+      - gr:hasCurrency
+      - gr:hasEligibleQuantity
+      - gr:hasGlobalLocationNumber
+      - gr:hasInventoryLevel
+      - gr:hasManufacturer
+      - gr:hasMakeAndModel
+      - gr:hasNext
+      - gr:hasPrevious
+      - gr:hasUnitOfMeasurement
+      - gr:hasValue
+      - IAO:0000039   # has measurement unit label
+      - IAO:0000407   # has coordinate unit label
+      - LOINC:has_action_guidance
+      - LOINC:has_adjustment
+      - LOINC:has_aggregation_view
+      - LOINC:has_approach_guidance
+      - LOINC:has_divisor
+      - LOINC:has_exam
+      - LOINC:has_method
+      - LOINC:has_modality_subtype
+      - LOINC:has_object_guidance
+      - LOINC:has_scale
+      - LOINC:has_suffix
+      - LOINC:has_time_aspect
+      - LOINC:has_time_modifier
+      - LOINC:has_timing_of
+      - NCIT:is_qualified_by
+      - NCIT:qualifier_applies_to
+      - NCIT:has_data_element
+      - NCIT:role_has_domain
+      - NCIT:role_has_range
+      - NCIT:C62618   # single, computer programming object attribute
+      - om:hasPhenomenon
+      - RO:0002002    # has boundary
+      - RO:0000053    # bearer of
+      - RO:0000086    # has quality
+      - RO:0000087    # has role
+      - RO:0002520    # is consecutive sequence of
+      - RO:0002018    # has component process
+      - RO:0002017    # has component activity
+      - RO:0002013    # has regulatory component activity
+      - RO:0002016    # has necessary component activity
+      - RO:0002025    # has effector activity
+      - RO:0002521    # is sequentially aligned with
+      - RO:0002348    # results in commitment to
+      - RO:0002566    # causally influences
+      - RO:0002002    # has 2d boundary
+      - RO:0002338    # has target start location
+      - RO:0002339    # has target end location
+      - RO:0002573    # has modifier
+      - RO:0009004    # has consumer
+      - SAN:hasActuatingCapability
+      - SAN:hasActuatingProperty
+      - SAN:hasDateTime
+      - SAN:hasEffect
+      - SAN:hasWriter
+      - SIO:000011    # is attribute of
+      - SIO:000586    # has capability
+      - SIO:001277    # has data item
+      - SIO:000671    # has identifier
+      - SIO:000312    # has product
+      - SIO:000552    # has parameter
+      - SIO:000420    # has Expression
+      - SIO:000253    # has source
+      - SIO:000132    # has participant
+      - SIO:000255    # has annotation
+      - SIO:000008    # has attribute
+      - SIO:000364    # has creator
+      - SIO:000230    # has input
+      - SIO:000235    # has disposition
+      - SIO:000234    # has implementation
+      - SIO:000228    # has role
+      - SIO:000229    # has output
+      - SIO:000900    # has frequency
+      - SIO:000905    # has substrate
+      - SIO:000221    # has unit
+      - SIO:000225    # has function
+      - SIO:000223    # has property
+      - SIO:000217    # has quality
+      - SIO:000291    # has target
+      - SIO:000054    # has boundary
+      - SIO:000059    # has member
+      - SIO:000028    # has part
+      - SIO:000139    # has agent
+      - SIO:000772    # has evidence
+      - SIO:000641    # has basis
+      - SIO:000635    # has trigger
+      - SIO:000066    # has provider
+      - SIO:001279    # has observable feature
+      - SIO:000300    # has value
+      - SIO:001278    # is data item in
+      - SIO:000680    # has start time
+      - SIO:000681    # has end time
+      - SIO:000679    # has time boundary
+      - SIO:000673    # has unique identifier
+      - SIO:000369    # has component part
+      - SIO:000053    # has proper part
+      - SIO:000972    # has last part
+      - SIO:000971    # has first part
+      - SIO:000273    # has direct part
+      - SIO:000644    # has realizable property
+      - SIO:000974    # has ordered part
+      - SIO:000553    # is parameter in
+      - SIO:000145    # is location of
+      - SWO:0004000   # has version
+      - sosa:hasFeatureOfInterest
+      - sosa:hasSample
+      - ssn:hasSubSystem
+      - ssn:isProxyFor
+      - ssn-system:hasSystemCapability
+      - ssn-system:hasSystemProperty
+      - ssn-system:hasOperatingRange
+      - ssn-system:hasOperatingProperty
+      - ssn-system:hasSurvivalRange
+      - ssn-system:hasSurvivalProperty
+      - ssn-system:inCondition
+      - sumo:hasAcrossVariable
+      - sumo:hasAccount
+      - sumo:hasAward
+      - sumo:hasDependency
+      - sumo:hasDimension
+      - sumo:hasExpertise
+      - sumo:hasGUEState
+      - sumo:hasOccupation
+      - sumo:hasPurpose
+      - sumo:hasPurposeForAgent
+      - sumo:hasSkill
+      - sumo:hasThroughVariable
+      - sumo:hasUniform
+      - sumo:hasVariable
+      - sumo:holdsRight
+      - SWO:9001002   # has clause
+      - SWO:0004001   # has interface
+      - SWO:9000067   # has declared status
+      - SWO:0004002   # has format specification
+      - SWO:0000087   # has specified data output
+      - SWO:0000086   # has specified data input
+      - SWO:0004004   # is published by
+      - SWO:0000741   # is encoded by
+      - SWO:0004002   # has format specification
+      - SWO:3000054   # is alternate format of
+      - SWO:0004000   # has version
+
+  has attribute type:
+    description: >-
+      connects an attribute to a class that describes it
+    domain: Attribute
+    range: OntologyClass
+    multivalued: false
+    required: true
+    in_subset:
+      - samples
+    close_mappings:
+      - sumo:havePartTypes
+    exact_mappings:
+      - aml:hasAttributeDataType
+    narrow_mappings:
+      - aml:hasDataType
+      - aml:hasAttributeName
+      - aml:hasBaseSystemUnitClass
+      - aml:hasInterfaceClass
+      - aml:hasRefBaseClassPath   # name of parent class
+      - aml:hasRefSemAttribute
+      - aml:hasRoleClass
+      - aml:hasRoleRequirement
+      - CDAO:has_Type
+      - ctrl:hasDataType
+      - ctrl:hasSemanticType
+      - dcterms:isFormatOf
+      - dcterms:isPartOf
+      - dcterms:isVersionOf
+      - dcterms:isVersionOf
+      - geolink:hasDocumentType
+      - geolink:hasFeatureType
+      - geolink:hasGeoFeatureType
+      - geolink:hasInstrumentType
+      - geolink:hasMaterialType
+      - geolink:hasMeasurementType
+      - geolink:hasPlatformType
+      - geolink:hasRoleType
+      - geolink:hasSampleType
+      - geolink:isAffiliationOf
+      - geolink:isCreatorOf
+      - geolink:isFormatOf
+      - geolink:isInstrumentTypeOf
+      - geolink:isParticipantOf
+      - geolink:isPartOf
+      - geolink:isPerformerOf
+      - geolink:isPlaceTypeOf
+      - geolink:isProgramOf
+      - geolink:isSubOrganizationOf
+      - geolink:isRightsHolderOf
+      - LOINC:has_modality_type
+      - LOINC:has_view_type
+      - sosa:isFeatureOfInterestOf
+      - sosa:isResultOf
+      - sumo:havePartTypes
+      - sumo:ipAddressOf
+    related_mappings:
+      - csrc:access_type
+      - csrc:Authenticator_Type
+      - csrc:Authority_Type
+      - csrc:Checklist_Type
+      - csrc:Class_of_Service
+      - csrc:default_classification
+      - csrc:Defect_Type
+      - csrc:Key_type
+      - csrc:PIV_Key_Type
+      - csrc:Content_Type
+      - csrc:DNS_Full_Zone_Transfer_Query_Type
+      - csrc:information_type
+      - csrc:memberType
+      - csrc:Resource_Type
+      - csrc:Resource_Type
+      - dcterms:isFormatOf
+      - dcterms:isVersionOf
+      - NCIT:C115618    # Category Type
+      - NCIT:C42854    # Label Type Flag
+      - INO:0000154  # has interaction type
+      - SAN:QuantityKind
+      - schema:publicationType
+      - schema:Float
+      - schema:Integer
+      - sumo:RealNumber
+      - sumo:AccountSecurityType
+      - sumo:cargoType
+      - sumo:currencyType
+      - sumo:dependencyType
+      - sumo:dependentAreaOfType
+      - sumo:diskTypeForDrive
+      - sumo:economyType
+      - sumo:environmentalProblemTypeInArea
+      - sumo:equipmentType
+      - sumo:exportCommodityType
+      - sumo:hardwareType
+      - sumo:importCommodityType
+      - sumo:industryProductType
+      - sumo:legalSystemType
+      - sumo:maritimeClaimType
+      - sumo:memberType
+      - sumo:mimeType
+      - sumo:organizationProductType
+      - sumo:partTypes
+      - sumo:playsRoleInEventOfType
+      - sumo:primaryGeopoliticalSubdivisionType
+      - sumo:resultType
+      - sumo:trafficableForTrafficType
+      - sumo:validPaymentType
+      - sumo:viewType
+
+  has qualitative value:
+    description: >-
+      connects an attribute to a value
+    domain: Attribute
+    range: NamedThing
+    multivalued: false
+    in_subset:
+      - samples
+    close_mappings:
+      - schema:QualitativeValue
+      - sumo:greaterThanByQuality
+    narrow_mappings:
+      - aml:hasAttributeValue
+      - IAO:0000221   # is quality measurement of
+      - gr:hasMaxValue
+      - gr:hasMinValue
+      - SIO:000216    # has measurement value
+
+  has quantitative value:
+    description: >-
+      connects an attribute to a value
+    domain: Attribute
+    range: QuantityValue
+    multivalued: true
+    broad_mappings:
+      - NCIT:C70589    # Abundance
+    exact_mappings:
+      - ctrl:hasQuantity
+      - gr:QuantitativeValue
+      - om:hasQuantity
+      - qud:quantityValue
+      - schema:QuantitativeValue
+      - WIKIDATA:Q17627912    # quantitative value
+    narrow_mappings:
+      - gr:QuantitativeValueFloat
+      - gr:QuantitativeValueInteger
+      - om:hasBaseQuantity
+      - om:hasDerivedQuantity
+    in_subset:
+      - samples
+
+  has numeric value:
+    description: >-
+      connects a quantity value to a number
+    domain: QuantityValue
+    range: double
+    multivalued: false
+    broad_mappings:
+      - NCIT:C81274    # numeric value
+      - schema:Number
+      - qud:numericValue
+      - sumo:number
+    exact_mappings:
+      - qud:quantityValue
+    narrow_mappings:
+      - ctrl:Quantity
+      - gr:weight
+      - gr:width
+      - sumo:age
+      - sumo:diameter
+      - sumo:duration
+      - sumo:FiniteQuantity
+      - sumo:InfiniteQuantity
+      - sumo:length
+      - sumo:memorySize
+      - sumo:netAmount
+      - sumo:netWorth
+      - sumo:publishedPrice
+      - sumo:Quantity
+      - sumo:QuantityChange
+      - sumo:radius
+      - sumo:totalFacilityTypeInArea
+      - sumo:unitNumber
+      - sumo:unitPrice
+      - gr:weight
+      - gr:width
+    in_subset:
+      - samples
+
+  has text value:
+    description: >-
+      connects some information to a string
+    domain: InformationContentEntity
+    range: string
+    multivalued: false
+    slot_uri: xsd:string
+
+  has unit:
+    description: >-
+      connects a quantity value to a unit
+    domain: QuantityValue
+    range: unit
+    multivalued: false
+    close_mappings:
+      - EFO:0001697    # semantic inverse, 'is unit of'
+      - UO:is_unit_of  # semantic inverse
+    exact_mappings:
+      - aml:hasUnit
+      - ctrl:unit
+      - ctrl:hasUnit
+      - IAO:0000039    # has unit
+      - om:hasUnit
+      - qud:unit
+      - SIO:000221  # has unit
+      - sumo:UnitFn
+    narrow_mappings:
+      - gr:hasUnitOfMeasurement
+    in_subset:
+      - samples
+
+  ## --------------------
+  ## NODE PROPERTY SLOTS
+  ## --------------------
+  node property:
+    description: >-
+      A grouping for any property that holds between a node and a value
+    domain: NamedThing
+
+  id:
+    identifier: true
+    domain: Identifier
+    description: >-
+      A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI
+    in_subset:
+      - translator_minimal
+    required: true
+    broad_mappings:
+      - CSO:catalogue_identifiers
+      - IAO:0000603    # is allocated id range
+      - IAO:0000119    # definition source
+      - sumo:identityElement
+    exact_mappings:
+      - dcterms:identifier
+      - edam.data:0842  # identifier
+      - EFO:id
+      # DB_Object_ID
+      - REPR:id
+      - schema:identifier
+      - SIO:000115          # identifier
+      - sumo:Identifier
+      - uco:identifier
+    narrow_mappings:
+      - dwc:eventID
+      - dwc:parentEventID
+      - dwc:identificationID
+      - dwc:systemID
+      - CSO:bicm-id
+      - SIO:000672    # is identifier for
+      - SIO:000674    # is unique identifier for
+      - ERO:0000044   # has inventory number
+      - ERO:0000480   # has_url
+      - NCIT:C94069   # resource provider identifier
+      - REPR:doi
+      - SIO:000328    # positional identifier
+      - SIO:000729    # record identifier
+      - schema:productID
+      - schema:taxID
+      - sumo:AccountID
+      - sumo:AlphaIDString
+      - sumo:AlphaNumericIDString
+      - sumo:AgentID
+      - sumo:CountryID
+      - sumo:CustomerID
+      - sumo:currencyCode
+      - sumo:DistrictID
+      - sumo:EmployeeID
+      - sumo:IsoCode
+      - sumo:LocalizablePlaceID
+      - sumo:userIDString
+      - sumo:urlString
+      - sumo:UniformResourceLocator
+      - WIKIDATA.PROPERTY:P3743   # ITU/ISO/IEC object identifier
+
+  iri:
+    description: >-
+      An IRI for an entity. This is determined by the id using expansion rules.
+    comments:
+      see also https://url.spec.whatwg.org/#goals
+    range: iri type
+    in_subset:
+      - translator_minimal
+      - samples
+    related_mappings:
+      - dwc:usewithiri
+    close_mappings:
+      - NCIT:C165071        # resource identifier
+      - sumo:UniformResourceLocator
+      - uco:url
+    exact_mappings:
+      - rr:IRI
+      - WIKIDATA.PROPERTY:P854
+      - WIKIDATA:Q424583    # Internationalized Resource Identifier
+      - XAPI:IRI
+    narrow_mappings:
+      - RO:0002617    # is representative IRI for equivalence set
+
+  type:
+    slot_uri: rdf:type
+    broad_mappings:
+      - SIO:000011    # is attribute of
+      - RO:0002473    # composed primarily of
+      - IAO:0006011   # may be identical to
+    exact_mappings:
+      - dcterms:type
+      # DB_Object_Type
+      - IAO:0000219    # denotes
+      - NCIT:C25284  # type
+      - schema:type
+      - SWO:type
+      - sumo:Class
+      - WIKIDATA:Q21146257    # type
+      - WIKIDATA.PROPERTY:P427  # type
+    narrow_mappings:
+      - ctrl:DataType
+      - ctrl:SemanticType
+      - dwc:measurementType
+      - GR:typeOfGood
+      - IAO:0000411   # is denotator type
+      - sumo:hardwareType
+      - WIKIDATA:Q190087  # data type
+
+  category:
+    is_a: type
+    domain: Entity
+    range: category type
+    designates_type: true
+    description: >-
+      Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
+       * In a neo4j database this MAY correspond to the neo4j label tag.
+       * In an RDF database it should be a generic model class URI.
+      This field is multi-valued. It should include values for ancestors of the generic class
+
+      In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.
+    is_class_field: true
+    multivalued: true
+    in_subset:
+      - translator_minimal
+    exact_mappings:
+      - gr:category
+      - schema:category
+    narrow_mappings:
+      - CSO:access_category
+      - schema:CategoryCode
+
+  xref:
+    is_a: node property
+    aliases: ['dbxref', 'Dbxref', 'DbXref']
+    domain: NamedThing
+    range: uriorcurie
+    description: >-
+      Alternate CURIEs for a thing
+    multivalued: true
+    in_subset:
+      - translator_minimal
+    broad_mappings:
+      - uco:ExternalReference
+    exact_mappings:
+      - WIKIDATA:Q1302249    # cross-reference
+    narrow_mappings:
+      - dwc:identificationReferences
+      - gr:relatedWebService
+      - NCIT:hasDbXref
+
+  name:
+    aliases: ['label', 'display name', 'title', 'alt label']
+    description: >-
+      A human-readable name for an attribute or entity.
+    comments: >-
+      This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource.
+    domain: Entity
+    range: label type
+    in_subset:
+      - translator_minimal
+      - samples
+    slot_uri: rdfs:label
+    broad_mappings:
+      - CSO:named_entity
+    exact_mappings:
+      - CSO:named_entity
+      # DB_Object_Name
+      - gr:name
+      - om:name
+      - REPR:name
+      - schema:name
+      - SIO:000116   # name
+      - sumo:Name
+      - WIKIDATA.PROPERTY:P2561   # name
+      - uco:name
+    close_mappings:
+      - IAO:0000111    # editor preferred term
+      - IAO:0000118    # alternative term
+      - skos:altLabel
+      - sumo:originalTitle
+    narrow_mappings:
+      - aml:hasAttributeName
+      - dcterms:title
+      - NCIT:P386      # subsource name
+      - WIKIDATA.PROPERTY:P1476   # title
+      - rr:column
+      - rr:tableName
+      - schema:recordLabel
+
+  description:
+    aliases: ['definition']
+    range: narrative text
+    description: >-
+      a human-readable description of an entity
+    in_subset:
+      - translator_minimal
+    slot_uri: dcterms:description
+    exact_mappings:
+      - dcterms:description
+      - IAO:0000115    # definition
+      - schema:description
+      - skos:definitions
+      - sumo:NarrativeText
+      - WIKIDATA:Q1200750    # Description
+      - uco:description
+    close_mappings:
+      - sumo:Descriptor
+    narrow_mappings:
+      - csrc:architecture_description
+      - CSO:architecture_description
+      - CSO:concept_description
+      - CSO:shape_description
+      - om:longcomment
+
+  ## Time
+
+  timepoint:
+    aliases: ['duration']
+    range: time type
+    description: >-
+      a point in time
+    exact_mappings:
+      - sumo:TimePoint
+      - WIKIDATA.PROPERTY:P585   # point in time
+    narrow_mappings:
+      - dwc:eventTime
+      - SAN:ActuatingTime
+      - sosa:phenomenonTime
+      - sosa:resultTime
+
+  creation date:
+    is_a: node property
+    aliases: ['publication date']
+    range: date
+    description: >-
+      date on which an entity was created. This can be applied to nodes or edges
+    broad_mappings:
+      - sumo:date
+    exact_mappings:
+      - dcterms:createdOn
+      - schema:dateCreated
+      - dwc:dateIdentified
+      - schema:datePublished
+      - sumo:dateEstablished
+      - WIKIDATA.PROPERTY:P577   # publication date
+      - uco:creationDate
+    narrow_mappings:
+      - dwc:eventDate
+      - dwc:verbatimEventDate
+      - dwc:relationshipEstablishedDate
+      - WIKIDATA:Q115748455  # date of change
+
+  ## General Information Entities
+
+  license:
+    is_a: node property
+    description: >-
+      legal document giving official permission to do something with the resource
+    domain: InformationContentEntity
+    exact_mappings:
+      - dcterms:license
+      - gr:License
+      - schema:license
+      - sumo:License
+      - uco:license
+    narrow_mappings:
+      - sumo:LicenseAgreement
+      - WIKIDATA.PROPERTY:P275      # copyright license
+      - WIKIDATA:Q7603              # GNU
+      - WIKIDATA.PROPERTY:Q334661   # MIT
+      - WIKIDATA.PROPERTY:Q192897   # GLGPL
+      - WIKIDATA.PROPERTY:Q284742   # Creative Commons
+      - WIKIDATA.PROPERTY:Q13785927  # Apache 2.0
+      - WIKIDATA.PROPERTY:Q3238057   # Proprietary license
+
+  rights:
+    is_a: node property
+    domain: InformationContentEntity
+    description: >-
+      provides information about rights held in and over the resource
+    comments: >-
+      This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource.
+    exact_mappings:
+      - dcterms:rights
+      - WIKIDATA:Q780687   # rights
+    narrow_mappings:
+      - CSO:access_rights
+      - CSO:cyber_rights
+
+  copyright:
+    is_a: rights
+    description: >-
+      Exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same
+    comments: >-
+      This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource.
+
+  format:
+    is_a: node property
+    mixin: true
+    domain: InformationContentEntity
+    exact_mappings:
+      - dcterms:format
+      - NCIT:C42761   # format
+      - sumo:format
+      - SWO:0004002    # has format specification
+    narrow_mappings:
+      - CSO:storage_formats
+      - REPR:ImageFormat
+      - schema:fileFormat
+      - WIKIDATA.PROPERTY:P2701    # file format
+      - WIKIDATA:Q935809   # csv
+      # uco:format
+
+  authors:
+    is_a: node property
+    singular_name: author
+    description: >-
+      connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.
+    multivalued: true
+    domain: Publication
+
+  pages:
+    is_a: node property
+    description: >-
+      page number of source referenced for statement or publication
+    domain: Publication
+    multivalued: true
+    exact_mappings:
+      - WIKIDATA.PROPERTY:P304  # pages
+    narrow_mappings:
+      - sumo:Page
+
+  summary:
+    is_a: node property
+    description: >-
+      executive summary of a resource or publication
+    aliases: ['abstract']
+    notes:
+      - As 'abstract' is linkML keyword denoting a unavailable class or slot,
+      - knowledge graphs should use 'summary' to tag a Publication 'abstract'
+    comments: >-
+      This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource.
+    domain: Publication
+    exact_mappings:
+      - dcterms:abstract
+      - sumo:Summary
+      - WIKIDATA:Q333291  # research document summary
+
+  keywords:
+    is_a: node property
+    description: >-
+      keywords tagging a publication
+    domain: Publication
+    multivalued: true
+    related_mappings:
+      - uco:keywordSearchTerm
+    exact_mappings:
+      - schema:keywords
+    close_mappings:
+      - csrc:keyword
+      - sumo:keyName
+      - WIKIDATA:Q1072684   # keyword
+
+  lcsh terms:
+    is_a: node property
+    description: >-
+      Library of Congress Subject Headings (lcsh) terms tagging a publication
+    domain: Publication
+    range: uriorcurie
+    values_from:
+      - lcsh
+    multivalued: true
+    exact_mappings: []
+
+  ## end of Publication related predicates
+
+  identifies:
+    aliases: ['denotes', 'identifier of']
+    is_a: related to at instance level
+    description: >-
+      a relationship that identifies, or serves as a sign, for something
+    domain: Association
+    range: InformationContentEntity
+    annotations:
+      canonical_predicate: true
+    close_mappings:
+      - IAO:0000219  # denotes
+      - SIO:000020  # denotes
+    exact_mappings:
+      - edam:is_identifier_of
+      - SIO:000672
+      - WIKIDATA.PROPERTY:P10476
+
+  ## --------------------
+  ## ASSOCIATION SLOTS
+  ## --------------------
+
+  association slot:
+    abstract: true
+    domain: Association
+    aliases:
+      - 'edge property'
+      - 'statement property'
+      - 'node qualifier'
+      - 'edge qualifier'
+      - 'statement qualifier'
+    description: >-
+      any slot that relates an association to another entity
+
+  subject:
+    is_a: association slot
+    local_names:
+      neo4j: node with outgoing relationship
+    description: >-
+      connects an association to the subject of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object.
+    required: true
+    range: NamedThing
+    slot_uri: rdf:subject
+    related_mappings:
+      - schema:about
+    exact_mappings:
+      - csrc:subject
+      - dcterms:subject
+      - foaf:topic
+      - gvp:subject
+      - NCIT:C48910    # subject
+      - owl:annotatedSource
+      - WIKIDATA:Q164573    # subject
+    narrow_mappings:
+      - aml:hasProjectTitle
+      - csrc:data_subjects
+      - csrc:Subject_in_a_certificate
+      - csrc:Subject_Certification_Authority
+      - schema:guidelineSubject
+      - schema:subject_headings
+      - sumo:Proposition
+      - uco:subject
+
+  object:
+    is_a: association slot
+    description: >-
+      connects an association to the object of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object.
+    required: true
+    range: NamedThing
+    local_names:
+      neo4j: node with incoming relationship
+    slot_uri: rdf:object
+    exact_mappings:
+      - owl:annotatedTarget
+
+  predicate:
+    is_a: association slot
+    description: >-
+      A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.
+    domain: Association
+    notes: >-
+      Has a value from the Generic related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, generic:related_to, generic:restores
+    range: predicate type
+    required: true
+    local_names:
+      translator: predicate
+    slot_uri: rdf:predicate
+    exact_mappings:
+      - owl:annotatedProperty
+      - sumo:Predicate
+
+  negated:
+    is_a: association slot
+    range: boolean
+    description: >-
+      if set to true, then the association is negated i.e. is not true
+
+  has evidence:
+    is_a: association slot
+    range: EvidenceType
+    description: >-
+      connects an association to an instance of supporting evidence
+    exact_mappings:
+      - RO:0002558
+    multivalued: true
+
+  provided by:
+    is_a: node property
+    description: >-
+      The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.
+    multivalued: true
+    exact_mappings:
+      - pav:providedBy
+      - WIKIDATA:Q68974939
+
+  knowledge source:
+    is_a: association slot
+    description: >-
+      An Information Resource from which the knowledge expressed in an Association was retrieved, directly or indirectly. This can be any resource through which the knowledge passed on its way to its currently serialized form. In practice, implementers should use one of the more specific subtypes of this generic property.
+    range: InformationResource
+    close_mappings:
+      - pav:providedBy
+
+  primary knowledge source:
+    is_a: knowledge source
+    aliases: ['primary source', 'primary reference']
+    description: >-
+      The most upstream source of the knowledge expressed in an Association that can be identified. Performing a rigorous analysis of upstream data providers is expected; every effort is made to catalog the most upstream source of data in this property.  Only one data source should be declared primary in any association.  "aggregator knowledge source" can be used to capture non-primary sources.
+    range: InformationResource
+    notes: >-
+    multivalued: false
+    broad_mappings:
+      - dcterms:references
+
+  aggregator knowledge source:
+    aliases: ['secondary sources', 'secondary references']
+    is_a: knowledge source
+    description: >-
+      An intermediate aggregator resource from which knowledge expressed in an Association was retrieved downstream of the original source, on its path to its current serialized form.
+    range: InformationResource
+    multivalued: true
+    notes: >-
+      For example, UN data collected from source X, is processed and published by Y, and republished by Z1, Z1, Z3. The retrieval path is Z--retrieved_from--> X --supporting_data_from Y, so the 'primary knowledge source' is 'un:X'. A 'supporting data source' is 'un:Y'. The 'aggregator knowledge source' are 'un:Z1', 'un:Z2', 'un:Z3'.
+    broad_mappings:
+      - dcterms:references
+
+  supporting documents:
+    is_a: association slot
+    description: >-
+      One or more referencable documents that report the statement expressed in an Association, or provide information used as evidence supporting this statement.
+    range: uriorcurie
+    multivalued: true
+    examples:
+      - value: PMID:12345678
+
+  publications:
+    aliases: ["supporting publications"]
+    singular_name: Publication
+    description: >-
+      One or more publications that report the statement expressed in an Association, or provide information used as evidence supporting this statement.
+    is_a: supporting documents
+    multivalued: true
+    range: Publication
+
+  ## -------------------
+  ## QUALIFIERS
+  ## -------------------
+  qualifiers:
+    singular_name: qualifier
+    description: >-
+      connects an association to qualifiers that modify or qualify the meaning of that association
+    local_names: {}
+    is_a: association slot
+    multivalued: true
+    range: OntologyClass
+
+  ## --------------------
+  ## PREDICATES/RELATIONS
+  ## --------------------
+
+  related to:
+    description: >-
+      A relationship that is asserted between two named things
+    domain: NamedThing
+    range: NamedThing
+    multivalued: true
+    inherited: true
+    symmetric: true
+    annotations:
+      canonical_predicate: true
+    exact_mappings:
+      - csrc:Association
+      - gvp:aat2000_related_to
+      - skos:relatedMatch
+      - schema:relatedTo
+      - schema:isRelatedTo
+      - SIO:000001    # is related to
+      - sumo:relatedTo
+    broad_mappings:
+      - ECO:0000041    # similarity evidence
+      - owl:topObjectProperty
+      - gvp:aat2900_miscellaneous_relationship
+      - schema:isSimilarTo
+      - SWO:topObjectProperty
+    close_mappings:
+      - dwc:ResourceRelationship
+    narrow_mappings:
+      - aml:contains
+      - BFO:0000054  # realized in
+      - CSO:semantic_relatedness
+      - csrc:Relatively_prime
+      - ctrl:isConnectedTo
+      - ctrl:isSupervisedBy
+      - ctrl:supervises
+      - dcterms:isReferencedBy
+      - dcterms:isReplacedBy
+      - dcterms:isRequiredBy
+      - dwc:identifiedBy
+      - EFO:0006351    # has_about_it
+      - gr:closes
+      - gr:offers
+      - gr:opens
+      - gr:owns
+      - gr:predecessorOf
+      - gr:seeks
+      - gr:includes
+      - gvp:aat2000_reflects
+      - NCIT:is_related_to_endogenous_product
+      - PATO:decreased_in_magnitude_relative_to
+      - PATO:has_cross_section
+      - PATO:has_relative_magnitude
+      - PATO:increased_in_magnitude_relative_to
+      - PATO:reciprocal_of
+      - RO:0002337    # related via localization to
+      - RO:0000052    # inheres in
+      - RO:0002001    # aligned with
+      - RO:0002002    # has 2d boundary
+      - RO:0002003    # electrically_synapsed_to
+      - RO:0002008    # coincident with
+      - RO:0002134    # innervates
+      - RO:0002150    # continious with
+      - RO:0002159    # serially homologous to
+      - RO:0002176    # connects
+      - RO:0002177    # attached to part of
+      - RO:0002178    # supplies
+      - RO:0002179    # drains
+      - RO:0002314    # inheres in part of
+      - RO:0002322    # confers advantage in
+      - RO:0002328    # functionally related to
+      - RO:0002332    # regulates levels of
+      - RO:0002338    # has target start location
+      - RO:0002339    # has target end location
+      - RO:0002341    # results in transport along
+      - RO:0002342    # results in transport across
+      - RO:0002344    # results in transport to form or in
+      - RO:0002348    # results in commitment to
+      - RO:0002349    # results in determination of
+      - RO:0002356    # results in specification of
+      - RO:0002371    # attached to
+      - RO:0002374    # derived from ancestoral fusion of
+      - RO:0002385    # has potential to developmentally contribute to
+      - RO:0002387    # has potential to develop into
+      - RO:0002451    # transmitted by
+      - RO:0002494    # transformation of
+      - RO:0002495    # immediate transformation of
+      - RO:0002573    # has modifier
+      - RO:0009004    # has consumer
+      - SAN:actsOn
+      - SAN:isPropertyOf
+      - SAN:controlledBy
+      - SAN:isImpactedUponBy
+      - SAN:isActedUponBy
+      - schema:branchOf
+      - schema:founder
+      - schema:greater
+      - schema:lesser
+      - schema:userLikes
+      - SIO:000699    # is greater than or equal to
+      - SIO:000733    # is lesser than or equal to
+      - SIO:000734    # is greater than
+      - SIO:000735    # is lesser than
+      - SIO:000774    # is refuted by
+      - SIO:000207    # is disputed by
+      - SIO:000248    # precedes
+      - SIO:000202    # contains
+      - sosa:implements
+      - sosa:isActedOnBy
+      - sosa:isFeatureOfInterestOf
+      - sosa:isHostedBy
+      - sosa:isObservedBy
+      - sosa:isObservedBy
+      - sosa:actsOnProperty
+      - ssn:isPropertyOf
+      - ssn:isProxyFor
+      - sosa:sensor
+      - sumo:Above
+      - sumo:actedIn
+      - sumo:Adjacent
+      - sumo:associateWithStatus
+      - sumo:associatedFunctionality
+      - sumo:Below
+      - sumo:benefits
+      - sumo:between
+      - sumo:connects
+      - sumo:covers
+      - sumo:during
+      - sumo:enjoys
+      - sumo:employs
+      - sumo:enemy
+      - sumo:increasesLikelihood
+      - sumo:inScopeOfInterest
+      - sumo:inList
+      - sumo:inside
+      - sumo:managedBy
+      - sumo:nearOrientation
+      - sumo:orbits
+      - sumo:overlapsPartially
+      - sumo:overlapsSpatially
+      - sumo:relatedTo
+      - sumo:relative
+      - sumo:RelationalAttribute
+      - ssn:wasOriginatedBy
+      - uberon:protects
+      # some following terms mapped here by RTX may merit upgrade to new Generic terms
+      - BFO:0000068   # begins to exist during
+      - BFO:0000069   # ceases to exist during
+      - BTO:related_to
+      - schema:addOn
+      - EFO:0006351    # has_about_it
+      - gvp:aat2805_contextualized_in
+      - gvp:tgn3103_located_on
+      - gvp:ulan1000_related_to
+      - gvp:ulan2778_owner_of
+      - schema:connectedTo
+      - sumo:conjugate
+      # RTX contributed terms, perhaps belong somewhere else with more precise semantics?
+      - IAO:0000136    # is_about
+      - PATO:decreased_in_magnitude_relative_to
+      - PATO:has_cross_section
+      - PATO:has_relative_magnitude
+      - PATO:increased_in_magnitude_relative_to
+      - PATO:reciprocal_of
+      - RO:0000052   # inheres in
+      - RO:0002001   # aligned with
+      - RO:0002002   # has 2d boundary
+      - RO:0002008   # coincident with
+      - RO:0002150   # continuous with
+      - RO:0002159   # serially homologous to
+      - RO:0002176   # connects
+      - RO:0002177   # attached to part of
+      - RO:0002178   # supplies
+      - RO:0002179   # drains
+      - RO:0002314   # inheres in part of
+      - RO:0002322   # confers advantage in
+      - RO:0002328   # functionally related to
+      - RO:0002332   # regulates levels of
+      - RO:0002338   # has target start location
+      - RO:0002339   # has target end location
+      - RO:0002341   # results in transport along
+      - RO:0002342   # results in transport across
+      - RO:0002344   # results in transport to, from, or in
+      - RO:0002348   # results in commitment to
+      - RO:0002349   # results in determination of
+      - RO:0002356   # results in specification of
+      - RO:0002371   # attached to
+      - RO:0002374   # derived from ancestral fusion of
+      - RO:0002385   # has potential to developmentally contribute to
+      - RO:0002451   # transmitted by
+      - RO:0002494   # transformation of
+      - RO:0002495   # immediate transformation of
+      - RO:0002573   # has modifier
+      - RO:0009004   # has consumer
+      - sosa:usedProcedure
+      - ssn:detects
+      - sumo:displayedUpon
+      - sumo:hostedOn
+      - sumo:hostOf
+      - sumo:initiallyContainsPart
+      - sumo:interiorPart
+      - sumo:Increasing
+      - sumo:parallel
+      - sumo:runningOn
+      - sumo:runsOn
+      - sumo:underlier
+      - sumo:Working
+      - WIKIDATA:Q1360012    # variant
+
+  related to at instance level:
+    is_a: related to
+    description: >-
+      Represents a relationship held between two instances of a data classes. Much like an assertion component, in an ABox, these represent facts associated with the conceptual model
+    annotations:
+      canonical_predicate: true
+    symmetric: true
+

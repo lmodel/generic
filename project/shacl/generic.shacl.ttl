@@ -1,0 +1,491 @@
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema1: <http://schema.org/> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix ucs_landscape: <https://w3id.org/lmodel/generic/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+
+ucs_landscape:AdministrativeEntity a sh:NodeShape ;
+    sh:closed false ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path rdfs:label ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path dcterms:description ] ;
+    sh:targetClass ucs_landscape:AdministrativeEntity .
+
+ucs_landscape:Annotation a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "Generic Model root class for entity annotations." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:targetClass ucs_landscape:Annotation .
+
+ucs_landscape:Association a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A typed association between two entities, supported by evidence" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:class ucs_landscape:Publication ;
+            sh:description "One or more publications that report the statement expressed in an Association, or provide information used as evidence supporting this statement." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 5 ;
+            sh:path ucs_landscape:publications ],
+        [ sh:description "if set to true, then the association is negated i.e. is not true" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ucs_landscape:negated ],
+        [ sh:class ucs_landscape:InformationResource ;
+            sh:description "The most upstream source of the knowledge expressed in an Association that can be identified. Performing a rigorous analysis of upstream data providers is expected; every effort is made to catalog the most upstream source of data in this property.  Only one data source should be declared primary in any association.  \"aggregator knowledge source\" can be used to capture non-primary sources." ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 7 ;
+            sh:path ucs_landscape:primary_knowledge_source ],
+        [ sh:description "An IRI for an entity. This is determined by the id using expansion rules." ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path ucs_landscape:iri ],
+        [ sh:class ucs_landscape:Attribute ;
+            sh:description "connects any entity to an attribute" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 16 ;
+            sh:path ucs_landscape:has_attribute ],
+        [ sh:class schema1:Thing ;
+            sh:description "connects an association to the subject of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 0 ;
+            sh:path rdf:subject ],
+        [ sh:description """Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
+ * In a neo4j database this MAY correspond to the neo4j label tag.
+ * In an RDF database it should be a generic model class URI.
+This field is multi-valued. It should include values for ancestors of the generic class
+In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.""" ;
+            sh:order 11 ;
+            sh:path ucs_landscape:category ],
+        [ sh:description "a point in time" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path ucs_landscape:timepoint ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 12 ;
+            sh:path ucs_landscape:id ],
+        [ sh:class schema1:Thing ;
+            sh:description "connects an association to the object of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 2 ;
+            sh:path rdf:object ],
+        [ sh:description "rdf:type of generic:Association should be fixed at rdf:Statement" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path rdf:type ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 15 ;
+            sh:path dcterms:description ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 14 ;
+            sh:path rdfs:label ],
+        [ sh:class ucs_landscape:EvidenceType ;
+            sh:description "connects an association to an instance of supporting evidence" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path ucs_landscape:has_evidence ],
+        [ sh:description "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path rdf:predicate ],
+        [ sh:class ucs_landscape:InformationResource ;
+            sh:description "An intermediate aggregator resource from which knowledge expressed in an Association was retrieved downstream of the original source, on its path to its current serialized form." ;
+            sh:nodeKind sh:IRI ;
+            sh:order 8 ;
+            sh:path ucs_landscape:aggregator_knowledge_source ],
+        [ sh:class ucs_landscape:OntologyClass ;
+            sh:description "connects an association to qualifiers that modify or qualify the meaning of that association" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 4 ;
+            sh:path ucs_landscape:qualifiers ] ;
+    sh:targetClass ucs_landscape:Association .
+
+ucs_landscape:Designation a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "representation for someone or something by a sign that denotes it" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path rdfs:label ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path dcterms:description ],
+        [ sh:description "connects some information to a string" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path xsd:string ],
+        [ sh:class ucs_landscape:InformationContentEntity ;
+            sh:description "a relationship that identifies, or serves as a sign, for something" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ucs_landscape:identifies ] ;
+    sh:targetClass ucs_landscape:Designation .
+
+ucs_landscape:Entity a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "Root Generic Model class for all things and informational relationships, real or imagined." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path dcterms:description ],
+        [ sh:description """Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
+ * In a neo4j database this MAY correspond to the neo4j label tag.
+ * In an RDF database it should be a generic model class URI.
+This field is multi-valued. It should include values for ancestors of the generic class
+In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.""" ;
+            sh:order 2 ;
+            sh:path ucs_landscape:category ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path rdfs:label ],
+        [ sh:class ucs_landscape:Attribute ;
+            sh:description "connects any entity to an attribute" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 6 ;
+            sh:path ucs_landscape:has_attribute ],
+        [ sh:description "An IRI for an entity. This is determined by the id using expansion rules." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:iri ],
+        [ sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path rdf:type ] ;
+    sh:targetClass ucs_landscape:Entity .
+
+ucs_landscape:Identifier a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Sequence of characters uniquely identifying that with which it is associated" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path dcterms:description ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:id ],
+        [ sh:class ucs_landscape:InformationContentEntity ;
+            sh:description "a relationship that identifies, or serves as a sign, for something" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ucs_landscape:identifies ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path rdfs:label ],
+        [ sh:description "connects some information to a string" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path xsd:string ] ;
+    sh:targetClass ucs_landscape:Identifier .
+
+ucs_landscape:Name a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "distinctive designation for an individual (person, organization or thing)" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "connects some information to a string" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path xsd:string ],
+        [ sh:class ucs_landscape:InformationContentEntity ;
+            sh:description "a relationship that identifies, or serves as a sign, for something" ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ucs_landscape:identifies ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path dcterms:description ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path rdfs:label ] ;
+    sh:targetClass ucs_landscape:Name .
+
+ucs_landscape:EvidenceType a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Class of evidence that supports an association" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "legal document giving official permission to do something with the resource" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:license ],
+        [ sh:description "provides information about rights held in and over the resource" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:rights ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:format ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path dcterms:description ],
+        [ sh:description "date on which an entity was created. This can be applied to nodes or edges" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ucs_landscape:creation_date ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path rdfs:label ] ;
+    sh:targetClass ucs_landscape:EvidenceType .
+
+ucs_landscape:Publication a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case)." ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path rdfs:label ],
+        [ sh:description "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 3 ;
+            sh:path dcterms:type ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 13 ;
+            sh:path dcterms:description ],
+        [ sh:description "legal document giving official permission to do something with the resource" ;
+            sh:maxCount 1 ;
+            sh:order 9 ;
+            sh:path ucs_landscape:license ],
+        [ sh:description "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN." ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:id ],
+        [ sh:maxCount 1 ;
+            sh:order 11 ;
+            sh:path ucs_landscape:format ],
+        [ sh:description "keywords tagging a publication" ;
+            sh:order 6 ;
+            sh:path ucs_landscape:keywords ],
+        [ sh:description "Library of Congress Subject Headings (lcsh) terms tagging a publication" ;
+            sh:order 7 ;
+            sh:path ucs_landscape:lcsh_terms ],
+        [ sh:description "executive summary of a resource or publication" ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path ucs_landscape:summary ],
+        [ sh:description "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book." ;
+            sh:order 4 ;
+            sh:path ucs_landscape:pages ],
+        [ sh:description "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication." ;
+            sh:order 0 ;
+            sh:path ucs_landscape:authors ],
+        [ sh:description "date on which an entity was created. This can be applied to nodes or edges" ;
+            sh:maxCount 1 ;
+            sh:order 12 ;
+            sh:path ucs_landscape:creation_date ],
+        [ sh:description "provides information about rights held in and over the resource" ;
+            sh:maxCount 1 ;
+            sh:order 10 ;
+            sh:path ucs_landscape:rights ],
+        [ sh:description "Alternate CURIEs for a thing" ;
+            sh:order 8 ;
+            sh:path ucs_landscape:xref ] ;
+    sh:targetClass ucs_landscape:Publication .
+
+ucs_landscape:QuantityValue a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "connects a quantity value to a unit" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:has_unit ],
+        [ sh:description "connects a quantity value to a number" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:has_numeric_value ] ;
+    sh:targetClass ucs_landscape:QuantityValue .
+
+ucs_landscape:Attribute a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 5 ;
+            sh:path ucs_landscape:id ],
+        [ sh:class ucs_landscape:OntologyClass ;
+            sh:description "connects an attribute to a class that describes it" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 1 ;
+            sh:path ucs_landscape:has_attribute_type ],
+        [ sh:class ucs_landscape:QuantityValue ;
+            sh:description "connects an attribute to a value" ;
+            sh:nodeKind sh:BlankNode ;
+            sh:order 2 ;
+            sh:path ucs_landscape:has_quantitative_value ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path dcterms:description ],
+        [ sh:description "An IRI for an entity. This is determined by the id using expansion rules." ;
+            sh:maxCount 1 ;
+            sh:order 4 ;
+            sh:path ucs_landscape:iri ],
+        [ sh:class schema1:Thing ;
+            sh:description "connects an attribute to a value" ;
+            sh:maxCount 1 ;
+            sh:nodeKind sh:IRI ;
+            sh:order 3 ;
+            sh:path ucs_landscape:has_qualitative_value ],
+        [ sh:description "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term." ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path rdfs:label ] ;
+    sh:targetClass ucs_landscape:Attribute .
+
+ucs_landscape:InformationResource a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "provides information about rights held in and over the resource" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:rights ],
+        [ sh:description "date on which an entity was created. This can be applied to nodes or edges" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ucs_landscape:creation_date ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path dcterms:description ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:format ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path rdfs:label ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "legal document giving official permission to do something with the resource" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:license ] ;
+    sh:targetClass ucs_landscape:InformationResource .
+
+ucs_landscape:OntologyClass a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "a concept or class in an ontology, vocabulary or thesaurus. Note that nodes in a base compatible KG can be considered both instances of base classes, and OWL classes in their own right. In general you should not need to use this class directly. Instead, use the appropriate base class." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:id ] ;
+    sh:targetClass ucs_landscape:OntologyClass .
+
+schema1:Thing a sh:NodeShape ;
+    sh:closed true ;
+    sh:description "A generic grouping for any identifiable entity" ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path rdfs:label ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path dcterms:description ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:id ] ;
+    sh:targetClass schema1:Thing .
+
+ucs_landscape:InformationContentEntity a sh:NodeShape ;
+    sh:closed false ;
+    sh:description "a piece of information that typically describes some topic of discourse or is used as support." ;
+    sh:ignoredProperties ( rdf:type ) ;
+    sh:property [ sh:description "provides information about rights held in and over the resource" ;
+            sh:maxCount 1 ;
+            sh:order 1 ;
+            sh:path ucs_landscape:rights ],
+        [ sh:description "legal document giving official permission to do something with the resource" ;
+            sh:maxCount 1 ;
+            sh:order 0 ;
+            sh:path ucs_landscape:license ],
+        [ sh:description "a human-readable description of an entity" ;
+            sh:maxCount 1 ;
+            sh:order 6 ;
+            sh:path dcterms:description ],
+        [ sh:maxCount 1 ;
+            sh:order 2 ;
+            sh:path ucs_landscape:format ],
+        [ sh:description "A human-readable name for an attribute or entity." ;
+            sh:maxCount 1 ;
+            sh:order 5 ;
+            sh:path rdfs:label ],
+        [ sh:description "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI" ;
+            sh:maxCount 1 ;
+            sh:minCount 1 ;
+            sh:order 4 ;
+            sh:path ucs_landscape:id ],
+        [ sh:description "date on which an entity was created. This can be applied to nodes or edges" ;
+            sh:maxCount 1 ;
+            sh:order 3 ;
+            sh:path ucs_landscape:creation_date ] ;
+    sh:targetClass ucs_landscape:InformationContentEntity .
+

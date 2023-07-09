@@ -1,0 +1,150 @@
+interface AdministrativeEntity
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+  }
+
+interface Annotation
+  {
+  }
+
+type Association
+  {
+    id: String!
+    iri: IriType
+    name: LabelType
+    description: NarrativeText
+    hasAttribute: [Attribute]
+    subject: NamedThing!
+    predicate: PredicateType!
+    object: NamedThing!
+    negated: Boolean
+    qualifiers: [OntologyClass]
+    publications: [Publication]
+    hasEvidence: [EvidenceType]
+    primaryKnowledgeSource: InformationResource
+    aggregatorKnowledgeSource: [InformationResource]
+    timepoint: TimeType
+    type: String
+    category: [CategoryType]
+  }
+
+type Attribute implements OntologyClass
+  {
+    id: String!
+    description: NarrativeText
+    name: LabelType
+    hasAttributeType: OntologyClass!
+    hasQuantitativeValue: [QuantityValue]
+    hasQualitativeValue: NamedThing
+    iri: IriType
+  }
+
+type Designation
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    hasTextValue: String
+    identifies: [InformationContentEntity]
+  }
+
+interface Entity
+  {
+    id: String!
+    iri: IriType
+    category: [CategoryType]
+    type: String
+    name: LabelType
+    description: NarrativeText
+    hasAttribute: [Attribute]
+  }
+
+type EvidenceType
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    license: String
+    rights: String
+    format: String
+    creationDate: Date
+  }
+
+type Identifier
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    hasTextValue: String
+    identifies: [InformationContentEntity]
+  }
+
+interface InformationContentEntity
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    license: String
+    rights: String
+    format: String
+    creationDate: Date
+  }
+
+type InformationResource
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    license: String
+    rights: String
+    format: String
+    creationDate: Date
+  }
+
+type Name
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+    hasTextValue: String
+    identifies: [InformationContentEntity]
+  }
+
+type NamedThing
+  {
+    id: String!
+    name: LabelType
+    description: NarrativeText
+  }
+
+interface OntologyClass
+  {
+    id: String!
+  }
+
+type Publication
+  {
+    description: NarrativeText
+    license: String
+    rights: String
+    format: String
+    creationDate: Date
+    authors: [String]
+    id: String!
+    name: LabelType
+    type: String!
+    pages: [String]
+    summary: String
+    keywords: [String]
+    lcshTerms: [Uriorcurie]
+    xref: [Uriorcurie]
+  }
+
+type QuantityValue
+  {
+    hasUnit: Unit
+    hasNumericValue: Double
+  }
+

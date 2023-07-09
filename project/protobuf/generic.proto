@@ -1,0 +1,112 @@
+// A typed association between two entities, supported by evidence
+message Association
+ {
+  string id = 0
+  iriType iri = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+  namedThing subject = 0
+  predicateType predicate = 0
+  namedThing object = 0
+  boolean negated = 0
+ repeated  ontologyClass qualifiers = 0
+ repeated  publication publications = 0
+ repeated  evidenceType hasEvidence = 0
+  informationResource primaryKnowledgeSource = 0
+ repeated  informationResource aggregatorKnowledgeSource = 0
+  timeType timepoint = 0
+  string type = 0
+ repeated  categoryType category = 0
+ }
+// A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.
+message Attribute
+ {
+  string id = 0
+  narrativeText description = 0
+  labelType name = 0
+  ontologyClass hasAttributeType = 0
+ repeated  quantityValue hasQuantitativeValue = 0
+  namedThing hasQualitativeValue = 0
+  iriType iri = 0
+ }
+// representation for someone or something by a sign that denotes it
+message Designation
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+  string hasTextValue = 0
+ repeated  informationContentEntity identifies = 0
+ }
+// Class of evidence that supports an association
+message EvidenceType
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// Sequence of characters uniquely identifying that with which it is associated
+message Identifier
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+  string hasTextValue = 0
+ repeated  informationContentEntity identifies = 0
+ }
+// A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.
+message InformationResource
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ }
+// distinctive designation for an individual (person, organization or thing)
+message Name
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+  string hasTextValue = 0
+ repeated  informationContentEntity identifies = 0
+ }
+// A generic grouping for any identifiable entity
+message NamedThing
+ {
+  string id = 0
+  labelType name = 0
+  narrativeText description = 0
+ }
+// Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
+message Publication
+ {
+  narrativeText description = 0
+  string license = 0
+  string rights = 0
+  string format = 0
+  date creationDate = 0
+ repeated  string authors = 0
+  string id = 0
+  labelType name = 0
+  string type = 0
+ repeated  string pages = 0
+  string summary = 0
+ repeated  string keywords = 0
+ repeated  uriorcurie lcshTerms = 0
+ repeated  uriorcurie xref = 0
+ }
+// A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value
+message QuantityValue
+ {
+  unit hasUnit = 0
+  double hasNumericValue = 0
+ }

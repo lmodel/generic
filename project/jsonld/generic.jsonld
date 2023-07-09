@@ -1,0 +1,3131 @@
+{
+  "name": "generic",
+  "description": "Entity and association taxonomy and datamodel for generic data",
+  "title": "generic",
+  "see_also": [
+    "https://lmodel.github.io/generic"
+  ],
+  "id": "https://w3id.org/lmodel/generic",
+  "imports": [
+    "linkml:types"
+  ],
+  "license": "Apache Software License 2.0",
+  "prefixes": [
+    {
+      "prefix_prefix": "ucs_landscape",
+      "prefix_reference": "https://w3id.org/lmodel/generic/"
+    },
+    {
+      "prefix_prefix": "aml",
+      "prefix_reference": "https://w3id.org/i40/aml#"
+    },
+    {
+      "prefix_prefix": "linkml",
+      "prefix_reference": "https://w3id.org/linkml/"
+    },
+    {
+      "prefix_prefix": "CDAO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/CDAO_"
+    },
+    {
+      "prefix_prefix": "CSO",
+      "prefix_reference": "https://cso.kmi.open.ac.uk/topics/"
+    },
+    {
+      "prefix_prefix": "ctrl",
+      "prefix_reference": "https://w3id.org/ibp/CTRLont#"
+    },
+    {
+      "prefix_prefix": "doi",
+      "prefix_reference": "https://doi.org/"
+    },
+    {
+      "prefix_prefix": "csrc",
+      "prefix_reference": "https://csrc.nist.gov/glossary/term/"
+    },
+    {
+      "prefix_prefix": "dwc",
+      "prefix_reference": "http://rs.tdwg.org/dwc/terms/"
+    },
+    {
+      "prefix_prefix": "edam.data",
+      "prefix_reference": "http://edamontology.org/data_"
+    },
+    {
+      "prefix_prefix": "edam.format",
+      "prefix_reference": "http://edamontology.org/format_"
+    },
+    {
+      "prefix_prefix": "edam.operation",
+      "prefix_reference": "http://edamontology.org/operation_"
+    },
+    {
+      "prefix_prefix": "edam.topic",
+      "prefix_reference": "http://edamontology.org/topic_"
+    },
+    {
+      "prefix_prefix": "EFO",
+      "prefix_reference": "http://identifiers.org/efo/"
+    },
+    {
+      "prefix_prefix": "geolink",
+      "prefix_reference": "http://schema.geolink.org/1.0/base/main.html#"
+    },
+    {
+      "prefix_prefix": "gr",
+      "prefix_reference": "http://purl.org/goodrelations/v1#"
+    },
+    {
+      "prefix_prefix": "gvp",
+      "prefix_reference": "http://vocab.getty.edu/ontology#"
+    },
+    {
+      "prefix_prefix": "INO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/INO_"
+    },
+    {
+      "prefix_prefix": "LOINC",
+      "prefix_reference": "http://loinc.org/rdf/"
+    },
+    {
+      "prefix_prefix": "lcsh",
+      "prefix_reference": "http://id.loc.gov/authorities/subjects/"
+    },
+    {
+      "prefix_prefix": "om",
+      "prefix_reference": "http://www.ontology-of-units-of-measure.org/resource/om-2/"
+    },
+    {
+      "prefix_prefix": "PATO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/PATO_"
+    },
+    {
+      "prefix_prefix": "pav",
+      "prefix_reference": "http://purl.org/pav/"
+    },
+    {
+      "prefix_prefix": "qud",
+      "prefix_reference": "http://qudt.org/1.1/schema/qudt#"
+    },
+    {
+      "prefix_prefix": "RO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/RO_"
+    },
+    {
+      "prefix_prefix": "REPR",
+      "prefix_reference": "https://w3id.org/reproduceme#"
+    },
+    {
+      "prefix_prefix": "rr",
+      "prefix_reference": "http://www.w3.org/ns/r2rml#"
+    },
+    {
+      "prefix_prefix": "SAN",
+      "prefix_reference": "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#"
+    },
+    {
+      "prefix_prefix": "schema",
+      "prefix_reference": "http://schema.org/"
+    },
+    {
+      "prefix_prefix": "SIO",
+      "prefix_reference": "http://identifiers.org/sio/"
+    },
+    {
+      "prefix_prefix": "sosa",
+      "prefix_reference": "http://www.w3.org/ns/sosa/"
+    },
+    {
+      "prefix_prefix": "ssn",
+      "prefix_reference": "http://www.w3.org/ns/ssn/"
+    },
+    {
+      "prefix_prefix": "ssn-system",
+      "prefix_reference": "http://www.w3.org/ns/ssn/systems/"
+    },
+    {
+      "prefix_prefix": "sumo",
+      "prefix_reference": "https://w3id.org/sumo/kb/"
+    },
+    {
+      "prefix_prefix": "uco",
+      "prefix_reference": "https://w3id.org/lmodel/uco-master"
+    },
+    {
+      "prefix_prefix": "UO",
+      "prefix_reference": "http://purl.obolibrary.org/obo/UO_"
+    },
+    {
+      "prefix_prefix": "WIKIDATA",
+      "prefix_reference": "https://www.WIKIDATA.org/wiki/"
+    },
+    {
+      "prefix_prefix": "WIKIDATA.PROPERTY",
+      "prefix_reference": "https://www.WIKIDATA.org/wiki/Property:"
+    },
+    {
+      "prefix_prefix": "XAPI",
+      "prefix_reference": "http://ns.inria.fr/ludo/v1/docs/xapi.html#"
+    }
+  ],
+  "default_curi_maps": [
+    "obo_context",
+    "idot_context",
+    "monarch_context",
+    "semweb_context"
+  ],
+  "default_prefix": "ucs_landscape",
+  "default_range": "string",
+  "subsets": [
+    {
+      "name": "model_system_database",
+      "definition_uri": "https://w3id.org/lmodel/generic/ModelSystemDatabase",
+      "description": "Subset that is relevant for a typical System Model Database",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "translator_minimal",
+      "definition_uri": "https://w3id.org/lmodel/generic/TranslatorMinimal",
+      "description": "Minimum subset of translator work",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "@type": "SubsetDefinition"
+    },
+    {
+      "name": "samples",
+      "definition_uri": "https://w3id.org/lmodel/generic/Samples",
+      "description": "Sample datamodel",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "@type": "SubsetDefinition"
+    }
+  ],
+  "types": [
+    {
+      "name": "category_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/CategoryType",
+      "description": "A primitive type in which the value denotes a class within the generic model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the generic class, for example generic:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "NCIT:C115618",
+        "schema:categoryCode",
+        "sumo:categoryID"
+      ],
+      "narrow_mappings": [
+        "aml:InterfaceClass",
+        "aml:RoleClass",
+        "aml:SystemUnitClass",
+        "schema:MapCategoryType",
+        "schema:occupationalCode"
+      ],
+      "typeof": "uriorcurie",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "iri_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/IriType",
+      "description": "An IRI",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "typeof": "uriorcurie",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "label_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/LabelType",
+      "description": "A string that provides a human-readable name for an entity",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "predicate_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/PredicateType",
+      "description": "A CURIE from the generic related_to hierarchy. For example, generic:related_to",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "typeof": "uriorcurie",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "narrative_text",
+      "definition_uri": "https://w3id.org/lmodel/generic/NarrativeText",
+      "description": "A string that provides a human-readable description of something",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "sumo:NarrativeText"
+      ],
+      "close_mappings": [
+        "geolink:description",
+        "schema:description"
+      ],
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "unit",
+      "id_prefixes": [
+        "UO"
+      ],
+      "definition_uri": "https://w3id.org/lmodel/generic/Unit",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "ctrl:Unit",
+        "qud:Unit",
+        "schema:unit",
+        "sumo:UnitOfInformation"
+      ],
+      "close_mappings": [
+        "SIO:000074",
+        "sumo:UnitOfMeasure"
+      ],
+      "narrow_mappings": [
+        "sumo:Bit",
+        "sumo:Byte",
+        "sumo:businessUnit",
+        "sumo:UnitFn",
+        "sumo:UnitOfAngularMeasure",
+        "sumo:UnitOfArea",
+        "sumo:UnitOfAtmosphericPressure",
+        "sumo:UnitOfCurrency",
+        "sumo:UnitOfDuration",
+        "sumo:UnitOfFrequency",
+        "sumo:UnitOfInformation",
+        "sumo:UnitOfLength",
+        "sumo:UnitOfMass",
+        "sumo:UnitOfMeasure",
+        "sumo:UnitOfMeasureMultiplier",
+        "sumo:UnitOfTemperature",
+        "sumo:UnitOfVolume",
+        "WIKIDATA.PROPERTY:P8111"
+      ],
+      "broad_mappings": [
+        "schema:unitText"
+      ],
+      "typeof": "string",
+      "base": "str",
+      "uri": "http://purl.obolibrary.org/obo/UO_0000000",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "time_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/TimeType",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "uco:Time"
+      ],
+      "typeof": "time",
+      "base": "XSDTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#time",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "string",
+      "definition_uri": "https://w3id.org/linkml/String",
+      "description": "A character string",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Text"
+      ],
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "integer",
+      "definition_uri": "https://w3id.org/linkml/Integer",
+      "description": "An integer",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Integer"
+      ],
+      "base": "int",
+      "uri": "http://www.w3.org/2001/XMLSchema#integer",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "boolean",
+      "definition_uri": "https://w3id.org/linkml/Boolean",
+      "description": "A binary (true or false) value",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Boolean"
+      ],
+      "base": "Bool",
+      "uri": "http://www.w3.org/2001/XMLSchema#boolean",
+      "repr": "bool",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "float",
+      "definition_uri": "https://w3id.org/linkml/Float",
+      "description": "A real number that conforms to the xsd:float specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#float",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "double",
+      "definition_uri": "https://w3id.org/linkml/Double",
+      "description": "A real number that conforms to the xsd:double specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:Float"
+      ],
+      "base": "float",
+      "uri": "http://www.w3.org/2001/XMLSchema#double",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "decimal",
+      "definition_uri": "https://w3id.org/linkml/Decimal",
+      "description": "A real number with arbitrary precision that conforms to the xsd:decimal specification",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "broad_mappings": [
+        "schema:Number"
+      ],
+      "base": "Decimal",
+      "uri": "http://www.w3.org/2001/XMLSchema#decimal",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "time",
+      "definition_uri": "https://w3id.org/linkml/Time",
+      "description": "A time object represents a (local) time of day, independent of any particular day",
+      "notes": [
+        "URI is dateTime because OWL reasoners do not work with straight date or time"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Time"
+      ],
+      "base": "XSDTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#time",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date",
+      "definition_uri": "https://w3id.org/linkml/Date",
+      "description": "a date (year, month and day) in an idealized calendar",
+      "notes": [
+        "URI is dateTime because OWL reasoners don't work with straight date or time"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:Date"
+      ],
+      "base": "XSDDate",
+      "uri": "http://www.w3.org/2001/XMLSchema#date",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "datetime",
+      "definition_uri": "https://w3id.org/linkml/Datetime",
+      "description": "The combination of a date and time",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "exact_mappings": [
+        "schema:DateTime"
+      ],
+      "base": "XSDDateTime",
+      "uri": "http://www.w3.org/2001/XMLSchema#dateTime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "date_or_datetime",
+      "definition_uri": "https://w3id.org/linkml/DateOrDatetime",
+      "description": "Either a date or a datetime",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "https://w3id.org/linkml/DateOrDatetime",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uriorcurie",
+      "definition_uri": "https://w3id.org/linkml/Uriorcurie",
+      "description": "a URI or a CURIE",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "URIorCURIE",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "curie",
+      "definition_uri": "https://w3id.org/linkml/Curie",
+      "conforms_to": "https://www.w3.org/TR/curie/",
+      "description": "a compact URI",
+      "comments": [
+        "in RDF serializations this MUST be expanded to a URI",
+        "in non-RDF serializations MAY be serialized as the compact representation"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "Curie",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "uri",
+      "definition_uri": "https://w3id.org/linkml/Uri",
+      "conforms_to": "https://www.ietf.org/rfc/rfc3987.txt",
+      "description": "a complete URI",
+      "comments": [
+        "in RDF serializations a slot with range of uri is treated as a literal or type xsd:anyURI unless it is an identifier or a reference to an identifier, in which case it is translated directly to a node"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "close_mappings": [
+        "schema:URL"
+      ],
+      "base": "URI",
+      "uri": "http://www.w3.org/2001/XMLSchema#anyURI",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "ncname",
+      "definition_uri": "https://w3id.org/linkml/Ncname",
+      "description": "Prefix part of CURIE",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NCName",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "objectidentifier",
+      "definition_uri": "https://w3id.org/linkml/Objectidentifier",
+      "description": "A URI or CURIE that represents an object in the model.",
+      "comments": [
+        "Used for inheritance and type checking"
+      ],
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "ElementIdentifier",
+      "uri": "http://www.w3.org/ns/shex#iri",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "nodeidentifier",
+      "definition_uri": "https://w3id.org/linkml/Nodeidentifier",
+      "description": "A URI, CURIE or BNODE that represents a node in a model.",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "NodeIdentifier",
+      "uri": "http://www.w3.org/ns/shex#nonLiteral",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpointer",
+      "definition_uri": "https://w3id.org/linkml/Jsonpointer",
+      "conforms_to": "https://datatracker.ietf.org/doc/html/rfc6901",
+      "description": "A string encoding a JSON Pointer. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to a valid object within the current instance document when encoded in tree form.",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "jsonpath",
+      "definition_uri": "https://w3id.org/linkml/Jsonpath",
+      "conforms_to": "https://www.ietf.org/archive/id/draft-goessner-dispatch-jsonpath-00.html",
+      "description": "A string encoding a JSON Path. The value of the string MUST conform to JSON Point syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded in tree form.",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    },
+    {
+      "name": "sparqlpath",
+      "definition_uri": "https://w3id.org/linkml/Sparqlpath",
+      "conforms_to": "https://www.w3.org/TR/sparql11-query/#propertypaths",
+      "description": "A string encoding a SPARQL Property Path. The value of the string MUST conform to SPARQL syntax and SHOULD dereference to zero or more valid objects within the current instance document when encoded as RDF.",
+      "from_schema": "https://w3id.org/linkml/types",
+      "imported_from": "linkml:types",
+      "base": "str",
+      "uri": "http://www.w3.org/2001/XMLSchema#string",
+      "repr": "str",
+      "@type": "TypeDefinition"
+    }
+  ],
+  "slots": [
+    {
+      "name": "has_attribute",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_attribute",
+      "description": "connects any entity to an attribute",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://w3id.org/i40/aml#hasAttribute",
+        "https://w3id.org/ibp/CTRLont#hasParameter",
+        "http://www.w3.org/ns/ssn/hasProperty",
+        "http://identifiers.org/sio/000008"
+      ],
+      "close_mappings": [
+        "https://w3id.org/sumo/kb/hasVariable",
+        "https://w3id.org/sumo/kb/property"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeName",
+        "https://w3id.org/i40/aml#hasDescription",
+        "https://w3id.org/i40/aml#hasICID",
+        "https://w3id.org/i40/aml#hasName",
+        "https://w3id.org/i40/aml#hasProject",
+        "https://w3id.org/i40/aml#hasUnit",
+        "https://w3id.org/i40/aml#hasSchemaVersion",
+        "https://w3id.org/i40/aml#hasVersionSUC",
+        "https://w3id.org/i40/aml#hasWriterVersion",
+        "http://schema.org/hasPart",
+        "http://purl.obolibrary.org/obo/CDAO_has_Character",
+        "http://purl.obolibrary.org/obo/CDAO_has_Root",
+        "http://purl.obolibrary.org/obo/CDAO_has_First_Coordinate_Item",
+        "http://purl.obolibrary.org/obo/CDAO_has_Coordinate",
+        "http://purl.obolibrary.org/obo/CDAO_has_Change_Component",
+        "http://purl.obolibrary.org/obo/CDAO_has_Datum",
+        "http://purl.obolibrary.org/obo/CDAO_has_Node",
+        "http://purl.obolibrary.org/obo/CDAO_has_Annotation",
+        "http://purl.obolibrary.org/obo/CDAO_has_Remaining_Coordinate_List",
+        "http://purl.obolibrary.org/obo/CDAO_has_State",
+        "http://purl.obolibrary.org/obo/CDAO_has_Element",
+        "https://w3id.org/ibp/CTRLont#hasApplicationLogic",
+        "https://w3id.org/ibp/CTRLont#hasInput",
+        "https://w3id.org/ibp/CTRLont#hasMedium",
+        "https://w3id.org/ibp/CTRLont#hasOutput",
+        "https://w3id.org/ibp/CTRLont#isConnectedTo",
+        "https://w3id.org/ibp/CTRLont#isSupervisedBy",
+        "http://purl.org/dc/terms/hasPart",
+        "http://purl.org/dc/terms/hasFormat",
+        "http://purl.org/dc/terms/hasVersion",
+        "http://identifiers.org/efo/is_executed_in",
+        "http://identifiers.org/efo/0006351",
+        "http://schema.geolink.org/1.0/base/main.html#hasAuthoritativeDigitalRepository",
+        "http://schema.geolink.org/1.0/base/main.html#hasRelatedSample",
+        "http://schema.geolink.org/1.0/base/main.html#hasAffiliation",
+        "http://schema.geolink.org/1.0/base/main.html#hasAuthor",
+        "http://schema.geolink.org/1.0/base/main.html#hasCollector",
+        "http://schema.geolink.org/1.0/base/main.html#hasContact",
+        "http://schema.geolink.org/1.0/base/main.html#hasContributor",
+        "http://schema.geolink.org/1.0/base/main.html#hasCollectionEndDate",
+        "http://schema.geolink.org/1.0/base/main.html#hasCollectionStartDate",
+        "http://schema.geolink.org/1.0/base/main.html#hasCreator",
+        "http://schema.geolink.org/1.0/base/main.html#hasDataset",
+        "http://schema.geolink.org/1.0/base/main.html#hasEditor",
+        "http://schema.geolink.org/1.0/base/main.html#hasEducator",
+        "http://schema.geolink.org/1.0/base/main.html#hasFirstAppearance",
+        "http://schema.geolink.org/1.0/base/main.html#hasIdentifierScheme",
+        "http://schema.geolink.org/1.0/base/main.html#hasObserver",
+        "http://schema.geolink.org/1.0/base/main.html#hasObservationArea",
+        "http://schema.geolink.org/1.0/base/main.html#hasOwner",
+        "http://schema.geolink.org/1.0/base/main.html#hasParticipant",
+        "http://schema.geolink.org/1.0/base/main.html#hasParticipationEndTime",
+        "http://schema.geolink.org/1.0/base/main.html#hasParticipationStartTime",
+        "http://schema.geolink.org/1.0/base/main.html#hasPart",
+        "http://schema.geolink.org/1.0/base/main.html#hasPublicationDate",
+        "http://schema.geolink.org/1.0/base/main.html#hasRegistrationDate",
+        "http://schema.geolink.org/1.0/base/main.html#hasStartDate",
+        "http://schema.geolink.org/1.0/base/main.html#hasRepository",
+        "http://schema.geolink.org/1.0/base/main.html#hasRightsHolder",
+        "http://schema.geolink.org/1.0/base/main.html#hasScheduler",
+        "http://schema.geolink.org/1.0/base/main.html#hasTimeStamp",
+        "http://schema.geolink.org/1.0/base/main.html#hasVendor",
+        "http://purl.org/goodrelations/v1#hasBusinessFunction",
+        "http://purl.org/goodrelations/v1#hasBrand",
+        "http://purl.org/goodrelations/v1#hasCurrency",
+        "http://purl.org/goodrelations/v1#hasEligibleQuantity",
+        "http://purl.org/goodrelations/v1#hasGlobalLocationNumber",
+        "http://purl.org/goodrelations/v1#hasInventoryLevel",
+        "http://purl.org/goodrelations/v1#hasManufacturer",
+        "http://purl.org/goodrelations/v1#hasMakeAndModel",
+        "http://purl.org/goodrelations/v1#hasNext",
+        "http://purl.org/goodrelations/v1#hasPrevious",
+        "http://purl.org/goodrelations/v1#hasUnitOfMeasurement",
+        "http://purl.org/goodrelations/v1#hasValue",
+        "http://purl.obolibrary.org/obo/IAO_0000039",
+        "http://purl.obolibrary.org/obo/IAO_0000407",
+        "http://loinc.org/rdf/has_action_guidance",
+        "http://loinc.org/rdf/has_adjustment",
+        "http://loinc.org/rdf/has_aggregation_view",
+        "http://loinc.org/rdf/has_approach_guidance",
+        "http://loinc.org/rdf/has_divisor",
+        "http://loinc.org/rdf/has_exam",
+        "http://loinc.org/rdf/has_method",
+        "http://loinc.org/rdf/has_modality_subtype",
+        "http://loinc.org/rdf/has_object_guidance",
+        "http://loinc.org/rdf/has_scale",
+        "http://loinc.org/rdf/has_suffix",
+        "http://loinc.org/rdf/has_time_aspect",
+        "http://loinc.org/rdf/has_time_modifier",
+        "http://loinc.org/rdf/has_timing_of",
+        "http://purl.obolibrary.org/obo/NCIT_is_qualified_by",
+        "http://purl.obolibrary.org/obo/NCIT_qualifier_applies_to",
+        "http://purl.obolibrary.org/obo/NCIT_has_data_element",
+        "http://purl.obolibrary.org/obo/NCIT_role_has_domain",
+        "http://purl.obolibrary.org/obo/NCIT_role_has_range",
+        "http://purl.obolibrary.org/obo/NCIT_C62618",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/hasPhenomenon",
+        "http://purl.obolibrary.org/obo/RO_0002002",
+        "http://purl.obolibrary.org/obo/RO_0000053",
+        "http://purl.obolibrary.org/obo/RO_0000086",
+        "http://purl.obolibrary.org/obo/RO_0000087",
+        "http://purl.obolibrary.org/obo/RO_0002520",
+        "http://purl.obolibrary.org/obo/RO_0002018",
+        "http://purl.obolibrary.org/obo/RO_0002017",
+        "http://purl.obolibrary.org/obo/RO_0002013",
+        "http://purl.obolibrary.org/obo/RO_0002016",
+        "http://purl.obolibrary.org/obo/RO_0002025",
+        "http://purl.obolibrary.org/obo/RO_0002521",
+        "http://purl.obolibrary.org/obo/RO_0002348",
+        "http://purl.obolibrary.org/obo/RO_0002566",
+        "http://purl.obolibrary.org/obo/RO_0002002",
+        "http://purl.obolibrary.org/obo/RO_0002338",
+        "http://purl.obolibrary.org/obo/RO_0002339",
+        "http://purl.obolibrary.org/obo/RO_0002573",
+        "http://purl.obolibrary.org/obo/RO_0009004",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasActuatingCapability",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasActuatingProperty",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasDateTime",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasEffect",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasWriter",
+        "http://identifiers.org/sio/000011",
+        "http://identifiers.org/sio/000586",
+        "http://identifiers.org/sio/001277",
+        "http://identifiers.org/sio/000671",
+        "http://identifiers.org/sio/000312",
+        "http://identifiers.org/sio/000552",
+        "http://identifiers.org/sio/000420",
+        "http://identifiers.org/sio/000253",
+        "http://identifiers.org/sio/000132",
+        "http://identifiers.org/sio/000255",
+        "http://identifiers.org/sio/000008",
+        "http://identifiers.org/sio/000364",
+        "http://identifiers.org/sio/000230",
+        "http://identifiers.org/sio/000235",
+        "http://identifiers.org/sio/000234",
+        "http://identifiers.org/sio/000228",
+        "http://identifiers.org/sio/000229",
+        "http://identifiers.org/sio/000900",
+        "http://identifiers.org/sio/000905",
+        "http://identifiers.org/sio/000221",
+        "http://identifiers.org/sio/000225",
+        "http://identifiers.org/sio/000223",
+        "http://identifiers.org/sio/000217",
+        "http://identifiers.org/sio/000291",
+        "http://identifiers.org/sio/000054",
+        "http://identifiers.org/sio/000059",
+        "http://identifiers.org/sio/000028",
+        "http://identifiers.org/sio/000139",
+        "http://identifiers.org/sio/000772",
+        "http://identifiers.org/sio/000641",
+        "http://identifiers.org/sio/000635",
+        "http://identifiers.org/sio/000066",
+        "http://identifiers.org/sio/001279",
+        "http://identifiers.org/sio/000300",
+        "http://identifiers.org/sio/001278",
+        "http://identifiers.org/sio/000680",
+        "http://identifiers.org/sio/000681",
+        "http://identifiers.org/sio/000679",
+        "http://identifiers.org/sio/000673",
+        "http://identifiers.org/sio/000369",
+        "http://identifiers.org/sio/000053",
+        "http://identifiers.org/sio/000972",
+        "http://identifiers.org/sio/000971",
+        "http://identifiers.org/sio/000273",
+        "http://identifiers.org/sio/000644",
+        "http://identifiers.org/sio/000974",
+        "http://identifiers.org/sio/000553",
+        "http://identifiers.org/sio/000145",
+        "http://purl.obolibrary.org/obo/SWO_0004000",
+        "http://www.w3.org/ns/sosa/hasFeatureOfInterest",
+        "http://www.w3.org/ns/sosa/hasSample",
+        "http://www.w3.org/ns/ssn/hasSubSystem",
+        "http://www.w3.org/ns/ssn/isProxyFor",
+        "http://www.w3.org/ns/ssn/systems/hasSystemCapability",
+        "http://www.w3.org/ns/ssn/systems/hasSystemProperty",
+        "http://www.w3.org/ns/ssn/systems/hasOperatingRange",
+        "http://www.w3.org/ns/ssn/systems/hasOperatingProperty",
+        "http://www.w3.org/ns/ssn/systems/hasSurvivalRange",
+        "http://www.w3.org/ns/ssn/systems/hasSurvivalProperty",
+        "http://www.w3.org/ns/ssn/systems/inCondition",
+        "https://w3id.org/sumo/kb/hasAcrossVariable",
+        "https://w3id.org/sumo/kb/hasAccount",
+        "https://w3id.org/sumo/kb/hasAward",
+        "https://w3id.org/sumo/kb/hasDependency",
+        "https://w3id.org/sumo/kb/hasDimension",
+        "https://w3id.org/sumo/kb/hasExpertise",
+        "https://w3id.org/sumo/kb/hasGUEState",
+        "https://w3id.org/sumo/kb/hasOccupation",
+        "https://w3id.org/sumo/kb/hasPurpose",
+        "https://w3id.org/sumo/kb/hasPurposeForAgent",
+        "https://w3id.org/sumo/kb/hasSkill",
+        "https://w3id.org/sumo/kb/hasThroughVariable",
+        "https://w3id.org/sumo/kb/hasUniform",
+        "https://w3id.org/sumo/kb/hasVariable",
+        "https://w3id.org/sumo/kb/holdsRight",
+        "http://purl.obolibrary.org/obo/SWO_9001002",
+        "http://purl.obolibrary.org/obo/SWO_0004001",
+        "http://purl.obolibrary.org/obo/SWO_9000067",
+        "http://purl.obolibrary.org/obo/SWO_0004002",
+        "http://purl.obolibrary.org/obo/SWO_0000087",
+        "http://purl.obolibrary.org/obo/SWO_0000086",
+        "http://purl.obolibrary.org/obo/SWO_0004004",
+        "http://purl.obolibrary.org/obo/SWO_0000741",
+        "http://purl.obolibrary.org/obo/SWO_0004002",
+        "http://purl.obolibrary.org/obo/SWO_3000054",
+        "http://purl.obolibrary.org/obo/SWO_0004000"
+      ],
+      "domain": "Entity",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_attribute",
+      "multivalued": true,
+      "owner": "Entity",
+      "domain_of": [
+        "Entity"
+      ],
+      "range": "Attribute",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_attribute_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_attribute_type",
+      "description": "connects an attribute to a class that describes it",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeDataType"
+      ],
+      "close_mappings": [
+        "https://w3id.org/sumo/kb/havePartTypes"
+      ],
+      "related_mappings": [
+        "https://csrc.nist.gov/glossary/term/access_type",
+        "https://csrc.nist.gov/glossary/term/Authenticator_Type",
+        "https://csrc.nist.gov/glossary/term/Authority_Type",
+        "https://csrc.nist.gov/glossary/term/Checklist_Type",
+        "https://csrc.nist.gov/glossary/term/Class_of_Service",
+        "https://csrc.nist.gov/glossary/term/default_classification",
+        "https://csrc.nist.gov/glossary/term/Defect_Type",
+        "https://csrc.nist.gov/glossary/term/Key_type",
+        "https://csrc.nist.gov/glossary/term/PIV_Key_Type",
+        "https://csrc.nist.gov/glossary/term/Content_Type",
+        "https://csrc.nist.gov/glossary/term/DNS_Full_Zone_Transfer_Query_Type",
+        "https://csrc.nist.gov/glossary/term/information_type",
+        "https://csrc.nist.gov/glossary/term/memberType",
+        "https://csrc.nist.gov/glossary/term/Resource_Type",
+        "https://csrc.nist.gov/glossary/term/Resource_Type",
+        "http://purl.org/dc/terms/isFormatOf",
+        "http://purl.org/dc/terms/isVersionOf",
+        "http://purl.obolibrary.org/obo/NCIT_C115618",
+        "http://purl.obolibrary.org/obo/NCIT_C42854",
+        "http://purl.obolibrary.org/obo/INO_0000154",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#QuantityKind",
+        "http://schema.org/publicationType",
+        "http://schema.org/Float",
+        "http://schema.org/Integer",
+        "https://w3id.org/sumo/kb/RealNumber",
+        "https://w3id.org/sumo/kb/AccountSecurityType",
+        "https://w3id.org/sumo/kb/cargoType",
+        "https://w3id.org/sumo/kb/currencyType",
+        "https://w3id.org/sumo/kb/dependencyType",
+        "https://w3id.org/sumo/kb/dependentAreaOfType",
+        "https://w3id.org/sumo/kb/diskTypeForDrive",
+        "https://w3id.org/sumo/kb/economyType",
+        "https://w3id.org/sumo/kb/environmentalProblemTypeInArea",
+        "https://w3id.org/sumo/kb/equipmentType",
+        "https://w3id.org/sumo/kb/exportCommodityType",
+        "https://w3id.org/sumo/kb/hardwareType",
+        "https://w3id.org/sumo/kb/importCommodityType",
+        "https://w3id.org/sumo/kb/industryProductType",
+        "https://w3id.org/sumo/kb/legalSystemType",
+        "https://w3id.org/sumo/kb/maritimeClaimType",
+        "https://w3id.org/sumo/kb/memberType",
+        "https://w3id.org/sumo/kb/mimeType",
+        "https://w3id.org/sumo/kb/organizationProductType",
+        "https://w3id.org/sumo/kb/partTypes",
+        "https://w3id.org/sumo/kb/playsRoleInEventOfType",
+        "https://w3id.org/sumo/kb/primaryGeopoliticalSubdivisionType",
+        "https://w3id.org/sumo/kb/resultType",
+        "https://w3id.org/sumo/kb/trafficableForTrafficType",
+        "https://w3id.org/sumo/kb/validPaymentType",
+        "https://w3id.org/sumo/kb/viewType"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasDataType",
+        "https://w3id.org/i40/aml#hasAttributeName",
+        "https://w3id.org/i40/aml#hasBaseSystemUnitClass",
+        "https://w3id.org/i40/aml#hasInterfaceClass",
+        "https://w3id.org/i40/aml#hasRefBaseClassPath",
+        "https://w3id.org/i40/aml#hasRefSemAttribute",
+        "https://w3id.org/i40/aml#hasRoleClass",
+        "https://w3id.org/i40/aml#hasRoleRequirement",
+        "http://purl.obolibrary.org/obo/CDAO_has_Type",
+        "https://w3id.org/ibp/CTRLont#hasDataType",
+        "https://w3id.org/ibp/CTRLont#hasSemanticType",
+        "http://purl.org/dc/terms/isFormatOf",
+        "http://purl.org/dc/terms/isPartOf",
+        "http://purl.org/dc/terms/isVersionOf",
+        "http://purl.org/dc/terms/isVersionOf",
+        "http://schema.geolink.org/1.0/base/main.html#hasDocumentType",
+        "http://schema.geolink.org/1.0/base/main.html#hasFeatureType",
+        "http://schema.geolink.org/1.0/base/main.html#hasGeoFeatureType",
+        "http://schema.geolink.org/1.0/base/main.html#hasInstrumentType",
+        "http://schema.geolink.org/1.0/base/main.html#hasMaterialType",
+        "http://schema.geolink.org/1.0/base/main.html#hasMeasurementType",
+        "http://schema.geolink.org/1.0/base/main.html#hasPlatformType",
+        "http://schema.geolink.org/1.0/base/main.html#hasRoleType",
+        "http://schema.geolink.org/1.0/base/main.html#hasSampleType",
+        "http://schema.geolink.org/1.0/base/main.html#isAffiliationOf",
+        "http://schema.geolink.org/1.0/base/main.html#isCreatorOf",
+        "http://schema.geolink.org/1.0/base/main.html#isFormatOf",
+        "http://schema.geolink.org/1.0/base/main.html#isInstrumentTypeOf",
+        "http://schema.geolink.org/1.0/base/main.html#isParticipantOf",
+        "http://schema.geolink.org/1.0/base/main.html#isPartOf",
+        "http://schema.geolink.org/1.0/base/main.html#isPerformerOf",
+        "http://schema.geolink.org/1.0/base/main.html#isPlaceTypeOf",
+        "http://schema.geolink.org/1.0/base/main.html#isProgramOf",
+        "http://schema.geolink.org/1.0/base/main.html#isSubOrganizationOf",
+        "http://schema.geolink.org/1.0/base/main.html#isRightsHolderOf",
+        "http://loinc.org/rdf/has_modality_type",
+        "http://loinc.org/rdf/has_view_type",
+        "http://www.w3.org/ns/sosa/isFeatureOfInterestOf",
+        "http://www.w3.org/ns/sosa/isResultOf",
+        "https://w3id.org/sumo/kb/havePartTypes",
+        "https://w3id.org/sumo/kb/ipAddressOf"
+      ],
+      "domain": "Attribute",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_attribute_type",
+      "owner": "Attribute",
+      "domain_of": [
+        "Attribute"
+      ],
+      "range": "OntologyClass",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_qualitative_value",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_qualitative_value",
+      "description": "connects an attribute to a value",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "close_mappings": [
+        "http://schema.org/QualitativeValue",
+        "https://w3id.org/sumo/kb/greaterThanByQuality"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeValue",
+        "http://purl.obolibrary.org/obo/IAO_0000221",
+        "http://purl.org/goodrelations/v1#hasMaxValue",
+        "http://purl.org/goodrelations/v1#hasMinValue",
+        "http://identifiers.org/sio/000216"
+      ],
+      "domain": "Attribute",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_qualitative_value",
+      "owner": "Attribute",
+      "domain_of": [
+        "Attribute"
+      ],
+      "range": "NamedThing",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_quantitative_value",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_quantitative_value",
+      "description": "connects an attribute to a value",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://w3id.org/ibp/CTRLont#hasQuantity",
+        "http://purl.org/goodrelations/v1#QuantitativeValue",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/hasQuantity",
+        "http://qudt.org/1.1/schema/qudt#quantityValue",
+        "http://schema.org/QuantitativeValue",
+        "https://www.WIKIDATA.org/wiki/Q17627912"
+      ],
+      "narrow_mappings": [
+        "http://purl.org/goodrelations/v1#QuantitativeValueFloat",
+        "http://purl.org/goodrelations/v1#QuantitativeValueInteger",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/hasBaseQuantity",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/hasDerivedQuantity"
+      ],
+      "broad_mappings": [
+        "http://purl.obolibrary.org/obo/NCIT_C70589"
+      ],
+      "domain": "Attribute",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_quantitative_value",
+      "multivalued": true,
+      "owner": "Attribute",
+      "domain_of": [
+        "Attribute"
+      ],
+      "range": "QuantityValue",
+      "inlined": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_numeric_value",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_numeric_value",
+      "description": "connects a quantity value to a number",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://qudt.org/1.1/schema/qudt#quantityValue"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/ibp/CTRLont#Quantity",
+        "http://purl.org/goodrelations/v1#weight",
+        "http://purl.org/goodrelations/v1#width",
+        "https://w3id.org/sumo/kb/age",
+        "https://w3id.org/sumo/kb/diameter",
+        "https://w3id.org/sumo/kb/duration",
+        "https://w3id.org/sumo/kb/FiniteQuantity",
+        "https://w3id.org/sumo/kb/InfiniteQuantity",
+        "https://w3id.org/sumo/kb/length",
+        "https://w3id.org/sumo/kb/memorySize",
+        "https://w3id.org/sumo/kb/netAmount",
+        "https://w3id.org/sumo/kb/netWorth",
+        "https://w3id.org/sumo/kb/publishedPrice",
+        "https://w3id.org/sumo/kb/Quantity",
+        "https://w3id.org/sumo/kb/QuantityChange",
+        "https://w3id.org/sumo/kb/radius",
+        "https://w3id.org/sumo/kb/totalFacilityTypeInArea",
+        "https://w3id.org/sumo/kb/unitNumber",
+        "https://w3id.org/sumo/kb/unitPrice",
+        "http://purl.org/goodrelations/v1#weight",
+        "http://purl.org/goodrelations/v1#width"
+      ],
+      "broad_mappings": [
+        "http://purl.obolibrary.org/obo/NCIT_C81274",
+        "http://schema.org/Number",
+        "http://qudt.org/1.1/schema/qudt#numericValue",
+        "https://w3id.org/sumo/kb/number"
+      ],
+      "domain": "QuantityValue",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_numeric_value",
+      "owner": "QuantityValue",
+      "domain_of": [
+        "QuantityValue"
+      ],
+      "range": "double",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_text_value",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_text_value",
+      "description": "connects some information to a string",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "domain": "InformationContentEntity",
+      "slot_uri": "http://www.w3.org/2001/XMLSchema#string",
+      "owner": "has_text_value",
+      "domain_of": [
+        "Designation"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_unit",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_unit",
+      "description": "connects a quantity value to a unit",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://w3id.org/i40/aml#hasUnit",
+        "https://w3id.org/ibp/CTRLont#unit",
+        "https://w3id.org/ibp/CTRLont#hasUnit",
+        "http://purl.obolibrary.org/obo/IAO_0000039",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/hasUnit",
+        "http://qudt.org/1.1/schema/qudt#unit",
+        "http://identifiers.org/sio/000221",
+        "https://w3id.org/sumo/kb/UnitFn"
+      ],
+      "close_mappings": [
+        "http://identifiers.org/efo/0001697",
+        "http://purl.obolibrary.org/obo/UO_is_unit_of"
+      ],
+      "narrow_mappings": [
+        "http://purl.org/goodrelations/v1#hasUnitOfMeasurement"
+      ],
+      "domain": "QuantityValue",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_unit",
+      "owner": "QuantityValue",
+      "domain_of": [
+        "QuantityValue"
+      ],
+      "range": "unit",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "node_property",
+      "definition_uri": "https://w3id.org/lmodel/generic/node_property",
+      "description": "A grouping for any property that holds between a node and a value",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/node_property",
+      "owner": "node_property",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "id",
+      "definition_uri": "https://w3id.org/lmodel/generic/id",
+      "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/identifier",
+        "http://edamontology.org/data_0842",
+        "http://identifiers.org/efo/id",
+        "https://w3id.org/reproduceme#id",
+        "http://schema.org/identifier",
+        "http://identifiers.org/sio/000115",
+        "https://w3id.org/sumo/kb/Identifier",
+        "https://w3id.org/lmodel/uco-masteridentifier"
+      ],
+      "narrow_mappings": [
+        "http://rs.tdwg.org/dwc/terms/eventID",
+        "http://rs.tdwg.org/dwc/terms/parentEventID",
+        "http://rs.tdwg.org/dwc/terms/identificationID",
+        "http://rs.tdwg.org/dwc/terms/systemID",
+        "https://cso.kmi.open.ac.uk/topics/bicm-id",
+        "http://identifiers.org/sio/000672",
+        "http://identifiers.org/sio/000674",
+        "http://purl.obolibrary.org/obo/ERO_0000044",
+        "http://purl.obolibrary.org/obo/ERO_0000480",
+        "http://purl.obolibrary.org/obo/NCIT_C94069",
+        "https://w3id.org/reproduceme#doi",
+        "http://identifiers.org/sio/000328",
+        "http://identifiers.org/sio/000729",
+        "http://schema.org/productID",
+        "http://schema.org/taxID",
+        "https://w3id.org/sumo/kb/AccountID",
+        "https://w3id.org/sumo/kb/AlphaIDString",
+        "https://w3id.org/sumo/kb/AlphaNumericIDString",
+        "https://w3id.org/sumo/kb/AgentID",
+        "https://w3id.org/sumo/kb/CountryID",
+        "https://w3id.org/sumo/kb/CustomerID",
+        "https://w3id.org/sumo/kb/currencyCode",
+        "https://w3id.org/sumo/kb/DistrictID",
+        "https://w3id.org/sumo/kb/EmployeeID",
+        "https://w3id.org/sumo/kb/IsoCode",
+        "https://w3id.org/sumo/kb/LocalizablePlaceID",
+        "https://w3id.org/sumo/kb/userIDString",
+        "https://w3id.org/sumo/kb/urlString",
+        "https://w3id.org/sumo/kb/UniformResourceLocator",
+        "https://www.WIKIDATA.org/wiki/Property:P3743"
+      ],
+      "broad_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/catalogue_identifiers",
+        "http://purl.obolibrary.org/obo/IAO_0000603",
+        "http://purl.obolibrary.org/obo/IAO_0000119",
+        "https://w3id.org/sumo/kb/identityElement"
+      ],
+      "domain": "Identifier",
+      "slot_uri": "https://w3id.org/lmodel/generic/id",
+      "identifier": true,
+      "owner": "id",
+      "domain_of": [
+        "OntologyClass",
+        "Entity",
+        "NamedThing",
+        "Publication"
+      ],
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "iri",
+      "definition_uri": "https://w3id.org/lmodel/generic/iri",
+      "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+      "comments": [
+        "see also https://url.spec.whatwg.org/#goals"
+      ],
+      "in_subset": [
+        "translator_minimal",
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://www.w3.org/ns/r2rml#IRI",
+        "https://www.WIKIDATA.org/wiki/Property:P854",
+        "https://www.WIKIDATA.org/wiki/Q424583",
+        "http://ns.inria.fr/ludo/v1/docs/xapi.html#IRI"
+      ],
+      "close_mappings": [
+        "http://purl.obolibrary.org/obo/NCIT_C165071",
+        "https://w3id.org/sumo/kb/UniformResourceLocator",
+        "https://w3id.org/lmodel/uco-masterurl"
+      ],
+      "related_mappings": [
+        "http://rs.tdwg.org/dwc/terms/usewithiri"
+      ],
+      "narrow_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002617"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/generic/iri",
+      "owner": "Entity",
+      "domain_of": [
+        "Attribute",
+        "Entity"
+      ],
+      "range": "iri_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "type",
+      "definition_uri": "https://w3id.org/lmodel/generic/type",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/type",
+        "http://purl.obolibrary.org/obo/IAO_0000219",
+        "http://purl.obolibrary.org/obo/NCIT_C25284",
+        "http://schema.org/type",
+        "http://purl.obolibrary.org/obo/SWO_type",
+        "https://w3id.org/sumo/kb/Class",
+        "https://www.WIKIDATA.org/wiki/Q21146257",
+        "https://www.WIKIDATA.org/wiki/Property:P427"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/ibp/CTRLont#DataType",
+        "https://w3id.org/ibp/CTRLont#SemanticType",
+        "http://rs.tdwg.org/dwc/terms/measurementType",
+        "http://purl.org/goodrelations/v1#typeOfGood",
+        "http://purl.obolibrary.org/obo/IAO_0000411",
+        "https://w3id.org/sumo/kb/hardwareType",
+        "https://www.WIKIDATA.org/wiki/Q190087"
+      ],
+      "broad_mappings": [
+        "http://identifiers.org/sio/000011",
+        "http://purl.obolibrary.org/obo/RO_0002473",
+        "http://purl.obolibrary.org/obo/IAO_0006011"
+      ],
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "owner": "Association",
+      "domain_of": [
+        "Entity",
+        "Publication",
+        "Association"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "category",
+      "definition_uri": "https://w3id.org/lmodel/generic/category",
+      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/goodrelations/v1#category",
+        "http://schema.org/category"
+      ],
+      "narrow_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/access_category",
+        "http://schema.org/CategoryCode"
+      ],
+      "is_a": "type",
+      "domain": "Entity",
+      "slot_uri": "https://w3id.org/lmodel/generic/category",
+      "multivalued": true,
+      "designates_type": true,
+      "owner": "Association",
+      "domain_of": [
+        "Entity",
+        "Association"
+      ],
+      "is_class_field": true,
+      "range": "category_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "xref",
+      "definition_uri": "https://w3id.org/lmodel/generic/xref",
+      "description": "Alternate CURIEs for a thing",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "dbxref",
+        "Dbxref",
+        "DbXref"
+      ],
+      "exact_mappings": [
+        "https://www.WIKIDATA.org/wiki/Q1302249"
+      ],
+      "narrow_mappings": [
+        "http://rs.tdwg.org/dwc/terms/identificationReferences",
+        "http://purl.org/goodrelations/v1#relatedWebService",
+        "http://purl.obolibrary.org/obo/NCIT_hasDbXref"
+      ],
+      "broad_mappings": [
+        "https://w3id.org/lmodel/uco-masterExternalReference"
+      ],
+      "is_a": "node_property",
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/xref",
+      "multivalued": true,
+      "owner": "xref",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "name",
+      "definition_uri": "https://w3id.org/lmodel/generic/name",
+      "description": "A human-readable name for an attribute or entity.",
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
+      ],
+      "in_subset": [
+        "translator_minimal",
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "label",
+        "display name",
+        "title",
+        "alt label"
+      ],
+      "mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#label"
+      ],
+      "exact_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity",
+        "http://purl.org/goodrelations/v1#name",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/name",
+        "https://w3id.org/reproduceme#name",
+        "http://schema.org/name",
+        "http://identifiers.org/sio/000116",
+        "https://w3id.org/sumo/kb/Name",
+        "https://www.WIKIDATA.org/wiki/Property:P2561",
+        "https://w3id.org/lmodel/uco-mastername"
+      ],
+      "close_mappings": [
+        "http://purl.obolibrary.org/obo/IAO_0000111",
+        "http://purl.obolibrary.org/obo/IAO_0000118",
+        "http://www.w3.org/2004/02/skos/core#altLabel",
+        "https://w3id.org/sumo/kb/originalTitle"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeName",
+        "http://purl.org/dc/terms/title",
+        "http://purl.obolibrary.org/obo/NCIT_P386",
+        "https://www.WIKIDATA.org/wiki/Property:P1476",
+        "http://www.w3.org/ns/r2rml#column",
+        "http://www.w3.org/ns/r2rml#tableName",
+        "http://schema.org/recordLabel"
+      ],
+      "broad_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity"
+      ],
+      "domain": "Entity",
+      "slot_uri": "http://www.w3.org/2000/01/rdf-schema#label",
+      "owner": "Publication",
+      "domain_of": [
+        "Attribute",
+        "Entity",
+        "NamedThing",
+        "Publication"
+      ],
+      "range": "label_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "description",
+      "definition_uri": "https://w3id.org/lmodel/generic/description",
+      "description": "a human-readable description of an entity",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "definition"
+      ],
+      "mappings": [
+        "http://purl.org/dc/terms/description"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/description",
+        "http://purl.obolibrary.org/obo/IAO_0000115",
+        "http://schema.org/description",
+        "http://www.w3.org/2004/02/skos/core#definitions",
+        "https://w3id.org/sumo/kb/NarrativeText",
+        "https://www.WIKIDATA.org/wiki/Q1200750",
+        "https://w3id.org/lmodel/uco-masterdescription"
+      ],
+      "close_mappings": [
+        "https://w3id.org/sumo/kb/Descriptor"
+      ],
+      "narrow_mappings": [
+        "https://csrc.nist.gov/glossary/term/architecture_description",
+        "https://cso.kmi.open.ac.uk/topics/architecture_description",
+        "https://cso.kmi.open.ac.uk/topics/concept_description",
+        "https://cso.kmi.open.ac.uk/topics/shape_description",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/longcomment"
+      ],
+      "slot_uri": "http://purl.org/dc/terms/description",
+      "owner": "NamedThing",
+      "domain_of": [
+        "Entity",
+        "NamedThing"
+      ],
+      "range": "narrative_text",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "timepoint",
+      "definition_uri": "https://w3id.org/lmodel/generic/timepoint",
+      "description": "a point in time",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "duration"
+      ],
+      "exact_mappings": [
+        "https://w3id.org/sumo/kb/TimePoint",
+        "https://www.WIKIDATA.org/wiki/Property:P585"
+      ],
+      "narrow_mappings": [
+        "http://rs.tdwg.org/dwc/terms/eventTime",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#ActuatingTime",
+        "http://www.w3.org/ns/sosa/phenomenonTime",
+        "http://www.w3.org/ns/sosa/resultTime"
+      ],
+      "slot_uri": "https://w3id.org/lmodel/generic/timepoint",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "time_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "creation_date",
+      "definition_uri": "https://w3id.org/lmodel/generic/creation_date",
+      "description": "date on which an entity was created. This can be applied to nodes or edges",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "publication date"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/createdOn",
+        "http://schema.org/dateCreated",
+        "http://rs.tdwg.org/dwc/terms/dateIdentified",
+        "http://schema.org/datePublished",
+        "https://w3id.org/sumo/kb/dateEstablished",
+        "https://www.WIKIDATA.org/wiki/Property:P577",
+        "https://w3id.org/lmodel/uco-mastercreationDate"
+      ],
+      "narrow_mappings": [
+        "http://rs.tdwg.org/dwc/terms/eventDate",
+        "http://rs.tdwg.org/dwc/terms/verbatimEventDate",
+        "http://rs.tdwg.org/dwc/terms/relationshipEstablishedDate",
+        "https://www.WIKIDATA.org/wiki/Q115748455"
+      ],
+      "broad_mappings": [
+        "https://w3id.org/sumo/kb/date"
+      ],
+      "is_a": "node_property",
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/creation_date",
+      "owner": "InformationContentEntity",
+      "domain_of": [
+        "InformationContentEntity"
+      ],
+      "range": "date",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "license",
+      "definition_uri": "https://w3id.org/lmodel/generic/license",
+      "description": "legal document giving official permission to do something with the resource",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/license",
+        "http://purl.org/goodrelations/v1#License",
+        "http://schema.org/license",
+        "https://w3id.org/sumo/kb/License",
+        "https://w3id.org/lmodel/uco-masterlicense"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/sumo/kb/LicenseAgreement",
+        "https://www.WIKIDATA.org/wiki/Property:P275",
+        "https://www.WIKIDATA.org/wiki/Q7603",
+        "https://www.WIKIDATA.org/wiki/Property:Q334661",
+        "https://www.WIKIDATA.org/wiki/Property:Q192897",
+        "https://www.WIKIDATA.org/wiki/Property:Q284742",
+        "https://www.WIKIDATA.org/wiki/Property:Q13785927",
+        "https://www.WIKIDATA.org/wiki/Property:Q3238057"
+      ],
+      "is_a": "node_property",
+      "domain": "InformationContentEntity",
+      "slot_uri": "https://w3id.org/lmodel/generic/license",
+      "owner": "InformationContentEntity",
+      "domain_of": [
+        "InformationContentEntity"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "rights",
+      "definition_uri": "https://w3id.org/lmodel/generic/rights",
+      "description": "provides information about rights held in and over the resource",
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource."
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/rights",
+        "https://www.WIKIDATA.org/wiki/Q780687"
+      ],
+      "narrow_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/access_rights",
+        "https://cso.kmi.open.ac.uk/topics/cyber_rights"
+      ],
+      "is_a": "node_property",
+      "domain": "InformationContentEntity",
+      "slot_uri": "https://w3id.org/lmodel/generic/rights",
+      "owner": "InformationContentEntity",
+      "domain_of": [
+        "InformationContentEntity"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "copyright",
+      "definition_uri": "https://w3id.org/lmodel/generic/copyright",
+      "description": "Exclusive legal right, given to an originator or an assignee to print, publish, perform, film, or record literary, artistic, or musical material, and to authorize others to do the same",
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource."
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "rights",
+      "domain": "InformationContentEntity",
+      "slot_uri": "https://w3id.org/lmodel/generic/copyright",
+      "owner": "copyright",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "format",
+      "definition_uri": "https://w3id.org/lmodel/generic/format",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/format",
+        "http://purl.obolibrary.org/obo/NCIT_C42761",
+        "https://w3id.org/sumo/kb/format",
+        "http://purl.obolibrary.org/obo/SWO_0004002"
+      ],
+      "narrow_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/storage_formats",
+        "https://w3id.org/reproduceme#ImageFormat",
+        "http://schema.org/fileFormat",
+        "https://www.WIKIDATA.org/wiki/Property:P2701",
+        "https://www.WIKIDATA.org/wiki/Q935809"
+      ],
+      "is_a": "node_property",
+      "mixin": true,
+      "domain": "InformationContentEntity",
+      "slot_uri": "https://w3id.org/lmodel/generic/format",
+      "owner": "InformationContentEntity",
+      "domain_of": [
+        "InformationContentEntity"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "authors",
+      "definition_uri": "https://w3id.org/lmodel/generic/authors",
+      "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "node_property",
+      "singular_name": "author",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/authors",
+      "multivalued": true,
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "pages",
+      "definition_uri": "https://w3id.org/lmodel/generic/pages",
+      "description": "page number of source referenced for statement or publication",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://www.WIKIDATA.org/wiki/Property:P304"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/sumo/kb/Page"
+      ],
+      "is_a": "node_property",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/pages",
+      "multivalued": true,
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "summary",
+      "definition_uri": "https://w3id.org/lmodel/generic/summary",
+      "description": "executive summary of a resource or publication",
+      "notes": [
+        "As 'abstract' is linkML keyword denoting a unavailable class or slot,",
+        "knowledge graphs should use 'summary' to tag a Publication 'abstract'"
+      ],
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, ontology, or other similar resource."
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "abstract"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/abstract",
+        "https://w3id.org/sumo/kb/Summary",
+        "https://www.WIKIDATA.org/wiki/Q333291"
+      ],
+      "is_a": "node_property",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/summary",
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "keywords",
+      "definition_uri": "https://w3id.org/lmodel/generic/keywords",
+      "description": "keywords tagging a publication",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://schema.org/keywords"
+      ],
+      "close_mappings": [
+        "https://csrc.nist.gov/glossary/term/keyword",
+        "https://w3id.org/sumo/kb/keyName",
+        "https://www.WIKIDATA.org/wiki/Q1072684"
+      ],
+      "related_mappings": [
+        "https://w3id.org/lmodel/uco-masterkeywordSearchTerm"
+      ],
+      "is_a": "node_property",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/keywords",
+      "multivalued": true,
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "lcsh_terms",
+      "definition_uri": "https://w3id.org/lmodel/generic/lcsh_terms",
+      "description": "Library of Congress Subject Headings (lcsh) terms tagging a publication",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "node_property",
+      "values_from": [
+        "lcsh"
+      ],
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/lcsh_terms",
+      "multivalued": true,
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "identifies",
+      "definition_uri": "https://w3id.org/lmodel/generic/identifies",
+      "annotations": [
+        {
+          "tag": "canonical_predicate",
+          "value": "True",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "a relationship that identifies, or serves as a sign, for something",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "denotes",
+        "identifier of"
+      ],
+      "exact_mappings": [
+        "http://identifiers.org/edam/is_identifier_of",
+        "http://identifiers.org/sio/000672",
+        "https://www.WIKIDATA.org/wiki/Property:P10476"
+      ],
+      "close_mappings": [
+        "http://purl.obolibrary.org/obo/IAO_0000219",
+        "http://identifiers.org/sio/000020"
+      ],
+      "is_a": "related_to_at_instance_level",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/identifies",
+      "multivalued": true,
+      "inherited": true,
+      "owner": "identifies",
+      "domain_of": [
+        "Designation"
+      ],
+      "range": "InformationContentEntity",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "association_slot",
+      "definition_uri": "https://w3id.org/lmodel/generic/association_slot",
+      "description": "any slot that relates an association to another entity",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "edge property",
+        "statement property",
+        "node qualifier",
+        "edge qualifier",
+        "statement qualifier"
+      ],
+      "abstract": true,
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/association_slot",
+      "owner": "association_slot",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "subject",
+      "definition_uri": "https://w3id.org/lmodel/generic/subject",
+      "local_names": [
+        {
+          "local_name_source": "neo4j",
+          "local_name_value": "node with outgoing relationship",
+          "@type": "LocalName"
+        }
+      ],
+      "description": "connects an association to the subject of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject"
+      ],
+      "exact_mappings": [
+        "https://csrc.nist.gov/glossary/term/subject",
+        "http://purl.org/dc/terms/subject",
+        "http://xmlns.com/foaf/0.1/topic",
+        "http://vocab.getty.edu/ontology#subject",
+        "http://purl.obolibrary.org/obo/NCIT_C48910",
+        "http://www.w3.org/2002/07/owl#annotatedSource",
+        "https://www.WIKIDATA.org/wiki/Q164573"
+      ],
+      "related_mappings": [
+        "http://schema.org/about"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasProjectTitle",
+        "https://csrc.nist.gov/glossary/term/data_subjects",
+        "https://csrc.nist.gov/glossary/term/Subject_in_a_certificate",
+        "https://csrc.nist.gov/glossary/term/Subject_Certification_Authority",
+        "http://schema.org/guidelineSubject",
+        "http://schema.org/subject_headings",
+        "https://w3id.org/sumo/kb/Proposition",
+        "https://w3id.org/lmodel/uco-mastersubject"
+      ],
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#subject",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "NamedThing",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "object",
+      "definition_uri": "https://w3id.org/lmodel/generic/object",
+      "local_names": [
+        {
+          "local_name_source": "neo4j",
+          "local_name_value": "node with incoming relationship",
+          "@type": "LocalName"
+        }
+      ],
+      "description": "connects an association to the object of the association. For example, in a class-to-observable feature association, the class is subject and observable feature is object.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#object"
+      ],
+      "exact_mappings": [
+        "http://www.w3.org/2002/07/owl#annotatedTarget"
+      ],
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#object",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "NamedThing",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "predicate",
+      "definition_uri": "https://w3id.org/lmodel/generic/predicate",
+      "local_names": [
+        {
+          "local_name_source": "translator",
+          "local_name_value": "predicate",
+          "@type": "LocalName"
+        }
+      ],
+      "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
+      "notes": [
+        "Has a value from the Generic related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, generic:related_to, generic:restores"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate"
+      ],
+      "exact_mappings": [
+        "http://www.w3.org/2002/07/owl#annotatedProperty",
+        "https://w3id.org/sumo/kb/Predicate"
+      ],
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#predicate",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "predicate_type",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "negated",
+      "definition_uri": "https://w3id.org/lmodel/generic/negated",
+      "description": "if set to true, then the association is negated i.e. is not true",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/negated",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "boolean",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "has_evidence",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_evidence",
+      "description": "connects an association to an instance of supporting evidence",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.obolibrary.org/obo/RO_0002558"
+      ],
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/has_evidence",
+      "multivalued": true,
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "EvidenceType",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "provided_by",
+      "definition_uri": "https://w3id.org/lmodel/generic/provided_by",
+      "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/pav/providedBy",
+        "https://www.WIKIDATA.org/wiki/Q68974939"
+      ],
+      "is_a": "node_property",
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/provided_by",
+      "multivalued": true,
+      "owner": "provided_by",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "knowledge_source",
+      "definition_uri": "https://w3id.org/lmodel/generic/knowledge_source",
+      "description": "An Information Resource from which the knowledge expressed in an Association was retrieved, directly or indirectly. This can be any resource through which the knowledge passed on its way to its currently serialized form. In practice, implementers should use one of the more specific subtypes of this generic property.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "close_mappings": [
+        "http://purl.org/pav/providedBy"
+      ],
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/knowledge_source",
+      "owner": "knowledge_source",
+      "range": "InformationResource",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "primary_knowledge_source",
+      "definition_uri": "https://w3id.org/lmodel/generic/primary_knowledge_source",
+      "description": "The most upstream source of the knowledge expressed in an Association that can be identified. Performing a rigorous analysis of upstream data providers is expected; every effort is made to catalog the most upstream source of data in this property.  Only one data source should be declared primary in any association.  \"aggregator knowledge source\" can be used to capture non-primary sources.",
+      "notes": [
+        ""
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "primary source",
+        "primary reference"
+      ],
+      "broad_mappings": [
+        "http://purl.org/dc/terms/references"
+      ],
+      "is_a": "knowledge_source",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/primary_knowledge_source",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "InformationResource",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "aggregator_knowledge_source",
+      "definition_uri": "https://w3id.org/lmodel/generic/aggregator_knowledge_source",
+      "description": "An intermediate aggregator resource from which knowledge expressed in an Association was retrieved downstream of the original source, on its path to its current serialized form.",
+      "notes": [
+        "For example, UN data collected from source X, is processed and published by Y, and republished by Z1, Z1, Z3. The retrieval path is Z--retrieved_from--> X --supporting_data_from Y, so the 'primary knowledge source' is 'un:X'. A 'supporting data source' is 'un:Y'. The 'aggregator knowledge source' are 'un:Z1', 'un:Z2', 'un:Z3'."
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "secondary sources",
+        "secondary references"
+      ],
+      "broad_mappings": [
+        "http://purl.org/dc/terms/references"
+      ],
+      "is_a": "knowledge_source",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/aggregator_knowledge_source",
+      "multivalued": true,
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "InformationResource",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "supporting_documents",
+      "definition_uri": "https://w3id.org/lmodel/generic/supporting_documents",
+      "description": "One or more referencable documents that report the statement expressed in an Association, or provide information used as evidence supporting this statement.",
+      "examples": [
+        {
+          "value": "PMID:12345678",
+          "@type": "Example"
+        }
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "association_slot",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/supporting_documents",
+      "multivalued": true,
+      "owner": "supporting_documents",
+      "range": "uriorcurie",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "publications",
+      "definition_uri": "https://w3id.org/lmodel/generic/publications",
+      "description": "One or more publications that report the statement expressed in an Association, or provide information used as evidence supporting this statement.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "supporting publications"
+      ],
+      "is_a": "supporting_documents",
+      "singular_name": "Publication",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/publications",
+      "multivalued": true,
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "Publication",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "qualifiers",
+      "definition_uri": "https://w3id.org/lmodel/generic/qualifiers",
+      "description": "connects an association to qualifiers that modify or qualify the meaning of that association",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "association_slot",
+      "singular_name": "qualifier",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/qualifiers",
+      "multivalued": true,
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "range": "OntologyClass",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "related_to",
+      "definition_uri": "https://w3id.org/lmodel/generic/related_to",
+      "annotations": [
+        {
+          "tag": "canonical_predicate",
+          "value": "True",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "A relationship that is asserted between two named things",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://csrc.nist.gov/glossary/term/Association",
+        "http://vocab.getty.edu/ontology#aat2000_related_to",
+        "http://www.w3.org/2004/02/skos/core#relatedMatch",
+        "http://schema.org/relatedTo",
+        "http://schema.org/isRelatedTo",
+        "http://identifiers.org/sio/000001",
+        "https://w3id.org/sumo/kb/relatedTo"
+      ],
+      "close_mappings": [
+        "http://rs.tdwg.org/dwc/terms/ResourceRelationship"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#contains",
+        "http://purl.obolibrary.org/obo/BFO_0000054",
+        "https://cso.kmi.open.ac.uk/topics/semantic_relatedness",
+        "https://csrc.nist.gov/glossary/term/Relatively_prime",
+        "https://w3id.org/ibp/CTRLont#isConnectedTo",
+        "https://w3id.org/ibp/CTRLont#isSupervisedBy",
+        "https://w3id.org/ibp/CTRLont#supervises",
+        "http://purl.org/dc/terms/isReferencedBy",
+        "http://purl.org/dc/terms/isReplacedBy",
+        "http://purl.org/dc/terms/isRequiredBy",
+        "http://rs.tdwg.org/dwc/terms/identifiedBy",
+        "http://identifiers.org/efo/0006351",
+        "http://purl.org/goodrelations/v1#closes",
+        "http://purl.org/goodrelations/v1#offers",
+        "http://purl.org/goodrelations/v1#opens",
+        "http://purl.org/goodrelations/v1#owns",
+        "http://purl.org/goodrelations/v1#predecessorOf",
+        "http://purl.org/goodrelations/v1#seeks",
+        "http://purl.org/goodrelations/v1#includes",
+        "http://vocab.getty.edu/ontology#aat2000_reflects",
+        "http://purl.obolibrary.org/obo/NCIT_is_related_to_endogenous_product",
+        "http://purl.obolibrary.org/obo/PATO_decreased_in_magnitude_relative_to",
+        "http://purl.obolibrary.org/obo/PATO_has_cross_section",
+        "http://purl.obolibrary.org/obo/PATO_has_relative_magnitude",
+        "http://purl.obolibrary.org/obo/PATO_increased_in_magnitude_relative_to",
+        "http://purl.obolibrary.org/obo/PATO_reciprocal_of",
+        "http://purl.obolibrary.org/obo/RO_0002337",
+        "http://purl.obolibrary.org/obo/RO_0000052",
+        "http://purl.obolibrary.org/obo/RO_0002001",
+        "http://purl.obolibrary.org/obo/RO_0002002",
+        "http://purl.obolibrary.org/obo/RO_0002003",
+        "http://purl.obolibrary.org/obo/RO_0002008",
+        "http://purl.obolibrary.org/obo/RO_0002134",
+        "http://purl.obolibrary.org/obo/RO_0002150",
+        "http://purl.obolibrary.org/obo/RO_0002159",
+        "http://purl.obolibrary.org/obo/RO_0002176",
+        "http://purl.obolibrary.org/obo/RO_0002177",
+        "http://purl.obolibrary.org/obo/RO_0002178",
+        "http://purl.obolibrary.org/obo/RO_0002179",
+        "http://purl.obolibrary.org/obo/RO_0002314",
+        "http://purl.obolibrary.org/obo/RO_0002322",
+        "http://purl.obolibrary.org/obo/RO_0002328",
+        "http://purl.obolibrary.org/obo/RO_0002332",
+        "http://purl.obolibrary.org/obo/RO_0002338",
+        "http://purl.obolibrary.org/obo/RO_0002339",
+        "http://purl.obolibrary.org/obo/RO_0002341",
+        "http://purl.obolibrary.org/obo/RO_0002342",
+        "http://purl.obolibrary.org/obo/RO_0002344",
+        "http://purl.obolibrary.org/obo/RO_0002348",
+        "http://purl.obolibrary.org/obo/RO_0002349",
+        "http://purl.obolibrary.org/obo/RO_0002356",
+        "http://purl.obolibrary.org/obo/RO_0002371",
+        "http://purl.obolibrary.org/obo/RO_0002374",
+        "http://purl.obolibrary.org/obo/RO_0002385",
+        "http://purl.obolibrary.org/obo/RO_0002387",
+        "http://purl.obolibrary.org/obo/RO_0002451",
+        "http://purl.obolibrary.org/obo/RO_0002494",
+        "http://purl.obolibrary.org/obo/RO_0002495",
+        "http://purl.obolibrary.org/obo/RO_0002573",
+        "http://purl.obolibrary.org/obo/RO_0009004",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#actsOn",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#isPropertyOf",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#controlledBy",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#isImpactedUponBy",
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#isActedUponBy",
+        "http://schema.org/branchOf",
+        "http://schema.org/founder",
+        "http://schema.org/greater",
+        "http://schema.org/lesser",
+        "http://schema.org/userLikes",
+        "http://identifiers.org/sio/000699",
+        "http://identifiers.org/sio/000733",
+        "http://identifiers.org/sio/000734",
+        "http://identifiers.org/sio/000735",
+        "http://identifiers.org/sio/000774",
+        "http://identifiers.org/sio/000207",
+        "http://identifiers.org/sio/000248",
+        "http://identifiers.org/sio/000202",
+        "http://www.w3.org/ns/sosa/implements",
+        "http://www.w3.org/ns/sosa/isActedOnBy",
+        "http://www.w3.org/ns/sosa/isFeatureOfInterestOf",
+        "http://www.w3.org/ns/sosa/isHostedBy",
+        "http://www.w3.org/ns/sosa/isObservedBy",
+        "http://www.w3.org/ns/sosa/isObservedBy",
+        "http://www.w3.org/ns/sosa/actsOnProperty",
+        "http://www.w3.org/ns/ssn/isPropertyOf",
+        "http://www.w3.org/ns/ssn/isProxyFor",
+        "http://www.w3.org/ns/sosa/sensor",
+        "https://w3id.org/sumo/kb/Above",
+        "https://w3id.org/sumo/kb/actedIn",
+        "https://w3id.org/sumo/kb/Adjacent",
+        "https://w3id.org/sumo/kb/associateWithStatus",
+        "https://w3id.org/sumo/kb/associatedFunctionality",
+        "https://w3id.org/sumo/kb/Below",
+        "https://w3id.org/sumo/kb/benefits",
+        "https://w3id.org/sumo/kb/between",
+        "https://w3id.org/sumo/kb/connects",
+        "https://w3id.org/sumo/kb/covers",
+        "https://w3id.org/sumo/kb/during",
+        "https://w3id.org/sumo/kb/enjoys",
+        "https://w3id.org/sumo/kb/employs",
+        "https://w3id.org/sumo/kb/enemy",
+        "https://w3id.org/sumo/kb/increasesLikelihood",
+        "https://w3id.org/sumo/kb/inScopeOfInterest",
+        "https://w3id.org/sumo/kb/inList",
+        "https://w3id.org/sumo/kb/inside",
+        "https://w3id.org/sumo/kb/managedBy",
+        "https://w3id.org/sumo/kb/nearOrientation",
+        "https://w3id.org/sumo/kb/orbits",
+        "https://w3id.org/sumo/kb/overlapsPartially",
+        "https://w3id.org/sumo/kb/overlapsSpatially",
+        "https://w3id.org/sumo/kb/relatedTo",
+        "https://w3id.org/sumo/kb/relative",
+        "https://w3id.org/sumo/kb/RelationalAttribute",
+        "http://www.w3.org/ns/ssn/wasOriginatedBy",
+        "http://purl.obolibrary.org/obo/UBERON_protects",
+        "http://purl.obolibrary.org/obo/BFO_0000068",
+        "http://purl.obolibrary.org/obo/BFO_0000069",
+        "http://purl.obolibrary.org/obo/BTO_related_to",
+        "http://schema.org/addOn",
+        "http://identifiers.org/efo/0006351",
+        "http://vocab.getty.edu/ontology#aat2805_contextualized_in",
+        "http://vocab.getty.edu/ontology#tgn3103_located_on",
+        "http://vocab.getty.edu/ontology#ulan1000_related_to",
+        "http://vocab.getty.edu/ontology#ulan2778_owner_of",
+        "http://schema.org/connectedTo",
+        "https://w3id.org/sumo/kb/conjugate",
+        "http://purl.obolibrary.org/obo/IAO_0000136",
+        "http://purl.obolibrary.org/obo/PATO_decreased_in_magnitude_relative_to",
+        "http://purl.obolibrary.org/obo/PATO_has_cross_section",
+        "http://purl.obolibrary.org/obo/PATO_has_relative_magnitude",
+        "http://purl.obolibrary.org/obo/PATO_increased_in_magnitude_relative_to",
+        "http://purl.obolibrary.org/obo/PATO_reciprocal_of",
+        "http://purl.obolibrary.org/obo/RO_0000052",
+        "http://purl.obolibrary.org/obo/RO_0002001",
+        "http://purl.obolibrary.org/obo/RO_0002002",
+        "http://purl.obolibrary.org/obo/RO_0002008",
+        "http://purl.obolibrary.org/obo/RO_0002150",
+        "http://purl.obolibrary.org/obo/RO_0002159",
+        "http://purl.obolibrary.org/obo/RO_0002176",
+        "http://purl.obolibrary.org/obo/RO_0002177",
+        "http://purl.obolibrary.org/obo/RO_0002178",
+        "http://purl.obolibrary.org/obo/RO_0002179",
+        "http://purl.obolibrary.org/obo/RO_0002314",
+        "http://purl.obolibrary.org/obo/RO_0002322",
+        "http://purl.obolibrary.org/obo/RO_0002328",
+        "http://purl.obolibrary.org/obo/RO_0002332",
+        "http://purl.obolibrary.org/obo/RO_0002338",
+        "http://purl.obolibrary.org/obo/RO_0002339",
+        "http://purl.obolibrary.org/obo/RO_0002341",
+        "http://purl.obolibrary.org/obo/RO_0002342",
+        "http://purl.obolibrary.org/obo/RO_0002344",
+        "http://purl.obolibrary.org/obo/RO_0002348",
+        "http://purl.obolibrary.org/obo/RO_0002349",
+        "http://purl.obolibrary.org/obo/RO_0002356",
+        "http://purl.obolibrary.org/obo/RO_0002371",
+        "http://purl.obolibrary.org/obo/RO_0002374",
+        "http://purl.obolibrary.org/obo/RO_0002385",
+        "http://purl.obolibrary.org/obo/RO_0002451",
+        "http://purl.obolibrary.org/obo/RO_0002494",
+        "http://purl.obolibrary.org/obo/RO_0002495",
+        "http://purl.obolibrary.org/obo/RO_0002573",
+        "http://purl.obolibrary.org/obo/RO_0009004",
+        "http://www.w3.org/ns/sosa/usedProcedure",
+        "http://www.w3.org/ns/ssn/detects",
+        "https://w3id.org/sumo/kb/displayedUpon",
+        "https://w3id.org/sumo/kb/hostedOn",
+        "https://w3id.org/sumo/kb/hostOf",
+        "https://w3id.org/sumo/kb/initiallyContainsPart",
+        "https://w3id.org/sumo/kb/interiorPart",
+        "https://w3id.org/sumo/kb/Increasing",
+        "https://w3id.org/sumo/kb/parallel",
+        "https://w3id.org/sumo/kb/runningOn",
+        "https://w3id.org/sumo/kb/runsOn",
+        "https://w3id.org/sumo/kb/underlier",
+        "https://w3id.org/sumo/kb/Working",
+        "https://www.WIKIDATA.org/wiki/Q1360012"
+      ],
+      "broad_mappings": [
+        "http://purl.obolibrary.org/obo/ECO_0000041",
+        "http://www.w3.org/2002/07/owl#topObjectProperty",
+        "http://vocab.getty.edu/ontology#aat2900_miscellaneous_relationship",
+        "http://schema.org/isSimilarTo",
+        "http://purl.obolibrary.org/obo/SWO_topObjectProperty"
+      ],
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/related_to",
+      "multivalued": true,
+      "inherited": true,
+      "owner": "related_to",
+      "symmetric": true,
+      "range": "NamedThing",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "related_to_at_instance_level",
+      "definition_uri": "https://w3id.org/lmodel/generic/related_to_at_instance_level",
+      "annotations": [
+        {
+          "tag": "canonical_predicate",
+          "value": "True",
+          "@type": "Annotation"
+        }
+      ],
+      "description": "Represents a relationship held between two instances of a data classes. Much like an assertion component, in an ABox, these represent facts associated with the conceptual model",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "related_to",
+      "domain": "NamedThing",
+      "slot_uri": "https://w3id.org/lmodel/generic/related_to_at_instance_level",
+      "multivalued": true,
+      "inherited": true,
+      "owner": "related_to_at_instance_level",
+      "symmetric": true,
+      "range": "NamedThing",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Attribute_name",
+      "definition_uri": "https://w3id.org/lmodel/generic/name",
+      "description": "The human-readable 'attribute name' can be set to a string which reflects its context of interpretation, e.g. SEPIO evidence/provenance/confidence annotation or it can default to the name associated with the 'has attribute type' slot ontology term.",
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
+      ],
+      "in_subset": [
+        "translator_minimal",
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "label",
+        "display name",
+        "title",
+        "alt label"
+      ],
+      "mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#label"
+      ],
+      "exact_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity",
+        "http://purl.org/goodrelations/v1#name",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/name",
+        "https://w3id.org/reproduceme#name",
+        "http://schema.org/name",
+        "http://identifiers.org/sio/000116",
+        "https://w3id.org/sumo/kb/Name",
+        "https://www.WIKIDATA.org/wiki/Property:P2561",
+        "https://w3id.org/lmodel/uco-mastername"
+      ],
+      "close_mappings": [
+        "http://purl.obolibrary.org/obo/IAO_0000111",
+        "http://purl.obolibrary.org/obo/IAO_0000118",
+        "http://www.w3.org/2004/02/skos/core#altLabel",
+        "https://w3id.org/sumo/kb/originalTitle"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeName",
+        "http://purl.org/dc/terms/title",
+        "http://purl.obolibrary.org/obo/NCIT_P386",
+        "https://www.WIKIDATA.org/wiki/Property:P1476",
+        "http://www.w3.org/ns/r2rml#column",
+        "http://www.w3.org/ns/r2rml#tableName",
+        "http://schema.org/recordLabel"
+      ],
+      "broad_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity"
+      ],
+      "is_a": "name",
+      "domain": "Attribute",
+      "slot_uri": "http://www.w3.org/2000/01/rdf-schema#label",
+      "alias": "name",
+      "owner": "Attribute",
+      "domain_of": [
+        "Attribute"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "label_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Designation_has_text_value",
+      "definition_uri": "https://w3id.org/lmodel/generic/has_text_value",
+      "description": "connects some information to a string",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/2001/XMLSchema#string"
+      ],
+      "is_a": "has_text_value",
+      "domain": "Designation",
+      "slot_uri": "http://www.w3.org/2001/XMLSchema#string",
+      "alias": "has text value",
+      "owner": "Designation",
+      "domain_of": [
+        "Designation"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "has text value",
+      "range": "string",
+      "minimum_cardinality": 0,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Publication_id",
+      "definition_uri": "https://w3id.org/lmodel/generic/id",
+      "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/dc/terms/identifier",
+        "http://edamontology.org/data_0842",
+        "http://identifiers.org/efo/id",
+        "https://w3id.org/reproduceme#id",
+        "http://schema.org/identifier",
+        "http://identifiers.org/sio/000115",
+        "https://w3id.org/sumo/kb/Identifier",
+        "https://w3id.org/lmodel/uco-masteridentifier"
+      ],
+      "narrow_mappings": [
+        "http://rs.tdwg.org/dwc/terms/eventID",
+        "http://rs.tdwg.org/dwc/terms/parentEventID",
+        "http://rs.tdwg.org/dwc/terms/identificationID",
+        "http://rs.tdwg.org/dwc/terms/systemID",
+        "https://cso.kmi.open.ac.uk/topics/bicm-id",
+        "http://identifiers.org/sio/000672",
+        "http://identifiers.org/sio/000674",
+        "http://purl.obolibrary.org/obo/ERO_0000044",
+        "http://purl.obolibrary.org/obo/ERO_0000480",
+        "http://purl.obolibrary.org/obo/NCIT_C94069",
+        "https://w3id.org/reproduceme#doi",
+        "http://identifiers.org/sio/000328",
+        "http://identifiers.org/sio/000729",
+        "http://schema.org/productID",
+        "http://schema.org/taxID",
+        "https://w3id.org/sumo/kb/AccountID",
+        "https://w3id.org/sumo/kb/AlphaIDString",
+        "https://w3id.org/sumo/kb/AlphaNumericIDString",
+        "https://w3id.org/sumo/kb/AgentID",
+        "https://w3id.org/sumo/kb/CountryID",
+        "https://w3id.org/sumo/kb/CustomerID",
+        "https://w3id.org/sumo/kb/currencyCode",
+        "https://w3id.org/sumo/kb/DistrictID",
+        "https://w3id.org/sumo/kb/EmployeeID",
+        "https://w3id.org/sumo/kb/IsoCode",
+        "https://w3id.org/sumo/kb/LocalizablePlaceID",
+        "https://w3id.org/sumo/kb/userIDString",
+        "https://w3id.org/sumo/kb/urlString",
+        "https://w3id.org/sumo/kb/UniformResourceLocator",
+        "https://www.WIKIDATA.org/wiki/Property:P3743"
+      ],
+      "broad_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/catalogue_identifiers",
+        "http://purl.obolibrary.org/obo/IAO_0000603",
+        "http://purl.obolibrary.org/obo/IAO_0000119",
+        "https://w3id.org/sumo/kb/identityElement"
+      ],
+      "is_a": "id",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/id",
+      "identifier": true,
+      "alias": "id",
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "id",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Publication_name",
+      "definition_uri": "https://w3id.org/lmodel/generic/name",
+      "description": "the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case).",
+      "comments": [
+        "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
+      ],
+      "in_subset": [
+        "translator_minimal",
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "label",
+        "display name",
+        "title",
+        "alt label"
+      ],
+      "mappings": [
+        "http://www.w3.org/2000/01/rdf-schema#label"
+      ],
+      "exact_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity",
+        "http://purl.org/goodrelations/v1#name",
+        "http://www.ontology-of-units-of-measure.org/resource/om-2/name",
+        "https://w3id.org/reproduceme#name",
+        "http://schema.org/name",
+        "http://identifiers.org/sio/000116",
+        "https://w3id.org/sumo/kb/Name",
+        "https://www.WIKIDATA.org/wiki/Property:P2561",
+        "https://w3id.org/lmodel/uco-mastername"
+      ],
+      "close_mappings": [
+        "http://purl.obolibrary.org/obo/IAO_0000111",
+        "http://purl.obolibrary.org/obo/IAO_0000118",
+        "http://www.w3.org/2004/02/skos/core#altLabel",
+        "https://w3id.org/sumo/kb/originalTitle"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/i40/aml#hasAttributeName",
+        "http://purl.org/dc/terms/title",
+        "http://purl.obolibrary.org/obo/NCIT_P386",
+        "https://www.WIKIDATA.org/wiki/Property:P1476",
+        "http://www.w3.org/ns/r2rml#column",
+        "http://www.w3.org/ns/r2rml#tableName",
+        "http://schema.org/recordLabel"
+      ],
+      "broad_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/named_entity"
+      ],
+      "is_a": "name",
+      "domain": "Publication",
+      "slot_uri": "http://www.w3.org/2000/01/rdf-schema#label",
+      "alias": "name",
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "name",
+      "range": "label_type",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Publication_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/type",
+      "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://purl.org/dc/terms/type"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/type",
+        "http://purl.obolibrary.org/obo/IAO_0000219",
+        "http://purl.obolibrary.org/obo/NCIT_C25284",
+        "http://schema.org/type",
+        "http://purl.obolibrary.org/obo/SWO_type",
+        "https://w3id.org/sumo/kb/Class",
+        "https://www.WIKIDATA.org/wiki/Q21146257",
+        "https://www.WIKIDATA.org/wiki/Property:P427"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/ibp/CTRLont#DataType",
+        "https://w3id.org/ibp/CTRLont#SemanticType",
+        "http://rs.tdwg.org/dwc/terms/measurementType",
+        "http://purl.org/goodrelations/v1#typeOfGood",
+        "http://purl.obolibrary.org/obo/IAO_0000411",
+        "https://w3id.org/sumo/kb/hardwareType",
+        "https://www.WIKIDATA.org/wiki/Q190087"
+      ],
+      "broad_mappings": [
+        "http://identifiers.org/sio/000011",
+        "http://purl.obolibrary.org/obo/RO_0002473",
+        "http://purl.obolibrary.org/obo/IAO_0006011"
+      ],
+      "is_a": "type",
+      "values_from": [
+        "dctermsypes",
+        "lcsh",
+        "COAR_RESOURCE",
+        "WIKIDATA"
+      ],
+      "domain": "Publication",
+      "slot_uri": "http://purl.org/dc/terms/type",
+      "alias": "type",
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "type",
+      "range": "string",
+      "required": true,
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Publication_pages",
+      "definition_uri": "https://w3id.org/lmodel/generic/pages",
+      "description": "When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://www.WIKIDATA.org/wiki/Property:P304"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/sumo/kb/Page"
+      ],
+      "is_a": "pages",
+      "domain": "Publication",
+      "slot_uri": "https://w3id.org/lmodel/generic/pages",
+      "multivalued": true,
+      "alias": "pages",
+      "owner": "Publication",
+      "domain_of": [
+        "Publication"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "pages",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Association_type",
+      "definition_uri": "https://w3id.org/lmodel/generic/type",
+      "description": "rdf:type of generic:Association should be fixed at rdf:Statement",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
+      ],
+      "exact_mappings": [
+        "http://purl.org/dc/terms/type",
+        "http://purl.obolibrary.org/obo/IAO_0000219",
+        "http://purl.obolibrary.org/obo/NCIT_C25284",
+        "http://schema.org/type",
+        "http://purl.obolibrary.org/obo/SWO_type",
+        "https://w3id.org/sumo/kb/Class",
+        "https://www.WIKIDATA.org/wiki/Q21146257",
+        "https://www.WIKIDATA.org/wiki/Property:P427"
+      ],
+      "narrow_mappings": [
+        "https://w3id.org/ibp/CTRLont#DataType",
+        "https://w3id.org/ibp/CTRLont#SemanticType",
+        "http://rs.tdwg.org/dwc/terms/measurementType",
+        "http://purl.org/goodrelations/v1#typeOfGood",
+        "http://purl.obolibrary.org/obo/IAO_0000411",
+        "https://w3id.org/sumo/kb/hardwareType",
+        "https://www.WIKIDATA.org/wiki/Q190087"
+      ],
+      "broad_mappings": [
+        "http://identifiers.org/sio/000011",
+        "http://purl.obolibrary.org/obo/RO_0002473",
+        "http://purl.obolibrary.org/obo/IAO_0006011"
+      ],
+      "is_a": "type",
+      "domain": "Association",
+      "slot_uri": "http://www.w3.org/1999/02/22-rdf-syntax-ns#type",
+      "alias": "type",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "is_usage_slot": true,
+      "usage_slot_name": "type",
+      "range": "string",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "Association_category",
+      "definition_uri": "https://w3id.org/lmodel/generic/category",
+      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "http://purl.org/goodrelations/v1#category",
+        "http://schema.org/category"
+      ],
+      "narrow_mappings": [
+        "https://cso.kmi.open.ac.uk/topics/access_category",
+        "http://schema.org/CategoryCode"
+      ],
+      "is_a": "category",
+      "domain": "Association",
+      "slot_uri": "https://w3id.org/lmodel/generic/category",
+      "multivalued": true,
+      "designates_type": true,
+      "alias": "category",
+      "owner": "Association",
+      "domain_of": [
+        "Association"
+      ],
+      "is_class_field": true,
+      "is_usage_slot": true,
+      "usage_slot_name": "category",
+      "range": "category_type",
+      "@type": "SlotDefinition"
+    }
+  ],
+  "classes": [
+    {
+      "name": "OntologyClass",
+      "id_prefixes": [
+        "lcsh"
+      ],
+      "definition_uri": "https://w3id.org/lmodel/generic/OntologyClass",
+      "description": "a concept or class in an ontology, vocabulary or thesaurus. Note that nodes in a base compatible KG can be considered both instances of base classes, and OWL classes in their own right. In general you should not need to use this class directly. Instead, use the appropriate base class.",
+      "comments": [
+        "This is modeled as a mixin. 'OntologyClass' should not be the primary type of a node in the KG. Instead you should use an informative base category, such as DeploymentEntity",
+        "Note that formally this is a metaclass. Instances of this class are instances in the graph, but can be the object of 'type' edges."
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "owl:Class",
+        "schema:Class"
+      ],
+      "mixin": true,
+      "slots": [
+        "id"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/OntologyClass",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Annotation",
+      "definition_uri": "https://w3id.org/lmodel/generic/Annotation",
+      "description": "Generic Model root class for entity annotations.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "WIKIDATA:Q857525"
+      ],
+      "abstract": true,
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Annotation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "QuantityValue",
+      "definition_uri": "https://w3id.org/lmodel/generic/QuantityValue",
+      "description": "A value of an attribute that is quantitative and measurable, expressed as a combination of a unit and a numeric value",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "Annotation",
+      "slots": [
+        "has_unit",
+        "has_numeric_value"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/QuantityValue",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Attribute",
+      "id_prefixes": [
+        "edam.data",
+        "edam.format",
+        "edam.operation",
+        "edam.topic"
+      ],
+      "definition_uri": "https://w3id.org/lmodel/generic/Attribute",
+      "description": "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.",
+      "in_subset": [
+        "samples"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "csrc:attribute",
+        "SIO:000614",
+        "sumo:Attribute",
+        "sumo:attribute",
+        "WIKIDATA:Q758243"
+      ],
+      "close_mappings": [
+        "SAN:property",
+        "schema:property",
+        "ssn:Property"
+      ],
+      "narrow_mappings": [
+        "CSO:quantitative_attributes",
+        "csrc:Application_virtualization",
+        "csrc:Capability",
+        "csrc:Capability_Anomalous_Event_Detection_Management",
+        "csrc:Capability_Anomalous_Event_Response_and_Recovery_Management",
+        "csrc:Capability_Behavior_Management",
+        "csrc:Capability_Boundary_Management",
+        "csrc:Capability_Configuration_Settings_Management",
+        "csrc:Capability_Credentials_and_Authentication_Management",
+        "csrc:Capability_Event_Preparation_Management",
+        "csrc:Capability_Hardware_Asset_Management",
+        "csrc:Capability_ISCM",
+        "csrc:Capability_Manage_and_Assess_Risk",
+        "csrc:Capability_Perform_Resilient_Systems_Engineering",
+        "csrc:Capability_Privilege_and_Account_Management",
+        "csrc:Capability_Software_Asset_Management",
+        "csrc:Capability_Trust_Management",
+        "csrc:Capability_Vulnerability_Management",
+        "CSO:release_date",
+        "csrc:security_attribute",
+        "dwc:identificationQualifier",
+        "dwc:typeStatus",
+        "dwc:usewithiri",
+        "gr:UnitPriceSpecification",
+        "PATO:0000001",
+        "SAN:impactedProperty",
+        "sumo:TimeMeasure",
+        "schema:releaseDate",
+        "schema:Softwareapplication",
+        "sosa:actsOnProperty",
+        "sosa:ActuatableProperty",
+        "sosa:DateTime",
+        "sosa:FeatureOfInterest",
+        "sosa:implementedBy",
+        "sosa:ObservableProperty",
+        "sosa:observedProperty",
+        "ssn:Stimulus",
+        "ssn:detects",
+        "ssn:MeasurementProperty",
+        "ssn:OperatingProperty",
+        "ssn:SurvivalProperty",
+        "sumo:criticalityLevel",
+        "sumo:duration",
+        "sumo:deviceAccount",
+        "sumo:deviceOS",
+        "sumo:DeviceClosed",
+        "sumo:deviceState",
+        "sumo:DeviceDamaged",
+        "sumo:DeviceOff",
+        "sumo:DeviceOn",
+        "sumo:DeviceOff",
+        "sumo:DeviceOpen",
+        "sumo:DeviceStateAttribute",
+        "sumo:FormOfAdaptationAttribute",
+        "sumo:greaterThan",
+        "sumo:greaterThanOrEqualTo",
+        "sumo:lessThan",
+        "sumo:lessThanOrEqualTo",
+        "sumo:load",
+        "sumo:most",
+        "sumo:magneticVariation",
+        "sumo:onboard",
+        "sumo:providesDestination",
+        "sumo:publishes",
+        "sumo:validityPeriod",
+        "sumo:VirtualAddress"
+      ],
+      "is_a": "NamedThing",
+      "mixins": [
+        "OntologyClass"
+      ],
+      "slots": [
+        "id",
+        "description",
+        "Attribute_name",
+        "has_attribute_type",
+        "has_quantitative_value",
+        "has_qualitative_value",
+        "iri"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Attribute",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Entity",
+      "definition_uri": "https://w3id.org/lmodel/generic/Entity",
+      "description": "Root Generic Model class for all things and informational relationships, real or imagined.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "abstract": true,
+      "slots": [
+        "id",
+        "iri",
+        "category",
+        "type",
+        "name",
+        "description",
+        "has_attribute"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Entity",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "NamedThing",
+      "definition_uri": "https://w3id.org/lmodel/generic/NamedThing",
+      "description": "A generic grouping for any identifiable entity",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mappings": [
+        "schema:Thing"
+      ],
+      "slots": [
+        "id",
+        "name",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "http://schema.org/Thing",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Designation",
+      "definition_uri": "https://w3id.org/lmodel/generic/Designation",
+      "description": "representation for someone or something by a sign that denotes it",
+      "notes": [
+        "can be a term including appellations, a proper name, or a symbol.",
+        "can be linguistic or non-linguistic, with various character types"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "NamedThing",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "Designation_has_text_value",
+        "identifies"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Designation",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Name",
+      "definition_uri": "https://w3id.org/lmodel/generic/Name",
+      "description": "distinctive designation for an individual (person, organization or thing)",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "Designation",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "Designation_has_text_value",
+        "identifies"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Name",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Identifier",
+      "definition_uri": "https://w3id.org/lmodel/generic/Identifier",
+      "description": "Sequence of characters uniquely identifying that with which it is associated",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "Designation",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "Designation_has_text_value",
+        "identifies"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Identifier",
+      "disjoint_with": [
+        "Name"
+      ],
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "AdministrativeEntity",
+      "definition_uri": "https://w3id.org/lmodel/generic/AdministrativeEntity",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "is_a": "NamedThing",
+      "abstract": true,
+      "slots": [
+        "id",
+        "name",
+        "description"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/AdministrativeEntity",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "InformationContentEntity",
+      "id_prefixes": [
+        "doi"
+      ],
+      "definition_uri": "https://w3id.org/lmodel/generic/InformationContentEntity",
+      "description": "a piece of information that typically describes some topic of discourse or is used as support.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "information",
+        "information artefact",
+        "information entity"
+      ],
+      "exact_mappings": [
+        "IAO:0000030",
+        "WIKIDATA:Q286583"
+      ],
+      "narrow_mappings": [
+        "schema:Language",
+        "sumo:Language",
+        "schema:inCodeSet"
+      ],
+      "is_a": "NamedThing",
+      "abstract": true,
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "license",
+        "rights",
+        "format",
+        "creation_date"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/InformationContentEntity",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "EvidenceType",
+      "definition_uri": "https://w3id.org/lmodel/generic/EvidenceType",
+      "description": "Class of evidence that supports an association",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "evidence code"
+      ],
+      "exact_mappings": [
+        "ECO:0000000"
+      ],
+      "is_a": "InformationContentEntity",
+      "values_from": [
+        "eco"
+      ],
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "license",
+        "rights",
+        "format",
+        "creation_date"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/EvidenceType",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "InformationResource",
+      "definition_uri": "https://w3id.org/lmodel/generic/InformationResource",
+      "description": "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.",
+      "in_subset": [
+        "translator_minimal"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "knowledgebase"
+      ],
+      "is_a": "InformationContentEntity",
+      "slots": [
+        "id",
+        "name",
+        "description",
+        "license",
+        "rights",
+        "format",
+        "creation_date"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/InformationResource",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Publication",
+      "definition_uri": "https://w3id.org/lmodel/generic/Publication",
+      "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.",
+      "in_subset": [
+        "model_system_database"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "csrc:Publication",
+        "IAO:0000311",
+        "schema:publication",
+        "sumo:Publication",
+        "WIKIDATA:Q732577"
+      ],
+      "narrow_mappings": [
+        "geolink:Document",
+        "IAO:0000013"
+      ],
+      "is_a": "InformationContentEntity",
+      "slots": [
+        "description",
+        "license",
+        "rights",
+        "format",
+        "creation_date",
+        "authors",
+        "Publication_id",
+        "Publication_name",
+        "Publication_type",
+        "Publication_pages",
+        "summary",
+        "keywords",
+        "lcsh_terms",
+        "xref"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Publication",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "Association",
+      "definition_uri": "https://w3id.org/lmodel/generic/Association",
+      "description": "A typed association between two entities, supported by evidence",
+      "comments": [
+        "This is roughly the model used by base and ontobio at the moment"
+      ],
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "csrc:Association",
+        "OBAN:association",
+        "rdf:Statement",
+        "owl:Axiom"
+      ],
+      "narrow_mappings": [
+        "CSO:data_association",
+        "WIKIDATA:Q382571"
+      ],
+      "broad_mappings": [
+        "WIKIDATA:Q186290"
+      ],
+      "is_a": "Entity",
+      "slots": [
+        "id",
+        "iri",
+        "name",
+        "description",
+        "has_attribute",
+        "subject",
+        "predicate",
+        "object",
+        "negated",
+        "qualifiers",
+        "publications",
+        "has_evidence",
+        "primary_knowledge_source",
+        "aggregator_knowledge_source",
+        "timepoint",
+        "Association_type",
+        "Association_category"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/Association",
+      "@type": "ClassDefinition"
+    }
+  ],
+  "metamodel_version": "1.7.0",
+  "source_file": "generic.yaml",
+  "source_file_date": "2023-07-09T19:08:21",
+  "source_file_size": 56034,
+  "generation_date": "2023-07-09T19:08:48",
+  "@type": "SchemaDefinition",
+  "@context": [
+    "project/jsonld/generic.context.jsonld",
+    "https://w3id.org/linkml/types.context.jsonld",
+    {
+      "@base": "https://w3id.org/lmodel/generic/"
+    }
+  ]
+}
