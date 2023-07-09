@@ -395,8 +395,6 @@ attributes:
         value: 'True'
     description: connects an entity to its taxonomic classification. Only certain
       kinds of entities can be taxonomically classified; see 'ThingWithTaxon'
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - RO:0002162
@@ -435,8 +433,6 @@ attributes:
   xref:
     name: xref
     description: Alternate CURIEs for a thing
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - dbxref
@@ -464,8 +460,6 @@ attributes:
     name: id
     description: A unique identifier for an entity. Must be either a CURIE shorthand
       for a URI or a complete URI
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - dcterms:identifier
@@ -530,9 +524,6 @@ attributes:
       rules.
     comments:
     - see also https://url.spec.whatwg.org/#goals
-    in_subset:
-    - translator_minimal
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - rr:IRI
@@ -619,9 +610,6 @@ attributes:
     comments:
     - This annotation is typically used to describe an artifact such as a controlled
       vocabulary, document, ontology, or other similar resource.
-    in_subset:
-    - translator_minimal
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - label
@@ -667,8 +655,6 @@ attributes:
   description:
     name: description
     description: a human-readable description of an entity
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - definition
@@ -698,8 +684,6 @@ attributes:
   has attribute:
     name: has attribute
     description: connects any entity to an attribute
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - aml:hasAttribute

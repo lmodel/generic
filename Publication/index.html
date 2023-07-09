@@ -690,8 +690,6 @@ description: Any published piece of information. Can refer to a whole publicatio
   by NLP). The scope is intended to be general and include information published on
   the web, as well as printed materials, either directly or in one of the Publication
   Universal category subclasses.
-in_subset:
-- model_system_database
 from_schema: https://w3id.org/lmodel/generic
 exact_mappings:
 - csrc:Publication
@@ -779,8 +777,6 @@ description: Any published piece of information. Can refer to a whole publicatio
   by NLP). The scope is intended to be general and include information published on
   the web, as well as printed materials, either directly or in one of the Publication
   Universal category subclasses.
-in_subset:
-- model_system_database
 from_schema: https://w3id.org/lmodel/generic
 exact_mappings:
 - csrc:Publication
@@ -1011,8 +1007,6 @@ attributes:
   xref:
     name: xref
     description: Alternate CURIEs for a thing
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - dbxref
@@ -1165,9 +1159,6 @@ attributes:
       rules.
     comments:
     - see also https://url.spec.whatwg.org/#goals
-    in_subset:
-    - translator_minimal
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - rr:IRI
@@ -1216,8 +1207,6 @@ attributes:
   description:
     name: description
     description: a human-readable description of an entity
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - definition
@@ -1247,8 +1236,6 @@ attributes:
   has attribute:
     name: has attribute
     description: connects any entity to an attribute
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - aml:hasAttribute

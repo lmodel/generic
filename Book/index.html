@@ -314,19 +314,19 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>Books should have industry-standard identifier such as from ISBN</td>
-<td><a href="../Entity/">Entity</a>, <a href="../Publication/">Publication</a></td>
+<td><a href="../Publication/">Publication</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../name/">name</a></td>
 <td>0..1 <br/> <a href="../LabelType/">LabelType</a></td>
 <td>the 'title' of the publication is generally recorded in the 'name' property (...</td>
-<td><a href="../Entity/">Entity</a>, <a href="../Publication/">Publication</a></td>
+<td><a href="../Publication/">Publication</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../type/">type</a></td>
 <td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>Should generally be set to an OntologyClass defined term for 'book'</td>
-<td><a href="../Entity/">Entity</a>, <a href="../Publication/">Publication</a></td>
+<td><a href="../Publication/">Publication</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../pages/">pages</a></td>
@@ -452,8 +452,6 @@ id_prefixes:
 - isbn
 description: This class may rarely be instantiated except if use cases of a given
   knowledge graph support its utility.
-in_subset:
-- model_system_database
 from_schema: https://w3id.org/lmodel/generic
 is_a: Publication
 slot_usage:
@@ -484,8 +482,6 @@ id_prefixes:
 - isbn
 description: This class may rarely be instantiated except if use cases of a given
   knowledge graph support its utility.
-in_subset:
-- model_system_database
 from_schema: https://w3id.org/lmodel/generic
 is_a: Publication
 slot_usage:
@@ -654,8 +650,6 @@ attributes:
   xref:
     name: xref
     description: Alternate CURIEs for a thing
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - dbxref
@@ -808,9 +802,6 @@ attributes:
       rules.
     comments:
     - see also https://url.spec.whatwg.org/#goals
-    in_subset:
-    - translator_minimal
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - rr:IRI
@@ -859,8 +850,6 @@ attributes:
   description:
     name: description
     description: a human-readable description of an entity
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - definition
@@ -890,8 +879,6 @@ attributes:
   has attribute:
     name: has attribute
     description: connects any entity to an attribute
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - aml:hasAttribute

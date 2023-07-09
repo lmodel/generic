@@ -327,7 +327,7 @@
 <td><a href="../id/">id</a></td>
 <td>1..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
 <td>A unique identifier for an entity</td>
-<td><a href="../Entity/">Entity</a>, <a href="../OntologyClass/">OntologyClass</a></td>
+<td><a href="../OntologyClass/">OntologyClass</a>, <a href="../Entity/">Entity</a></td>
 </tr>
 <tr>
 <td><a href="../provided_by/">provided_by</a></td>
@@ -823,8 +823,6 @@ id_prefixes:
 description: A property or characteristic of an entity. For example, an apple may
   have properties such as color, shape, age, crispiness. An environmental sample may
   have attributes such as depth, lat, long, material.
-in_subset:
-- samples
 from_schema: https://w3id.org/lmodel/generic
 exact_mappings:
 - csrc:attribute
@@ -938,8 +936,6 @@ id_prefixes:
 description: A property or characteristic of an entity. For example, an apple may
   have properties such as color, shape, age, crispiness. An environmental sample may
   have attributes such as depth, lat, long, material.
-in_subset:
-- samples
 from_schema: https://w3id.org/lmodel/generic
 exact_mappings:
 - csrc:attribute
@@ -1055,8 +1051,6 @@ attributes:
   has attribute type:
     name: has attribute type
     description: connects an attribute to a class that describes it
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - aml:hasAttributeDataType
@@ -1167,8 +1161,6 @@ attributes:
   has quantitative value:
     name: has quantitative value
     description: connects an attribute to a value
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - CTRL:hasQuantity
@@ -1195,8 +1187,6 @@ attributes:
   has qualitative value:
     name: has qualitative value
     description: connects an attribute to a value
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     close_mappings:
     - schema:QualitativeValue
@@ -1221,9 +1211,6 @@ attributes:
       rules.
     comments:
     - see also https://url.spec.whatwg.org/#goals
-    in_subset:
-    - translator_minimal
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - rr:IRI
@@ -1249,8 +1236,6 @@ attributes:
     name: id
     description: A unique identifier for an entity. Must be either a CURIE shorthand
       for a URI or a complete URI
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - dcterms:identifier
@@ -1331,8 +1316,6 @@ attributes:
   xref:
     name: xref
     description: Alternate CURIEs for a thing
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - dbxref
@@ -1418,8 +1401,6 @@ attributes:
   description:
     name: description
     description: a human-readable description of an entity
-    in_subset:
-    - translator_minimal
     from_schema: https://w3id.org/lmodel/generic
     aliases:
     - definition
@@ -1449,8 +1430,6 @@ attributes:
   has attribute:
     name: has attribute
     description: connects any entity to an attribute
-    in_subset:
-    - samples
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - aml:hasAttribute
