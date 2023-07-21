@@ -96,7 +96,7 @@ types:
   category type:
     typeof: uriorcurie
     description: >-
-      A primitive type in which the value denotes a class within the universal model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the universal class, for example universal:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service
+      A primitive type in which the value denotes a class within the generic-model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the generic-model class, for example generic:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service
     exact_mappings:
       - NCIT:C115618    # Category Type
       - schema:categoryCode
@@ -121,7 +121,7 @@ types:
   predicate type:
     typeof: uriorcurie
     description: >-
-      A CURIE from the universal related_to hierarchy. For example, universal:related_to
+      A CURIE from the generic-model related_to hierarchy. For example, generic:related_to
 
   narrative text:
     typeof: string
@@ -798,8 +798,8 @@ slots:
     description: >-
       Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
        * In a neo4j database this MAY correspond to the neo4j label tag.
-       * In an RDF database it should be a universal model class URI.
-      This field is multi-valued. It should include values for ancestors of the universal class
+       * In an RDF database it should be a generic-model class URI.
+      This field is multi-valued. It should include values for ancestors of the generic-model class
 
       In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.
     is_class_field: true
@@ -911,7 +911,7 @@ slots:
       - om:unofficialLabel
       - om:unofficialAbbreviation
       # there is an interesting debate here: are these terms "narrower" a.k.a. more specialized instances of
-      # 'universal:synonym' or should they be binned into their respective namesake class of mappings?
+      # 'generic:synonym' or should they be binned into their respective namesake class of mappings?
       # namely, is 'ExO:hasExactSynonym' an instance 'exact_mappings', etc.
       - IAO:0000136    # is about
       - skos:altLabel
@@ -1462,7 +1462,7 @@ slots:
     is_a: node property
     singular_name: author
     description: >-
-      connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.
+      connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.
     multivalued: true
     domain: Publication
 
@@ -2514,9 +2514,9 @@ slots:
       - RO:has_participant
     narrow_mappings:
       - BFO:0000167    # has participant at all times
-      # Several of the following RTX terms tagged as inverse to 'universal:participates_in'
+      # Several of the following RTX terms tagged as inverse to 'generic:participates_in'
       - LOINC:has_subject
-      # RTX mapped the following term as 'universal:superclass_of' but term seem compositional in nature
+      # RTX mapped the following term as 'generic:superclass_of' but term seem compositional in nature
       # has_group
       # has_state transition
       - RO:0004007    # has primary input or output
@@ -2822,7 +2822,7 @@ slots:
       A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.
     domain: Association
     notes: >-
-      Has a value from the Universal related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, universal:related_to, universal:restores
+      Has a value from the Generic related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, generic:related_to, generic:restores
     range: predicate type
     required: true
     local_names:
@@ -2983,7 +2983,7 @@ classes:
 
   Annotation:
     description: >-
-      Universal Model root class for entity annotations.
+      Generic Model root class for entity annotations.
     abstract: true
     exact_mappings:
       - WIKIDATA:Q857525
@@ -2996,7 +2996,7 @@ classes:
       - has unit
       - has numeric value
 
-  # Alignment attempted of the universal:Attribute model
+  # Alignment attempted of the generic:Attribute model
   # to the proposed TRAPI Release 1.1 Attribute schema, i.e.
   #
   # attribute_name: "assertionAuthoredBy",
@@ -3135,7 +3135,7 @@ classes:
 
   Entity:
     description: >-
-      Root Universal Model class for all things and informational relationships, real or imagined.
+      Root Generic Model class for all things and informational relationships, real or imagined.
     abstract: true
     slots:
       - id
@@ -3157,7 +3157,7 @@ classes:
     slot_usage:
       category:
         required: true
-        pattern: '^universal:[A-Z][A-Za-z]+$'
+        pattern: '^generic:[A-Z][A-Za-z]+$'
     exact_mappings:
       - BFO:0000001    # entity
       - WIKIDATA:Q35120    # entity
@@ -3398,7 +3398,7 @@ classes:
   Publication:
     is_a: InformationContentEntity
     description: >-
-      Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.
+      Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
     slots:
       - authors
       - id
@@ -3422,7 +3422,7 @@ classes:
         slot_uri: dcterms:type
         required: true
         description: >-
-          Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.
+          Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.
         values_from:  # Not sure which takes precedence, if any...
           - dctermsypes
           - lcsh
@@ -3527,7 +3527,7 @@ classes:
 
   Occurrent:
     description: >-
-      A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing
+      A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin generic:NamedThing
     is_a: TangibleEssenceOrOccurrent
     mixin: true
     exact_mappings:
@@ -3716,6 +3716,33 @@ classes:
 
   ## Sciences
 
+  System:
+    aliases: ['ComputationalEntity']
+    is_a: NamedThing
+    abstract: true
+    description: >-
+      An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
+    mixins:
+      - ThingWithTaxon
+    broad_mappings:
+      - WIKIDATA:Q99527517  # collective entity
+      # ssn:FeatureOfInterest
+    exact_mappings:
+      - csrc:system
+      - NCIT:C25700   # system
+      - RO:0002577   # system
+      - ssn:System
+      - sumo:ComputationalSystem
+      - WIKIDATA:Q58778
+    narrow_mappings:
+      - CSO:computational_grid
+      - CSO:computational_resource
+      - CSO:computational_power
+      - REPR:ComputationalTool
+      - schema:SoftwareApplication
+      - SIO:000097    # software entity
+      - SIO:000602    # computational entity
+
   ThingWithTaxon:
     mixin: true
     description: >-
@@ -3723,20 +3750,29 @@ classes:
     slots:
       - in taxon
 
-  System:
-    is_a: NamedThing
+  OperationalEntity:
+    is_a: System
     description: >-
-      An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
-    mixins:
-      - ThingWithTaxon
-    broad_mappings:
-      - WIKIDATA:Q99527517  # collective entity
-    exact_mappings:
-      - csrc:system
-      - NCIT:C25700   # system
-      - RO:0002577   # system
-      - ssn:System
-      - WIKIDATA:Q58778
+      A operational entity is a control entity
+    slots:
+      - is controller
+    related_mappings:
+      - CSO:operational_profile
+      - geolink:hasOperationArea
+      - geolink:hasOperator
+      - geolink:isOperatorOf
+      - csrc:operational_technology
+      - NCIT:C47908    # operating system
+      - schema:operatingSystem
+      - ssn:Deployment
+      - sumo:Computer
+      - sumo:ComputerComponent
+      - sumo:ComputerProcess
+      - sumo:ComputerResource
+      - sumo:computerRunning
+      - sumo:OperationalAmplifier
+      - sumo:Server
+    id_prefixes: []
 
   IndividualSystem:
     description: >-
@@ -3938,7 +3974,7 @@ classes:
       - category
     slot_usage:
       type:
-        description: rdf:type of universal:Association should be fixed at rdf:Statement
+        description: rdf:type of generic:Association should be fixed at rdf:Statement
       category:
         range: category type
         required: false
