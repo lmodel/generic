@@ -34,6 +34,7 @@ export type HardwareId = string;
 export type PlanetaryEntityId = string;
 export type GeographicLocationId = string;
 export type SystemId = string;
+export type OperationalEntityId = string;
 export type IndividualSystemId = string;
 export type SystemAttributeId = string;
 export type EnvironmentId = string;
@@ -62,7 +63,7 @@ export interface OntologyClass {
     id: string,
 };
 /**
- * Universal Model root class for entity annotations.
+ * Generic Model root class for entity annotations.
  */
 export interface Annotation {
 };
@@ -97,8 +98,8 @@ export interface Attribute extends NamedThing, OntologyClass {
     xref?: string[],
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -130,8 +131,8 @@ export interface ControlRole extends Attribute {
     xref?: string[],
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -163,8 +164,8 @@ export interface BiologicalSex extends Attribute {
     xref?: string[],
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -196,8 +197,8 @@ export interface SeverityValue extends Attribute {
     xref?: string[],
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -208,7 +209,7 @@ In an RDF database, nodes will typically have an rdf:type triples. This can be t
     has_attribute?: AttributeId[],
 };
 /**
- * Root Universal Model class for all things and informational relationships, real or imagined.
+ * Root Generic Model class for all things and informational relationships, real or imagined.
  */
 export interface Entity {
     /** A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI */
@@ -217,8 +218,8 @@ export interface Entity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category?: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -244,8 +245,8 @@ export interface NamedThing extends Entity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -275,8 +276,8 @@ export interface Designation extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -306,8 +307,8 @@ export interface Name extends Designation {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -337,8 +338,8 @@ export interface Identifier extends Designation {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -364,8 +365,8 @@ export interface Event extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -391,8 +392,8 @@ export interface AdministrativeEntity extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -424,8 +425,8 @@ export interface Agent extends AdministrativeEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -455,8 +456,8 @@ export interface Project extends Agent {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -488,8 +489,8 @@ export interface InformationContentEntity extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -523,8 +524,8 @@ export interface Specification extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -558,8 +559,8 @@ export interface Dataset extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -595,8 +596,8 @@ export interface DatasetDistribution extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -636,8 +637,8 @@ export interface DatasetVersion extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -675,8 +676,8 @@ export interface DatasetSummary extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -710,8 +711,8 @@ export interface EvidenceType extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -745,8 +746,8 @@ export interface InformationResource extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -772,8 +773,8 @@ export interface OpenAccess extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -786,16 +787,16 @@ In an RDF database, nodes will typically have an rdf:type triples. This can be t
     has_attribute?: AttributeId[],
 };
 /**
- * Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.
+ * Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
  */
 export interface Publication extends InformationContentEntity {
-    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
+    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
     authors?: string[],
     /** Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN. */
     id: string,
     /** the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case). */
     name?: string,
-    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass. */
+    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass. */
     type: string,
     /** When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book. */
     pages?: string[],
@@ -821,8 +822,8 @@ export interface Publication extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** a human-readable description of an entity */
@@ -834,7 +835,7 @@ In an RDF database, nodes will typically have an rdf:type triples. This can be t
  * This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.
  */
 export interface Book extends Publication {
-    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
+    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
     authors?: string[],
     /** Books should have industry-standard identifier such as from ISBN. */
     id: string,
@@ -866,8 +867,8 @@ export interface Book extends Publication {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** a human-readable description of an entity */
@@ -883,13 +884,13 @@ export interface BookChapter extends Publication {
     volume?: string,
     /** chapter of a book */
     chapter?: string,
-    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
+    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
     authors?: string[],
     /** Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN. */
     id: string,
     /** the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case). */
     name?: string,
-    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass. */
+    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass. */
     type: string,
     /** When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book. */
     pages?: string[],
@@ -915,8 +916,8 @@ export interface BookChapter extends Publication {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** a human-readable description of an entity */
@@ -936,7 +937,7 @@ export interface Serial extends Publication {
     volume?: string,
     /** issue of a newspaper, a scientific journal or magazine for reference purpose */
     issue?: string,
-    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
+    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
     authors?: string[],
     /** Serials (journals) should have industry-standard identifier such as from ISSN. */
     id: string,
@@ -966,8 +967,8 @@ export interface Serial extends Publication {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** a human-readable description of an entity */
@@ -987,13 +988,13 @@ export interface Article extends Publication {
     volume?: string,
     /** issue of a newspaper, a scientific journal or magazine for reference purpose */
     issue?: string,
-    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
+    /** connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as "surname, firstname initial.".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication. */
     authors?: string[],
     /** Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN. */
     id: string,
     /** the 'title' of the publication is generally recorded in the 'name' property (inherited from NamedThing). The field name 'title' is now also tagged as an acceptable alias for the node property 'name' (just in case). */
     name?: string,
-    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass. */
+    /** Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass. */
     type: string,
     /** When a 2-tuple of page numbers are provided, they represent the start and end page of the publication within its parent publication context. For books, this may be set to the total number of pages of the book. */
     pages?: string[],
@@ -1019,8 +1020,8 @@ export interface Article extends Publication {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** a human-readable description of an entity */
@@ -1039,7 +1040,7 @@ export interface TangibleEssenceOrOccurrent {
 export interface TangibleEssence extends TangibleEssenceOrOccurrent {
 };
 /**
- * A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing
+ * A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin generic:NamedThing
  */
 export interface Occurrent extends TangibleEssenceOrOccurrent {
 };
@@ -1057,8 +1058,8 @@ export interface Phenomenon extends NamedThing, Occurrent {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1086,8 +1087,8 @@ export interface Device extends System {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1115,8 +1116,8 @@ export interface SoftwareOrDevice extends System {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1144,8 +1145,8 @@ export interface Software extends SoftwareOrDevice {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1173,8 +1174,8 @@ export interface Hardware extends SoftwareOrDevice {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1205,8 +1206,8 @@ export interface PlanetaryEntity extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1236,8 +1237,37 @@ export interface GeographicLocation extends PlanetaryEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
+In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
+    category: string[],
+    /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
+    type?: string,
+    /** A human-readable name for an attribute or entity. */
+    name?: string,
+    /** a human-readable description of an entity */
+    description?: string,
+    /** connects any entity to an attribute */
+    has_attribute?: AttributeId[],
+};
+/**
+ * An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
+ */
+export interface System extends NamedThing, ThingWithTaxon {
+    /** connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon' */
+    in_taxon?: NamedThingId[],
+    /** The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph. */
+    provided_by?: string[],
+    /** Alternate CURIEs for a thing */
+    xref?: string[],
+    /** A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI */
+    id: string,
+    /** An IRI for an entity. This is determined by the id using expansion rules. */
+    iri?: string,
+    /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
+ * In a neo4j database this MAY correspond to the neo4j label tag.
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1257,9 +1287,11 @@ export interface ThingWithTaxon {
     in_taxon?: NamedThingId[],
 };
 /**
- * An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
+ * A operational entity is a control entity
  */
-export interface System extends NamedThing, ThingWithTaxon {
+export interface OperationalEntity extends System {
+    /** indicates whether a desired state is a controller */
+    is_controller?: boolean,
     /** connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon' */
     in_taxon?: NamedThingId[],
     /** The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph. */
@@ -1272,8 +1304,8 @@ export interface System extends NamedThing, ThingWithTaxon {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1301,8 +1333,8 @@ export interface IndividualSystem extends System {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1336,8 +1368,8 @@ export interface SystemAttribute extends Attribute {
     xref?: string[],
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1363,8 +1395,8 @@ export interface Environment extends System {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1392,8 +1424,8 @@ export interface Component extends System {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1427,8 +1459,8 @@ export interface Message extends InformationContentEntity {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1462,8 +1494,8 @@ export interface Rule extends Message {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1497,8 +1529,8 @@ export interface Instruction extends Message {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1532,8 +1564,8 @@ export interface Law extends Rule {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1567,8 +1599,8 @@ export interface Regulation extends Rule {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1602,8 +1634,8 @@ export interface Governance extends Regulation {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1629,8 +1661,8 @@ export interface Boundary extends NamedThing {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1664,8 +1696,8 @@ export interface Knowledge extends InformationResource {
     iri?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category: string[],
     /** Clasification of an entity, or anchoring point (of a name) in taxonomy */
@@ -1706,12 +1738,12 @@ export interface Association extends Entity {
     aggregator_knowledge_source?: InformationResourceId[],
     /** a point in time */
     timepoint?: string,
-    /** rdf:type of universal:Association should be fixed at rdf:Statement */
+    /** rdf:type of generic:Association should be fixed at rdf:Statement */
     type?: string,
     /** Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base. */
     category?: string[],
     /** A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI */

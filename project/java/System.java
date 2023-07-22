@@ -13,7 +13,7 @@ import lombok.*;
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
-public class System extends NamedThing {
+public abstract class System extends NamedThing {
 
   private List<NamedThing> inTaxon;
 

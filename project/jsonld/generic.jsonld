@@ -256,29 +256,6 @@
   ],
   "default_prefix": "generic",
   "default_range": "string",
-  "subsets": [
-    {
-      "name": "model_system_database",
-      "definition_uri": "https://w3id.org/lmodel/generic/ModelSystemDatabase",
-      "description": "Subset that is relevant for a typical System Model Database",
-      "from_schema": "https://w3id.org/lmodel/generic",
-      "@type": "SubsetDefinition"
-    },
-    {
-      "name": "translator_minimal",
-      "definition_uri": "https://w3id.org/lmodel/generic/TranslatorMinimal",
-      "description": "Minimum subset of translator work",
-      "from_schema": "https://w3id.org/lmodel/generic",
-      "@type": "SubsetDefinition"
-    },
-    {
-      "name": "samples",
-      "definition_uri": "https://w3id.org/lmodel/generic/Samples",
-      "description": "Sample datamodel",
-      "from_schema": "https://w3id.org/lmodel/generic",
-      "@type": "SubsetDefinition"
-    }
-  ],
   "types": [
     {
       "name": "formula_value",
@@ -295,7 +272,7 @@
     {
       "name": "category_type",
       "definition_uri": "https://w3id.org/lmodel/generic/CategoryType",
-      "description": "A primitive type in which the value denotes a class within the universal model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the universal class, for example universal:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service",
+      "description": "A primitive type in which the value denotes a class within the generic-model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the generic-model class, for example generic:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "NCIT:C115618",
@@ -339,7 +316,7 @@
     {
       "name": "predicate_type",
       "definition_uri": "https://w3id.org/lmodel/generic/PredicateType",
-      "description": "A CURIE from the universal related_to hierarchy. For example, universal:related_to",
+      "description": "A CURIE from the generic-model related_to hierarchy. For example, generic:related_to",
       "from_schema": "https://w3id.org/lmodel/generic",
       "typeof": "uriorcurie",
       "base": "URIorCURIE",
@@ -758,9 +735,6 @@
       "name": "has_attribute",
       "definition_uri": "https://w3id.org/lmodel/generic/has_attribute",
       "description": "connects any entity to an attribute",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "https://w3id.org/i40/aml#hasAttribute",
@@ -994,9 +968,6 @@
       "name": "has_attribute_type",
       "definition_uri": "https://w3id.org/lmodel/generic/has_attribute_type",
       "description": "connects an attribute to a class that describes it",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "https://w3id.org/i40/aml#hasAttributeDataType"
@@ -1113,9 +1084,6 @@
       "name": "has_qualitative_value",
       "definition_uri": "https://w3id.org/lmodel/generic/has_qualitative_value",
       "description": "connects an attribute to a value",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "close_mappings": [
         "http://schema.org/QualitativeValue",
@@ -1141,9 +1109,6 @@
       "name": "has_quantitative_value",
       "definition_uri": "https://w3id.org/lmodel/generic/has_quantitative_value",
       "description": "connects an attribute to a value",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "https://w3id.org/ibp/CTRLont#hasQuantity",
@@ -1177,9 +1142,6 @@
       "name": "has_numeric_value",
       "definition_uri": "https://w3id.org/lmodel/generic/has_numeric_value",
       "description": "connects a quantity value to a number",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://qudt.org/1.1/schema/qudt#quantityValue"
@@ -1243,9 +1205,6 @@
       "name": "has_unit",
       "definition_uri": "https://w3id.org/lmodel/generic/has_unit",
       "description": "connects a quantity value to a unit",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "https://w3id.org/i40/aml#hasUnit",
@@ -1301,9 +1260,6 @@
       "name": "id",
       "definition_uri": "https://w3id.org/lmodel/generic/id",
       "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/dc/terms/identifier",
@@ -1373,10 +1329,6 @@
       "description": "An IRI for an entity. This is determined by the id using expansion rules.",
       "comments": [
         "see also https://url.spec.whatwg.org/#goals"
-      ],
-      "in_subset": [
-        "translator_minimal",
-        "samples"
       ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
@@ -1451,10 +1403,7 @@
     {
       "name": "category",
       "definition_uri": "https://w3id.org/lmodel/generic/category",
-      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
-      "in_subset": [
-        "translator_minimal"
-      ],
+      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/goodrelations/v1#category",
@@ -1484,10 +1433,6 @@
       "description": "A human-readable name for an attribute or entity.",
       "comments": [
         "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
-      ],
-      "in_subset": [
-        "translator_minimal",
-        "samples"
       ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
@@ -1625,9 +1570,6 @@
       "name": "synonym",
       "definition_uri": "https://w3id.org/lmodel/generic/synonym",
       "description": "Alternate human-readable names for a thing",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "alias"
@@ -1839,9 +1781,6 @@
       "name": "xref",
       "definition_uri": "https://w3id.org/lmodel/generic/xref",
       "description": "Alternate CURIEs for a thing",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "dbxref",
@@ -1903,9 +1842,6 @@
       "name": "description",
       "definition_uri": "https://w3id.org/lmodel/generic/description",
       "description": "a human-readable description of an entity",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "definition"
@@ -2651,7 +2587,7 @@
     {
       "name": "authors",
       "definition_uri": "https://w3id.org/lmodel/generic/authors",
-      "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+      "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "is_a": "node_property",
       "singular_name": "author",
@@ -2849,6 +2785,24 @@
       "slot_uri": "https://w3id.org/lmodel/generic/has_formula",
       "owner": "has_formula",
       "range": "formula_value",
+      "@type": "SlotDefinition"
+    },
+    {
+      "name": "is_controller",
+      "definition_uri": "https://w3id.org/lmodel/generic/is_controller",
+      "description": "indicates whether a desired state is a controller",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "exact_mappings": [
+        "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#isController"
+      ],
+      "is_a": "node_property",
+      "domain": "OperationalEntity",
+      "slot_uri": "https://w3id.org/lmodel/generic/is_controller",
+      "owner": "OperationalEntity",
+      "domain_of": [
+        "OperationalEntity"
+      ],
+      "range": "boolean",
       "@type": "SlotDefinition"
     },
     {
@@ -3767,9 +3721,6 @@
         }
       ],
       "description": "holds between any two entities that directly or indirectly interact with each other",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0002434"
@@ -3835,9 +3786,6 @@
         }
       ],
       "description": "describes an entity that has a direct affect on the state or quality of another existing entity. Use of the 'affects' predicate implies that the affected entity already exists, unlike predicates such as 'affects risk for' and 'prevents', where the outcome is something that may or may not come to be.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "https://www.irit.fr/recherches/MELODI/ontologies/SAN.html#hasEffect",
@@ -3989,9 +3937,6 @@
       "comments": [
         "typically describes homology relationships between named things or groups"
       ],
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "in homology relationship with"
@@ -4025,9 +3970,6 @@
         }
       ],
       "description": "a homology relationship that holds between entities that diverged from a common point of origin",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/goodrelations/v1#isVariantOf",
@@ -4054,9 +3996,6 @@
         }
       ],
       "description": "holds between two entities that are co-located in the same aggregate object, process, or spatio-temporal region",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "narrow_mappings": [
         "http://loinc.org/rdf/has_lateral_anatomic_location",
@@ -4131,9 +4070,6 @@
       "notes": [
         "These concepts may map exactly to the statistical variables, or represent related entities for which the variables serve as proxies in an Association (e.g. faults, control entities or processes)."
       ],
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0002610",
@@ -4166,9 +4102,6 @@
         }
       ],
       "description": "holds between a process and an material entity or site within which the process occurs",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "narrow_mappings": [
         "http://schema.geolink.org/1.0/base/main.html#isProgramOf",
@@ -4216,9 +4149,6 @@
         }
       ],
       "description": "holds between a material entity and a material entity or site within which it is located (but of which it is not considered a part)",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0001025"
@@ -4247,9 +4177,6 @@
       "name": "location_of",
       "definition_uri": "https://w3id.org/lmodel/generic/location_of",
       "description": "holds between material entity or site and a material entity that is located within it (but not considered a part of it)",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "site of"
@@ -4279,9 +4206,6 @@
         }
       ],
       "description": "holds between an entity and some other entity with similar features.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_HOM0000000",
@@ -4308,9 +4232,6 @@
         }
       ],
       "description": "holds between a thing and some other thing it approximates for purposes of scientific study, in virtue of its exhibiting similar features of the studied entity.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0003301"
@@ -4362,9 +4283,6 @@
         }
       ],
       "description": "holds between entities that overlap in their extents (entities or processes)",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0002131"
@@ -4398,9 +4316,6 @@
         }
       ],
       "description": "holds between wholes and their parts (entities or processes)",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/BFO_0000051",
@@ -4444,9 +4359,6 @@
         }
       ],
       "description": "holds between a process and a continuant, where the continuant is somehow involved in the process",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://schema.geolink.org/1.0/base/main.html#hasParticipant",
@@ -4513,9 +4425,6 @@
       "name": "participates_in",
       "definition_uri": "https://w3id.org/lmodel/generic/participates_in",
       "description": "holds between a continuant and a process, where the continuant is somehow involved in the process",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0000056",
@@ -4549,9 +4458,6 @@
         }
       ],
       "description": "holds between a material entity and a product that is generated through the intentional actions or functioning of the material entity",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0003000",
@@ -4659,9 +4565,6 @@
         }
       ],
       "description": "holds between two processes, where one completes before the other begins",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/BFO_0000063"
@@ -4694,9 +4597,6 @@
       "name": "preceded_by",
       "definition_uri": "https://w3id.org/lmodel/generic/preceded_by",
       "description": "holds between two processes, where the other is completed before the one begins",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/BFO_0000062"
@@ -4897,9 +4797,6 @@
         }
       ],
       "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.obolibrary.org/obo/RO_0002162",
@@ -5045,7 +4942,7 @@
       ],
       "description": "A high-level grouping for the relationship type. AKA minimal predicate. This is analogous to category for nodes.",
       "notes": [
-        "Has a value from the Universal related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, universal:related_to, universal:restores"
+        "Has a value from the Generic related_to hierarchy. In RDF,  this corresponds to rdf:predicate and in Neo4j this corresponds to the relationship type. The convention is for an edge label in snake_case form. For example, generic:related_to, generic:restores"
       ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "mappings": [
@@ -5320,10 +5217,6 @@
       "comments": [
         "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
       ],
-      "in_subset": [
-        "translator_minimal",
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "label",
@@ -5379,10 +5272,7 @@
     {
       "name": "NamedThing_category",
       "definition_uri": "https://w3id.org/lmodel/generic/category",
-      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
-      "in_subset": [
-        "translator_minimal"
-      ],
+      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/goodrelations/v1#category",
@@ -5407,7 +5297,7 @@
       "usage_slot_name": "category",
       "range": "category_type",
       "required": true,
-      "pattern": "^universal:[A-Z][A-Za-z]+$",
+      "pattern": "^generic:[A-Z][A-Za-z]+$",
       "@type": "SlotDefinition"
     },
     {
@@ -5436,9 +5326,6 @@
       "name": "Agent_id",
       "definition_uri": "https://w3id.org/lmodel/generic/id",
       "description": "Different classes of agents have distinct preferred identifiers.  For publishers, use the ISBN publisher code.  See https://grp.isbn-international.org/ for publisher code lookups.  For editors, authors and  individual providers, use the individual's ORCID if available; Otherwise, a ScopusID, publons.researcher or Google Scholar ID ('GSID') may be used if the author ORCID is unknown. Institutional agents could be identified by an International Standard Name Identifier ('ISNI') code.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/dc/terms/identifier",
@@ -5518,10 +5405,6 @@
       "comments": [
         "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
       ],
-      "in_subset": [
-        "translator_minimal",
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "label",
@@ -5578,9 +5461,6 @@
       "name": "Publication_id",
       "definition_uri": "https://w3id.org/lmodel/generic/id",
       "description": "Different kinds of publication subtypes will have different preferred identifiers (curies when feasible). Precedence of identifiers for scientific articles is as follows PMID if available; DOI if not; actual alternate CURIE otherwise. Enclosing publications (i.e. referenced by 'published in' node property) such as books and journals, should have industry-standard identifier such as from ISBN and ISSN.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/dc/terms/identifier",
@@ -5652,10 +5532,6 @@
       "comments": [
         "This annotation is typically used to describe an artifact such as a controlled vocabulary, document, ontology, or other similar resource."
       ],
-      "in_subset": [
-        "translator_minimal",
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "label",
@@ -5711,7 +5587,7 @@
     {
       "name": "Publication_type",
       "definition_uri": "https://w3id.org/lmodel/generic/type",
-      "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+      "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "mappings": [
         "http://purl.org/dc/terms/type"
@@ -5789,9 +5665,6 @@
       "name": "book_id",
       "definition_uri": "https://w3id.org/lmodel/generic/id",
       "description": "Books should have industry-standard identifier such as from ISBN.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/dc/terms/identifier",
@@ -5936,9 +5809,6 @@
       "name": "Serial_id",
       "definition_uri": "https://w3id.org/lmodel/generic/id",
       "description": "Serials (journals) should have industry-standard identifier such as from ISSN.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/dc/terms/identifier",
@@ -6103,7 +5973,7 @@
     {
       "name": "Association_type",
       "definition_uri": "https://w3id.org/lmodel/generic/type",
-      "description": "rdf:type of universal:Association should be fixed at rdf:Statement",
+      "description": "rdf:type of generic:Association should be fixed at rdf:Statement",
       "from_schema": "https://w3id.org/lmodel/generic",
       "mappings": [
         "http://www.w3.org/1999/02/22-rdf-syntax-ns#type"
@@ -6148,10 +6018,7 @@
     {
       "name": "Association_category",
       "definition_uri": "https://w3id.org/lmodel/generic/category",
-      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
-      "in_subset": [
-        "translator_minimal"
-      ],
+      "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "http://purl.org/goodrelations/v1#category",
@@ -6218,7 +6085,7 @@
     {
       "name": "Annotation",
       "definition_uri": "https://w3id.org/lmodel/generic/Annotation",
-      "description": "Universal Model root class for entity annotations.",
+      "description": "Generic Model root class for entity annotations.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "WIKIDATA:Q857525"
@@ -6252,9 +6119,6 @@
       ],
       "definition_uri": "https://w3id.org/lmodel/generic/Attribute",
       "description": "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.",
-      "in_subset": [
-        "samples"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "csrc:attribute",
@@ -6442,7 +6306,7 @@
     {
       "name": "Entity",
       "definition_uri": "https://w3id.org/lmodel/generic/Entity",
-      "description": "Root Universal Model class for all things and informational relationships, real or imagined.",
+      "description": "Root Generic Model class for all things and informational relationships, real or imagined.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "abstract": true,
       "slots": [
@@ -6936,9 +6800,6 @@
       "name": "InformationResource",
       "definition_uri": "https://w3id.org/lmodel/generic/InformationResource",
       "description": "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.",
-      "in_subset": [
-        "translator_minimal"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "knowledgebase"
@@ -6991,10 +6852,7 @@
     {
       "name": "Publication",
       "definition_uri": "https://w3id.org/lmodel/generic/Publication",
-      "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.",
-      "in_subset": [
-        "model_system_database"
-      ],
+      "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "csrc:Publication",
@@ -7039,9 +6897,6 @@
       ],
       "definition_uri": "https://w3id.org/lmodel/generic/Book",
       "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
-      "in_subset": [
-        "model_system_database"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "is_a": "Publication",
       "slots": [
@@ -7071,9 +6926,6 @@
     {
       "name": "BookChapter",
       "definition_uri": "https://w3id.org/lmodel/generic/BookChapter",
-      "in_subset": [
-        "model_system_database"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "is_a": "Publication",
       "slots": [
@@ -7110,9 +6962,6 @@
       ],
       "definition_uri": "https://w3id.org/lmodel/generic/Serial",
       "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
-      "in_subset": [
-        "model_system_database"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "aliases": [
         "journal"
@@ -7153,9 +7002,6 @@
       ],
       "definition_uri": "https://w3id.org/lmodel/generic/Article",
       "description": "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication",
-      "in_subset": [
-        "model_system_database"
-      ],
       "from_schema": "https://w3id.org/lmodel/generic",
       "is_a": "Publication",
       "slots": [
@@ -7210,7 +7056,7 @@
     {
       "name": "Occurrent",
       "definition_uri": "https://w3id.org/lmodel/generic/Occurrent",
-      "description": "A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing",
+      "description": "A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin generic:NamedThing",
       "from_schema": "https://w3id.org/lmodel/generic",
       "exact_mappings": [
         "BFO:0000003",
@@ -7528,34 +7374,35 @@
       "@type": "ClassDefinition"
     },
     {
-      "name": "ThingWithTaxon",
-      "definition_uri": "https://w3id.org/lmodel/generic/ThingWithTaxon",
-      "description": "A mixin that can be used on any entity that can be taxonomically classified. This includes individual entities, their products, and other operational entities and processes.",
-      "from_schema": "https://w3id.org/lmodel/generic",
-      "mixin": true,
-      "slots": [
-        "in_taxon"
-      ],
-      "slot_usage": {},
-      "class_uri": "https://w3id.org/lmodel/generic/ThingWithTaxon",
-      "@type": "ClassDefinition"
-    },
-    {
       "name": "System",
       "definition_uri": "https://w3id.org/lmodel/generic/System",
       "description": "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.",
       "from_schema": "https://w3id.org/lmodel/generic",
+      "aliases": [
+        "ComputationalEntity"
+      ],
       "exact_mappings": [
         "csrc:system",
         "NCIT:C25700",
         "RO:0002577",
         "ssn:System",
+        "sumo:ComputationalSystem",
         "WIKIDATA:Q58778"
+      ],
+      "narrow_mappings": [
+        "CSO:computational_grid",
+        "CSO:computational_resource",
+        "CSO:computational_power",
+        "REPR:ComputationalTool",
+        "schema:SoftwareApplication",
+        "SIO:000097",
+        "SIO:000602"
       ],
       "broad_mappings": [
         "WIKIDATA:Q99527517"
       ],
       "is_a": "NamedThing",
+      "abstract": true,
       "mixins": [
         "ThingWithTaxon"
       ],
@@ -7573,6 +7420,59 @@
       ],
       "slot_usage": {},
       "class_uri": "https://w3id.org/lmodel/generic/System",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "ThingWithTaxon",
+      "definition_uri": "https://w3id.org/lmodel/generic/ThingWithTaxon",
+      "description": "A mixin that can be used on any entity that can be taxonomically classified. This includes individual entities, their products, and other operational entities and processes.",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "mixin": true,
+      "slots": [
+        "in_taxon"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/ThingWithTaxon",
+      "@type": "ClassDefinition"
+    },
+    {
+      "name": "OperationalEntity",
+      "definition_uri": "https://w3id.org/lmodel/generic/OperationalEntity",
+      "description": "A operational entity is a control entity",
+      "from_schema": "https://w3id.org/lmodel/generic",
+      "related_mappings": [
+        "CSO:operational_profile",
+        "geolink:hasOperationArea",
+        "geolink:hasOperator",
+        "geolink:isOperatorOf",
+        "csrc:operational_technology",
+        "NCIT:C47908",
+        "schema:operatingSystem",
+        "ssn:Deployment",
+        "sumo:Computer",
+        "sumo:ComputerComponent",
+        "sumo:ComputerProcess",
+        "sumo:ComputerResource",
+        "sumo:computerRunning",
+        "sumo:OperationalAmplifier",
+        "sumo:Server"
+      ],
+      "is_a": "System",
+      "slots": [
+        "id",
+        "iri",
+        "type",
+        "name",
+        "description",
+        "has_attribute",
+        "provided_by",
+        "xref",
+        "NamedThing_category",
+        "in_taxon",
+        "is_controller"
+      ],
+      "slot_usage": {},
+      "class_uri": "https://w3id.org/lmodel/generic/OperationalEntity",
       "@type": "ClassDefinition"
     },
     {
@@ -8025,9 +7925,9 @@
   ],
   "metamodel_version": "1.7.0",
   "source_file": "generic.yaml",
-  "source_file_date": "2023-07-09T22:37:19",
-  "source_file_size": 128538,
-  "generation_date": "2023-07-09T22:47:21",
+  "source_file_date": "2023-07-22T01:33:17",
+  "source_file_size": 127881,
+  "generation_date": "2023-07-22T01:33:28",
   "@type": "SchemaDefinition",
   "@context": [
     "project/jsonld/generic.context.jsonld",

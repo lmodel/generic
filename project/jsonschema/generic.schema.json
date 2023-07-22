@@ -16,9 +16,9 @@
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -77,16 +77,16 @@
             "description": "A written composition in prose, usually nonfiction, on a specific topic, forming an independent part of a book or other publication",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -176,7 +176,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
                     "type": "string"
                 },
                 "volume": {
@@ -212,7 +212,7 @@
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
                         "type": "string"
                     },
@@ -288,7 +288,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "rdf:type of universal:Association should be fixed at rdf:Statement",
+                    "description": "rdf:type of generic:Association should be fixed at rdf:Statement",
                     "type": "string"
                 }
             },
@@ -306,9 +306,9 @@
             "description": "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -383,9 +383,9 @@
             "description": "Status as female, male, or intersex depending on their chromosomes, reproductive organs, and other characteristics",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -460,16 +460,16 @@
             "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -571,16 +571,16 @@
             "description": "",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -666,7 +666,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
                     "type": "string"
                 },
                 "volume": {
@@ -695,9 +695,9 @@
             "description": "dividing line between two areas or sets of points in a topological space; difference between the closure and the interior",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -756,9 +756,9 @@
             "description": "The component is the smallest system entity that can be deployed, isolated, and restored independently. A self-contained assembly of parts within a complete operating unit or module, which cannot be further subdivided without loss of identity or function. The compoent is part of a system structurally composed of a set of components bound together. Each component is another system and this recursive definition stops when a component is regarded as atomic.\"",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -824,9 +824,9 @@
             "description": "A role played by the entity or part thereof within a control context.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -901,9 +901,9 @@
             "description": "an item that refers to a collection of data from a data source.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -979,9 +979,9 @@
             "description": "an item that holds distribution level information about a dataset",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1061,9 +1061,9 @@
             "description": "an item that holds summary level information about a dataset.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1147,9 +1147,9 @@
             "description": "an item that holds version level information about a dataset.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1237,9 +1237,9 @@
             "description": "representation for someone or something by a sign that denotes it",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1309,9 +1309,9 @@
             "description": "A thing made or adapted for a particular purpose, especially a piece of mechanical or electronic equipment.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1377,9 +1377,9 @@
             "description": "Part of the universe outside the boundaries of a given system, interacting with that given system.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1445,9 +1445,9 @@
             "description": "Something that happens at a given place and time.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1506,9 +1506,9 @@
             "description": "Class of evidence that supports an association",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1584,9 +1584,9 @@
             "description": "a location that can be described in lat/long coordinates",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1653,9 +1653,9 @@
             "description": "all of the processes of governing, whether undertaken by a government, market or network, whether over a family, tribe, formal or informal organization or territory and whether through the laws, norms, power or language of an organized society",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1731,9 +1731,9 @@
             "description": "physical components of a computer",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1799,9 +1799,9 @@
             "description": "Sequence of characters uniquely identifying that with which it is associated",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1871,9 +1871,9 @@
             "description": "An instance of an system. For example, human. Computer, my pet cat.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -1939,9 +1939,9 @@
             "description": "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2017,9 +2017,9 @@
             "description": "message intended to convey a course of action for the audience to follow",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2095,9 +2095,9 @@
             "description": "A set of knowledge or reproducible skills acquired through study or experience.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2173,9 +2173,9 @@
             "description": "system of rules and guidelines, generally backed by governmental authority",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2251,9 +2251,9 @@
             "description": "discrete unit of communication intended by the source for consumption by some recipient or group of recipients",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2335,9 +2335,9 @@
             "description": "distinctive designation for an individual (person, organization or thing)",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2407,9 +2407,9 @@
             "description": "a databased entity or concept/class",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2463,14 +2463,86 @@
             "title": "NamedThing",
             "type": "object"
         },
+        "OperationalEntity": {
+            "additionalProperties": false,
+            "description": "A operational entity is a control entity",
+            "properties": {
+                "category": {
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "items": {
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "description": {
+                    "description": "a human-readable description of an entity",
+                    "type": "string"
+                },
+                "has_attribute": {
+                    "description": "connects any entity to an attribute",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "id": {
+                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
+                    "type": "string"
+                },
+                "in_taxon": {
+                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "iri": {
+                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
+                    "type": "string"
+                },
+                "is_controller": {
+                    "description": "indicates whether a desired state is a controller",
+                    "type": "boolean"
+                },
+                "name": {
+                    "description": "A human-readable name for an attribute or entity.",
+                    "type": "string"
+                },
+                "provided_by": {
+                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                },
+                "type": {
+                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
+                    "type": "string"
+                },
+                "xref": {
+                    "description": "Alternate CURIEs for a thing",
+                    "items": {
+                        "type": "string"
+                    },
+                    "type": "array"
+                }
+            },
+            "required": [
+                "id",
+                "category"
+            ],
+            "title": "OperationalEntity",
+            "type": "object"
+        },
         "Phenomenon": {
             "additionalProperties": false,
             "description": "a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2529,9 +2601,9 @@
             "description": "Any entity or process that exists at the level of the whole planet",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2601,9 +2673,9 @@
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2659,19 +2731,19 @@
         },
         "Publication": {
             "additionalProperties": false,
-            "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.",
+            "description": "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2749,7 +2821,7 @@
                     "type": "string"
                 },
                 "type": {
-                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of universal:category universal:OntologyClass.",
+                    "description": "Ontology term for publication type may be drawn from Dublin Core types (https://www.dublincore.org/specifications/dublin-core/dcmi-type-vocabulary/), the Confederation of Open Access Repositories (COAR) Controlled Vocabulary for Resource Type Genres (http://vocabularies.coar-repositories.org/documentation/resource_types/), Wikidata (https://www.WIKIDATA.org/wiki/Wikidata:Publication_types), or equivalent publication type ontology. When a given publication type ontology term is used within a given knowledge graph, then the CURIE identified term must be documented in the graph as a concept node of generic:category generic:OntologyClass.",
                     "type": "string"
                 },
                 "xref": {
@@ -2789,9 +2861,9 @@
             "description": "general term for rules or controls, including delegated legislation and self-regulation within an organisation",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2867,9 +2939,9 @@
             "description": "prescription, including laws, regulations, instructions, guidelines, and social conventions; determinate method for performing any operation",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -2945,16 +3017,16 @@
             "description": "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility.",
             "properties": {
                 "authors": {
-                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
+                    "description": "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication.",
                     "items": {
                         "type": "string"
                     },
                     "type": "array"
                 },
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -3068,9 +3140,9 @@
             "description": "describes the severity of a observable feature or fault",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -3145,9 +3217,9 @@
             "description": "A set of instructions in a computer programming language that can be executed by a computer, possibly after compilation into another programming language. The term Software includes ComputerPrograms (free-standing software), object methods, subroutines and software packages.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"
@@ -3208,82 +3280,14 @@
             "title": "Software",
             "type": "object"
         },
-        "System": {
-            "additionalProperties": false,
-            "description": "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.",
-            "properties": {
-                "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
-                    "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "description": {
-                    "description": "a human-readable description of an entity",
-                    "type": "string"
-                },
-                "has_attribute": {
-                    "description": "connects any entity to an attribute",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "id": {
-                    "description": "A unique identifier for an entity. Must be either a CURIE shorthand for a URI or a complete URI",
-                    "type": "string"
-                },
-                "in_taxon": {
-                    "description": "connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "iri": {
-                    "description": "An IRI for an entity. This is determined by the id using expansion rules.",
-                    "type": "string"
-                },
-                "name": {
-                    "description": "A human-readable name for an attribute or entity.",
-                    "type": "string"
-                },
-                "provided_by": {
-                    "description": "The value in this node property represents the knowledge provider that created or assembled the node and all of its attributes.  Used internally to represent how a particular node made its way into a knowledge provider or graph.",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                },
-                "type": {
-                    "description": "Clasification of an entity, or anchoring point (of a name) in taxonomy",
-                    "type": "string"
-                },
-                "xref": {
-                    "description": "Alternate CURIEs for a thing",
-                    "items": {
-                        "type": "string"
-                    },
-                    "type": "array"
-                }
-            },
-            "required": [
-                "id",
-                "category"
-            ],
-            "title": "System",
-            "type": "object"
-        },
         "SystemAttribute": {
             "additionalProperties": false,
             "description": "describes a characteristic of an SystemEntity.",
             "properties": {
                 "category": {
-                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a universal model class URI.\nThis field is multi-valued. It should include values for ancestors of the universal class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
+                    "description": "Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.\n * In a neo4j database this MAY correspond to the neo4j label tag.\n * In an RDF database it should be a generic-model class URI.\nThis field is multi-valued. It should include values for ancestors of the generic-model class\nIn an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.",
                     "items": {
-                        "pattern": "^universal:[A-Z][A-Za-z]+$",
+                        "pattern": "^generic:[A-Z][A-Za-z]+$",
                         "type": "string"
                     },
                     "type": "array"

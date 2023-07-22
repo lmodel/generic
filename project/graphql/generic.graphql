@@ -588,6 +588,21 @@ interface OpenAccess
     category: [CategoryType]!
   }
 
+type OperationalEntity
+  {
+    id: String!
+    iri: IriType
+    type: String
+    name: LabelType
+    description: NarrativeText
+    hasAttribute: [Attribute]
+    providedBy: [String]
+    xref: [Uriorcurie]
+    category: [CategoryType]!
+    inTaxon: [NamedThing]
+    isController: Boolean
+  }
+
 interface Outcome
   {
   }

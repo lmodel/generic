@@ -454,6 +454,15 @@ linkml:Sparqlpath xsd:string
     )
 }
 
+<OperationalEntity> CLOSED {
+    (  $<OperationalEntity_tes> (  &<System_tes> ;
+          rdf:type [ <System> ] ? ;
+          <is_controller> @linkml:Boolean ?
+       ) ;
+       rdf:type [ <OperationalEntity> ]
+    )
+}
+
 <Outcome> {
     (  $<Outcome_tes> rdf:type . * ;
        rdf:type [ <Outcome> ] ?
@@ -590,17 +599,19 @@ linkml:Sparqlpath xsd:string
 }
 
 <System>  (
-    CLOSED {
-       (  $<System_tes> (  &<NamedThing_tes> ;
-             rdf:type [ schema1:Thing ] ? ;
-             &<ThingWithTaxon_tes> ;
-             rdf:type [ <ThingWithTaxon> ] ? ;
-             <in_taxon> @<NamedThing> *
-          ) ;
-          rdf:type [ <System> ]
-       )
-    } OR @<Component> OR @<Device> OR @<Environment> OR @<IndividualSystem> OR @<SoftwareOrDevice>
+    @<Component> OR @<Device> OR @<Environment> OR @<IndividualSystem> OR @<OperationalEntity> OR @<SoftwareOrDevice>
 )
+
+<System_struct> {
+    (  $<System_tes> (  &<NamedThing_tes> ;
+          rdf:type [ schema1:Thing ] ? ;
+          &<ThingWithTaxon_tes> ;
+          rdf:type [ <ThingWithTaxon> ] ? ;
+          <in_taxon> @<NamedThing> *
+       ) ;
+       rdf:type [ <System> ]
+    )
+}
 
 <SystemAttribute> CLOSED {
     (  $<SystemAttribute_tes> (  &<Attribute_tes> ;

@@ -516,6 +516,21 @@ message NamedThing
  repeated  uriorcurie xref = 0
  repeated  categoryType category = 0
  }
+// A operational entity is a control entity
+message OperationalEntity
+ {
+  string id = 0
+  iriType iri = 0
+  string type = 0
+  labelType name = 0
+  narrativeText description = 0
+ repeated  attribute hasAttribute = 0
+ repeated  string providedBy = 0
+ repeated  uriorcurie xref = 0
+ repeated  categoryType category = 0
+ repeated  namedThing inTaxon = 0
+  boolean isController = 0
+ }
 // a fact or situation that is observed to exist or happen, especially one whose cause or explanation is in question
 message Phenomenon
  {
@@ -557,7 +572,7 @@ message Project
   string id = 0
   labelType name = 0
  }
-// Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.
+// Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.
 message Publication
  {
   iriType iri = 0
@@ -662,20 +677,6 @@ message SeverityValue
  }
 // A set of instructions in a computer programming language that can be executed by a computer, possibly after compilation into another programming language. The term Software includes ComputerPrograms (free-standing software), object methods, subroutines and software packages.
 message Software
- {
-  string id = 0
-  iriType iri = 0
-  string type = 0
-  labelType name = 0
-  narrativeText description = 0
- repeated  attribute hasAttribute = 0
- repeated  string providedBy = 0
- repeated  uriorcurie xref = 0
- repeated  categoryType category = 0
- repeated  namedThing inTaxon = 0
- }
-// An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.
-message System
  {
   string id = 0
   iriType iri = 0

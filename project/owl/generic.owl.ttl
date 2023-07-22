@@ -71,19 +71,19 @@ generic:Article a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:issue ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty generic:volume ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
             owl:onProperty generic:iso_abbreviation ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:anyURI ;
             owl:onProperty generic:published_in ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:issue ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:volume ],
         generic:Publication .
 
 generic:Book a owl:Class ;
@@ -91,11 +91,11 @@ generic:Book a owl:Class ;
     rdfs:comment "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility." ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty rdf:type ;
+            owl:onProperty generic:id ;
             owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:id ;
+            owl:onProperty rdf:type ;
             owl:qualifiedCardinality 1 ],
         generic:Publication .
 
@@ -138,11 +138,11 @@ generic:GeographicLocation a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:float ;
-            owl:onProperty generic:latitude ],
+            owl:onProperty generic:longitude ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:float ;
-            owl:onProperty generic:longitude ],
+            owl:onProperty generic:latitude ],
         generic:PlanetaryEntity ;
     skos:broadMatch dwc:higherGeography,
         csrc:Location ;
@@ -222,17 +222,17 @@ generic:Serial a owl:Class ;
     rdfs:label "Serial" ;
     rdfs:comment "This class may rarely be instantiated except if use cases of a given knowledge graph support its utility." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty generic:id ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:volume ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:iso_abbreviation ],
+            owl:onProperty generic:issue ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
@@ -240,7 +240,7 @@ generic:Serial a owl:Class ;
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:issue ],
+            owl:onProperty generic:iso_abbreviation ],
         generic:Publication ;
     skos:altLabel "journal" .
 
@@ -947,13 +947,13 @@ generic:BookChapter a owl:Class ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:volume ],
         [ a owl:Restriction ;
-            owl:onDataRange xsd:anyURI ;
-            owl:onProperty generic:published_in ;
-            owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:chapter ],
+        [ a owl:Restriction ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty generic:published_in ;
+            owl:qualifiedCardinality 1 ],
         generic:Publication .
 
 generic:ControlRole a owl:Class ;
@@ -1069,6 +1069,30 @@ generic:Name a owl:Class ;
     rdfs:label "Name" ;
     rdfs:comment "distinctive designation for an individual (person, organization or thing)" ;
     rdfs:subClassOf generic:Designation .
+
+generic:OperationalEntity a owl:Class ;
+    rdfs:label "OperationalEntity" ;
+    rdfs:comment "A operational entity is a control entity" ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty generic:is_controller ],
+        generic:System ;
+    skos:relatedMatch ns1:NCIT_C47908,
+        geolink:hasOperationArea,
+        geolink:hasOperator,
+        geolink:isOperatorOf,
+        schema1:operatingSystem,
+        ssn:Deployment,
+        CSO:operational_profile,
+        csrc:operational_technology,
+        sumo:Computer,
+        sumo:ComputerComponent,
+        sumo:ComputerProcess,
+        sumo:ComputerResource,
+        sumo:OperationalAmplifier,
+        sumo:Server,
+        sumo:computerRunning .
 
 generic:Outcome a owl:Class ;
     rdfs:label "outcome" ;
@@ -1217,7 +1241,7 @@ generic:author a owl:ObjectProperty ;
 
 generic:authors a owl:DatatypeProperty ;
     rdfs:label "authors" ;
-    rdfs:comment "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in universal:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication." ;
+    rdfs:comment "connects an publication to the list of authors who contributed to the publication.  This property should be a comma-delimited list of author names. It is recommended that an author's name be formatted as \"surname, firstname initial.\".  Note that this property is a node annotation voicing the citation list of authorship which might typically otherwise be more completely documented in generic:PublicationToProviderAssociation defined edges which point to full details about an author and possibly, some qualifiers which clarify the specific status of a given author in the publication." ;
     rdfs:domain generic:Publication ;
     rdfs:range xsd:string ;
     rdfs:subPropertyOf generic:node_property .
@@ -1849,6 +1873,14 @@ generic:is_assessed_by a owl:ObjectProperty ;
     rdfs:subPropertyOf generic:related_to_at_instance_level ;
     owl:inverseOf generic:assesses .
 
+generic:is_controller a owl:DatatypeProperty ;
+    rdfs:label "is controller" ;
+    rdfs:comment "indicates whether a desired state is a controller" ;
+    rdfs:domain generic:OperationalEntity ;
+    rdfs:range xsd:boolean ;
+    rdfs:subPropertyOf generic:node_property ;
+    skos:exactMatch SAN:isController .
+
 generic:is_defined_by a owl:ObjectProperty ;
     rdfs:label "is defined by" ;
     rdfs:comment "indicates something that specifies the meaning associated with the subject" ;
@@ -2471,19 +2503,19 @@ rdf:subject a owl:ObjectProperty ;
 
 generic:Annotation a owl:Class ;
     rdfs:label "Annotation" ;
-    rdfs:comment "Universal Model root class for entity annotations." ;
+    rdfs:comment "Generic Model root class for entity annotations." ;
     skos:exactMatch WIKIDATA:Q857525 .
 
 generic:Designation a owl:Class ;
     rdfs:label "Designation" ;
     rdfs:comment "representation for someone or something by a sign that denotes it" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom generic:InformationContentEntity ;
-            owl:onProperty generic:identifies ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty xsd:string ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:InformationContentEntity ;
+            owl:onProperty generic:identifies ],
         generic:NamedThing .
 
 generic:EvidenceType a owl:Class ;
@@ -2682,11 +2714,11 @@ generic:DatasetSummary a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:source_web_page ],
+            owl:onProperty schema1:logo ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty schema1:logo ],
+            owl:onProperty generic:source_web_page ],
         generic:InformationContentEntity .
 
 generic:TangibleEssenceOrOccurrent a owl:Class ;
@@ -2743,12 +2775,12 @@ generic:DatasetVersion a owl:Class ;
             owl:onProperty pav:version ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
-            owl:onClass generic:Dataset ;
-            owl:onProperty dcterms:source ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
             owl:onClass generic:DatasetDistribution ;
             owl:onProperty dcterms:distribution ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:Dataset ;
+            owl:onProperty dcterms:source ],
         generic:InformationContentEntity .
 
 generic:QuantityValue a owl:Class ;
@@ -2783,8 +2815,8 @@ generic:category a owl:DatatypeProperty ;
     rdfs:label "category" ;
     rdfs:comment """Name of the high level OntologyClass in which this entity is categorized. Corresponds to the label for the base entity type class.
  * In a neo4j database this MAY correspond to the neo4j label tag.
- * In an RDF database it should be a universal model class URI.
-This field is multi-valued. It should include values for ancestors of the universal class
+ * In an RDF database it should be a generic-model class URI.
+This field is multi-valued. It should include values for ancestors of the generic-model class
 In an RDF database, nodes will typically have an rdf:type triples. This can be to the most specific base class, or potentially to a class more specific than something in base.""" ;
     rdfs:domain generic:Entity ;
     rdfs:range xsd:anyURI ;
@@ -2891,11 +2923,18 @@ generic:Dataset a owl:Class ;
 
 generic:Entity a owl:Class ;
     rdfs:label "Entity" ;
-    rdfs:comment "Root Universal Model class for all things and informational relationships, real or imagined." ;
+    rdfs:comment "Root Generic Model class for all things and informational relationships, real or imagined." ;
     rdfs:subClassOf [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:id ;
-            owl:qualifiedCardinality 1 ],
+            owl:onProperty rdfs:label ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:anyURI ;
+            owl:onProperty generic:iri ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:Attribute ;
+            owl:onProperty generic:has_attribute ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
@@ -2905,34 +2944,12 @@ generic:Entity a owl:Class ;
             owl:onDataRange xsd:string ;
             owl:onProperty rdf:type ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:Attribute ;
-            owl:onProperty generic:has_attribute ],
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:id ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty generic:category ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:anyURI ;
-            owl:onProperty generic:iri ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty rdfs:label ] .
-
-generic:System a owl:Class ;
-    rdfs:label "System" ;
-    rdfs:comment "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together." ;
-    rdfs:subClassOf [ a owl:Restriction ;
-            owl:allValuesFrom generic:NamedThing ;
-            owl:onProperty generic:in_taxon ],
-        generic:NamedThing,
-        generic:ThingWithTaxon ;
-    skos:broadMatch WIKIDATA:Q99527517 ;
-    skos:exactMatch ns1:NCIT_C25700,
-        RO:0002577,
-        ssn:System,
-        csrc:system,
-        WIKIDATA:Q58778 .
+            owl:onProperty generic:category ] .
 
 generic:id a owl:DatatypeProperty ;
     rdfs:label "id" ;
@@ -2999,6 +3016,30 @@ generic:synonym a owl:DatatypeProperty ;
         skos:altLabel,
         uco:nickname .
 
+generic:System a owl:Class ;
+    rdfs:label "System" ;
+    rdfs:comment "An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together." ;
+    rdfs:subClassOf [ a owl:Restriction ;
+            owl:allValuesFrom generic:NamedThing ;
+            owl:onProperty generic:in_taxon ],
+        generic:NamedThing,
+        generic:ThingWithTaxon ;
+    skos:altLabel "ComputationalEntity" ;
+    skos:broadMatch WIKIDATA:Q99527517 ;
+    skos:exactMatch ns1:NCIT_C25700,
+        RO:0002577,
+        ssn:System,
+        csrc:system,
+        sumo:ComputationalSystem,
+        WIKIDATA:Q58778 ;
+    skos:narrowMatch SIO:000097,
+        SIO:000602,
+        schema1:SoftwareApplication,
+        CSO:computational_grid,
+        CSO:computational_power,
+        CSO:computational_resource,
+        REPR:ComputationalTool .
+
 generic:InformationResource a owl:Class ;
     rdfs:label "InformationResource" ;
     rdfs:comment "A database or knowledgebase and its supporting ecosystem of interfaces and services that deliver content to consumers (e.g. web portals, APIs, query endpoints, streaming services, data downloads, etc.).  A single Information Resource by this definition may span many different datasets or databases, and include many access endpoints and user interfaces. Information Resources include project-specific resources such as a Translator Knowledge Provider, and community knowledgebases." ;
@@ -3020,20 +3061,20 @@ generic:Attribute a owl:Class ;
     rdfs:label "Attribute" ;
     rdfs:comment "A property or characteristic of an entity. For example, an apple may have properties such as color, shape, age, crispiness. An environmental sample may have attributes such as depth, lat, long, material." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass generic:NamedThing ;
-            owl:onProperty generic:has_qualitative_value ],
-        [ a owl:Restriction ;
             owl:onClass generic:OntologyClass ;
             owl:onProperty generic:has_attribute_type ;
             owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:QuantityValue ;
+            owl:onProperty generic:has_quantitative_value ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:QuantityValue ;
-            owl:onProperty generic:has_quantitative_value ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:NamedThing ;
+            owl:onProperty generic:has_qualitative_value ],
         generic:NamedThing,
         generic:OntologyClass ;
     skos:closeMatch schema1:property,
@@ -3112,7 +3153,7 @@ generic:Attribute a owl:Class ;
 
 generic:Occurrent a owl:Class ;
     rdfs:label "Occurrent" ;
-    rdfs:comment "A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing" ;
+    rdfs:comment "A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin generic:NamedThing" ;
     rdfs:subClassOf linkml:mixin,
         generic:TangibleEssenceOrOccurrent ;
     skos:exactMatch ns1:BFO_0000003,
@@ -3125,18 +3166,18 @@ generic:Agent a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
+            owl:onProperty generic:address ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
             owl:onProperty rdfs:label ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:anyURI ;
+            owl:onProperty generic:affiliation ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:id ;
             owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty generic:address ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:anyURI ;
-            owl:onProperty generic:affiliation ],
         generic:AdministrativeEntity ;
     skos:altLabel "group" ;
     skos:exactMatch dcterms:Agent,
@@ -3157,28 +3198,19 @@ generic:Agent a owl:Class ;
 
 generic:Publication a owl:Class ;
     rdfs:label "Publication" ;
-    rdfs:comment "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses." ;
+    rdfs:comment "Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses." ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
-            owl:onProperty rdfs:label ],
-        [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:summary ],
         [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty generic:authors ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty generic:pages ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty rdfs:label ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
             owl:onProperty dcterms:type ;
             owl:qualifiedCardinality 1 ],
-        [ a owl:Restriction ;
-            owl:allValuesFrom xsd:string ;
-            owl:onProperty generic:keywords ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:id ;
@@ -3186,6 +3218,15 @@ generic:Publication a owl:Class ;
         [ a owl:Restriction ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty generic:lcsh_terms ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:keywords ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:authors ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom xsd:string ;
+            owl:onProperty generic:pages ],
         generic:InformationContentEntity ;
     skos:exactMatch ns1:IAO_0000311,
         schema1:publication,
@@ -3201,19 +3242,19 @@ generic:InformationContentEntity a owl:Class ;
     rdfs:subClassOf [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
-            owl:onProperty generic:license ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:string ;
             owl:onProperty generic:format ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:date ;
-            owl:onProperty generic:creation_date ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty generic:rights ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:string ;
+            owl:onProperty generic:license ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:date ;
+            owl:onProperty generic:creation_date ],
         generic:NamedThing ;
     skos:altLabel "information",
         "information artefact",
@@ -3239,20 +3280,15 @@ generic:Association a owl:Class ;
     rdfs:label "Association" ;
     rdfs:comment "A typed association between two entities, supported by evidence" ;
     rdfs:subClassOf [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onClass generic:InformationResource ;
-            owl:onProperty generic:primary_knowledge_source ],
+            owl:onClass generic:NamedThing ;
+            owl:onProperty rdf:object ;
+            owl:qualifiedCardinality 1 ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:InformationResource ;
-            owl:onProperty generic:aggregator_knowledge_source ],
+            owl:allValuesFrom generic:EvidenceType ;
+            owl:onProperty generic:has_evidence ],
         [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:time ;
-            owl:onProperty generic:timepoint ],
-        [ a owl:Restriction ;
-            owl:maxQualifiedCardinality 1 ;
-            owl:onDataRange xsd:boolean ;
-            owl:onProperty generic:negated ],
+            owl:allValuesFrom generic:OntologyClass ;
+            owl:onProperty generic:qualifiers ],
         [ a owl:Restriction ;
             owl:onDataRange xsd:anyURI ;
             owl:onProperty rdf:predicate ;
@@ -3261,26 +3297,31 @@ generic:Association a owl:Class ;
             owl:allValuesFrom xsd:anyURI ;
             owl:onProperty generic:category ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:Publication ;
-            owl:onProperty generic:publications ],
+            owl:onClass generic:NamedThing ;
+            owl:onProperty rdf:subject ;
+            owl:qualifiedCardinality 1 ],
+        [ a owl:Restriction ;
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:time ;
+            owl:onProperty generic:timepoint ],
+        [ a owl:Restriction ;
+            owl:allValuesFrom generic:InformationResource ;
+            owl:onProperty generic:aggregator_knowledge_source ],
         [ a owl:Restriction ;
             owl:maxQualifiedCardinality 1 ;
             owl:onDataRange xsd:string ;
             owl:onProperty rdf:type ],
         [ a owl:Restriction ;
-            owl:onClass generic:NamedThing ;
-            owl:onProperty rdf:subject ;
-            owl:qualifiedCardinality 1 ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onDataRange xsd:boolean ;
+            owl:onProperty generic:negated ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:OntologyClass ;
-            owl:onProperty generic:qualifiers ],
+            owl:allValuesFrom generic:Publication ;
+            owl:onProperty generic:publications ],
         [ a owl:Restriction ;
-            owl:allValuesFrom generic:EvidenceType ;
-            owl:onProperty generic:has_evidence ],
-        [ a owl:Restriction ;
-            owl:onClass generic:NamedThing ;
-            owl:onProperty rdf:object ;
-            owl:qualifiedCardinality 1 ],
+            owl:maxQualifiedCardinality 1 ;
+            owl:onClass generic:InformationResource ;
+            owl:onProperty generic:primary_knowledge_source ],
         generic:Entity ;
     skos:broadMatch WIKIDATA:Q186290 ;
     skos:exactMatch <http://purl.org/oban/association>,

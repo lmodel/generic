@@ -1,5 +1,5 @@
 # Auto generated from generic.yaml by pythongen.py version: 0.9.0
-# Generation date: 2023-07-09T22:47:57
+# Generation date: 2023-07-22T01:34:06
 # Schema: generic
 #
 # id: https://w3id.org/lmodel/generic
@@ -125,7 +125,7 @@ class FormulaValue(str):
 
 
 class CategoryType(Uriorcurie):
-    """ A primitive type in which the value denotes a class within the universal model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the universal class, for example universal:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service """
+    """ A primitive type in which the value denotes a class within the generic-model.  The value must be a URI or a CURIE. In a Neo4j representation, the value should be the CURIE for the generic-model class, for example generic:Service. For an RDF representation, the value should be a URI such as https://w3id.org/lmodel/base/vocab/Service """
     type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "category type"
@@ -149,7 +149,7 @@ class LabelType(String):
 
 
 class PredicateType(Uriorcurie):
-    """ A CURIE from the universal related_to hierarchy. For example, universal:related_to """
+    """ A CURIE from the generic-model related_to hierarchy. For example, generic:related_to """
     type_class_uri = XSD.anyURI
     type_class_curie = "xsd:anyURI"
     type_name = "predicate type"
@@ -358,6 +358,10 @@ class HardwareId(SoftwareOrDeviceId):
     pass
 
 
+class OperationalEntityId(SystemId):
+    pass
+
+
 class IndividualSystemId(SystemId):
     pass
 
@@ -439,7 +443,7 @@ class OntologyClass(YAMLRoot):
 
 class Annotation(YAMLRoot):
     """
-    Universal Model root class for entity annotations.
+    Generic Model root class for entity annotations.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -478,7 +482,7 @@ class QuantityValue(Annotation):
 @dataclass
 class Entity(YAMLRoot):
     """
-    Root Universal Model class for all things and informational relationships, real or imagined.
+    Root Generic Model class for all things and informational relationships, real or imagined.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1112,7 +1116,7 @@ class Publication(InformationContentEntity):
     Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal
     or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or
     section highlighted by NLP). The scope is intended to be general and include information published on the web, as
-    well as printed materials, either directly or in one of the Publication Universal category subclasses.
+    well as printed materials, either directly or in one of the Publication Generic category subclasses.
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1354,8 +1358,8 @@ class TangibleEssence(TangibleEssenceOrOccurrent):
 class Occurrent(TangibleEssenceOrOccurrent):
     """
     A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases.
-    universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit
-    from the non-mixin universal:NamedThing
+    generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from
+    the non-mixin generic:NamedThing
     """
     _inherited_slots: ClassVar[List[str]] = []
 
@@ -1458,29 +1462,6 @@ class GeographicLocation(PlanetaryEntity):
 
 
 @dataclass
-class ThingWithTaxon(YAMLRoot):
-    """
-    A mixin that can be used on any entity that can be taxonomically classified. This includes individual entities,
-    their products, and other operational entities and processes.
-    """
-    _inherited_slots: ClassVar[List[str]] = ["in_taxon"]
-
-    class_class_uri: ClassVar[URIRef] = GENERIC.ThingWithTaxon
-    class_class_curie: ClassVar[str] = "generic:ThingWithTaxon"
-    class_name: ClassVar[str] = "ThingWithTaxon"
-    class_model_uri: ClassVar[URIRef] = GENERIC.ThingWithTaxon
-
-    in_taxon: Optional[Union[Union[str, NamedThingId], List[Union[str, NamedThingId]]]] = empty_list()
-
-    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if not isinstance(self.in_taxon, list):
-            self.in_taxon = [self.in_taxon] if self.in_taxon is not None else []
-        self.in_taxon = [v if isinstance(v, NamedThingId) else NamedThingId(v) for v in self.in_taxon]
-
-        super().__post_init__(**kwargs)
-
-
-@dataclass
 class System(NamedThing):
     """
     An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the
@@ -1499,11 +1480,6 @@ class System(NamedThing):
     in_taxon: Optional[Union[Union[str, NamedThingId], List[Union[str, NamedThingId]]]] = empty_list()
 
     def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
-        if self._is_empty(self.id):
-            self.MissingRequiredField("id")
-        if not isinstance(self.id, SystemId):
-            self.id = SystemId(self.id)
-
         if not isinstance(self.in_taxon, list):
             self.in_taxon = [self.in_taxon] if self.in_taxon is not None else []
         self.in_taxon = [v if isinstance(v, NamedThingId) else NamedThingId(v) for v in self.in_taxon]
@@ -1596,6 +1572,57 @@ class Hardware(SoftwareOrDevice):
             self.MissingRequiredField("id")
         if not isinstance(self.id, HardwareId):
             self.id = HardwareId(self.id)
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class ThingWithTaxon(YAMLRoot):
+    """
+    A mixin that can be used on any entity that can be taxonomically classified. This includes individual entities,
+    their products, and other operational entities and processes.
+    """
+    _inherited_slots: ClassVar[List[str]] = ["in_taxon"]
+
+    class_class_uri: ClassVar[URIRef] = GENERIC.ThingWithTaxon
+    class_class_curie: ClassVar[str] = "generic:ThingWithTaxon"
+    class_name: ClassVar[str] = "ThingWithTaxon"
+    class_model_uri: ClassVar[URIRef] = GENERIC.ThingWithTaxon
+
+    in_taxon: Optional[Union[Union[str, NamedThingId], List[Union[str, NamedThingId]]]] = empty_list()
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if not isinstance(self.in_taxon, list):
+            self.in_taxon = [self.in_taxon] if self.in_taxon is not None else []
+        self.in_taxon = [v if isinstance(v, NamedThingId) else NamedThingId(v) for v in self.in_taxon]
+
+        super().__post_init__(**kwargs)
+
+
+@dataclass
+class OperationalEntity(System):
+    """
+    A operational entity is a control entity
+    """
+    _inherited_slots: ClassVar[List[str]] = ["in_taxon"]
+
+    class_class_uri: ClassVar[URIRef] = GENERIC.OperationalEntity
+    class_class_curie: ClassVar[str] = "generic:OperationalEntity"
+    class_name: ClassVar[str] = "OperationalEntity"
+    class_model_uri: ClassVar[URIRef] = GENERIC.OperationalEntity
+
+    id: Union[str, OperationalEntityId] = None
+    category: Union[Union[str, CategoryType], List[Union[str, CategoryType]]] = None
+    is_controller: Optional[Union[bool, Bool]] = None
+
+    def __post_init__(self, *_: List[str], **kwargs: Dict[str, Any]):
+        if self._is_empty(self.id):
+            self.MissingRequiredField("id")
+        if not isinstance(self.id, OperationalEntityId):
+            self.id = OperationalEntityId(self.id)
+
+        if self.is_controller is not None and not isinstance(self.is_controller, Bool):
+            self.is_controller = Bool(self.is_controller)
 
         super().__post_init__(**kwargs)
 
@@ -2224,6 +2251,9 @@ slots.has_computational_sequence = Slot(uri=GENERIC.has_computational_sequence, 
 slots.has_formula = Slot(uri=GENERIC.has_formula, name="has formula", curie=GENERIC.curie('has_formula'),
                    model_uri=GENERIC.has_formula, domain=NamedThing, range=Optional[str])
 
+slots.is_controller = Slot(uri=GENERIC.is_controller, name="is controller", curie=GENERIC.curie('is_controller'),
+                   model_uri=GENERIC.is_controller, domain=OperationalEntity, range=Optional[Union[bool, Bool]])
+
 slots.has_device = Slot(uri=GENERIC.has_device, name="has device", curie=GENERIC.curie('has_device'),
                    model_uri=GENERIC.has_device, domain=NamedThing, range=Optional[Union[Union[str, DeviceId], List[Union[str, DeviceId]]]])
 
@@ -2514,7 +2544,7 @@ slots.Attribute_name = Slot(uri=RDFS.label, name="Attribute_name", curie=RDFS.cu
 
 slots.NamedThing_category = Slot(uri=GENERIC.category, name="NamedThing_category", curie=GENERIC.curie('category'),
                    model_uri=GENERIC.NamedThing_category, domain=NamedThing, range=Union[Union[str, CategoryType], List[Union[str, CategoryType]]],
-                   pattern=re.compile(r'^universal:[A-Z][A-Za-z]+$'))
+                   pattern=re.compile(r'^generic:[A-Z][A-Za-z]+$'))
 
 slots.Designation_has_text_value = Slot(uri=XSD.string, name="Designation_has text value", curie=XSD.curie('string'),
                    model_uri=GENERIC.Designation_has_text_value, domain=Designation, range=Optional[str])

@@ -322,6 +322,18 @@ CREATE TABLE "NamedThing" (
 	PRIMARY KEY (id)
 );
 
+CREATE TABLE "OperationalEntity" (
+	id TEXT NOT NULL, 
+	iri TEXT, 
+	type TEXT, 
+	name TEXT, 
+	description TEXT, 
+	has_attribute TEXT, 
+	in_taxon TEXT, 
+	is_controller BOOLEAN, 
+	PRIMARY KEY (id)
+);
+
 CREATE TABLE "Phenomenon" (
 	id TEXT NOT NULL, 
 	iri TEXT, 
@@ -406,17 +418,6 @@ CREATE TABLE "Serial" (
 );
 
 CREATE TABLE "Software" (
-	id TEXT NOT NULL, 
-	iri TEXT, 
-	type TEXT, 
-	name TEXT, 
-	description TEXT, 
-	has_attribute TEXT, 
-	in_taxon TEXT, 
-	PRIMARY KEY (id)
-);
-
-CREATE TABLE "System" (
 	id TEXT NOT NULL, 
 	iri TEXT, 
 	type TEXT, 
@@ -1173,6 +1174,27 @@ CREATE TABLE "NamedThing_category" (
 	FOREIGN KEY(backref_id) REFERENCES "NamedThing" (id)
 );
 
+CREATE TABLE "OperationalEntity_provided_by" (
+	backref_id TEXT, 
+	provided_by TEXT, 
+	PRIMARY KEY (backref_id, provided_by), 
+	FOREIGN KEY(backref_id) REFERENCES "OperationalEntity" (id)
+);
+
+CREATE TABLE "OperationalEntity_xref" (
+	backref_id TEXT, 
+	xref TEXT, 
+	PRIMARY KEY (backref_id, xref), 
+	FOREIGN KEY(backref_id) REFERENCES "OperationalEntity" (id)
+);
+
+CREATE TABLE "OperationalEntity_category" (
+	backref_id TEXT, 
+	category TEXT NOT NULL, 
+	PRIMARY KEY (backref_id, category), 
+	FOREIGN KEY(backref_id) REFERENCES "OperationalEntity" (id)
+);
+
 CREATE TABLE "Phenomenon_provided_by" (
 	backref_id TEXT, 
 	provided_by TEXT, 
@@ -1353,27 +1375,6 @@ CREATE TABLE "Software_category" (
 	category TEXT NOT NULL, 
 	PRIMARY KEY (backref_id, category), 
 	FOREIGN KEY(backref_id) REFERENCES "Software" (id)
-);
-
-CREATE TABLE "System_provided_by" (
-	backref_id TEXT, 
-	provided_by TEXT, 
-	PRIMARY KEY (backref_id, provided_by), 
-	FOREIGN KEY(backref_id) REFERENCES "System" (id)
-);
-
-CREATE TABLE "System_xref" (
-	backref_id TEXT, 
-	xref TEXT, 
-	PRIMARY KEY (backref_id, xref), 
-	FOREIGN KEY(backref_id) REFERENCES "System" (id)
-);
-
-CREATE TABLE "System_category" (
-	backref_id TEXT, 
-	category TEXT NOT NULL, 
-	PRIMARY KEY (backref_id, category), 
-	FOREIGN KEY(backref_id) REFERENCES "System" (id)
 );
 
 CREATE TABLE "EvidenceType" (

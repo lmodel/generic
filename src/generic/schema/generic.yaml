@@ -1565,6 +1565,15 @@ slots:
     exact_mappings:
       - WIKIDATA:Q976981  # formula
 
+  is controller:
+    is_a: node property
+    domain: OperationalEntity
+    range: boolean
+    exact_mappings:
+      - SAN:isController
+    description: >-
+      indicates whether a desired state is a controller
+
   has device:
     is_a: node property
     description: >-

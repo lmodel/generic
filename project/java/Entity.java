@@ -9,7 +9,7 @@ import lombok.*;
 
 
 /**
-  Root Universal Model class for all things and informational relationships, real or imagined.
+  Root Generic Model class for all things and informational relationships, real or imagined.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)

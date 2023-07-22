@@ -9,7 +9,7 @@ import lombok.*;
 
 
 /**
-  Universal Model root class for entity annotations.
+  Generic Model root class for entity annotations.
 **/
 @Data
 @EqualsAndHashCode(callSuper=false)
