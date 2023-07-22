@@ -355,7 +355,7 @@
 <tr>
 <td><a href="../type/">type</a></td>
 <td>0..1 <br/> <a href="http://www.w3.org/2001/XMLSchema#string">xsd:string</a></td>
-<td>rdf:type of universal:Association should be fixed at rdf:Statement</td>
+<td>rdf:type of generic:Association should be fixed at rdf:Statement</td>
 <td>direct</td>
 </tr>
 <tr>
@@ -557,7 +557,7 @@ slots:
 slot_usage:
   type:
     name: type
-    description: rdf:type of universal:Association should be fixed at rdf:Statement
+    description: rdf:type of generic:Association should be fixed at rdf:Statement
     domain_of:
     - Entity
     - Publication
@@ -594,7 +594,7 @@ is_a: Entity
 slot_usage:
   type:
     name: type
-    description: rdf:type of universal:Association should be fixed at rdf:Statement
+    description: rdf:type of generic:Association should be fixed at rdf:Statement
     domain_of:
     - Entity
     - Publication
@@ -656,10 +656,10 @@ attributes:
     description: A high-level grouping for the relationship type. AKA minimal predicate.
       This is analogous to category for nodes.
     notes:
-    - Has a value from the Universal related_to hierarchy. In RDF,  this corresponds
+    - Has a value from the Generic related_to hierarchy. In RDF,  this corresponds
       to rdf:predicate and in Neo4j this corresponds to the relationship type. The
-      convention is for an edge label in snake_case form. For example, universal:related_to,
-      universal:restores
+      convention is for an edge label in snake_case form. For example, generic:related_to,
+      generic:restores
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - owl:annotatedProperty
@@ -827,7 +827,7 @@ attributes:
     range: time type
   type:
     name: type
-    description: rdf:type of universal:Association should be fixed at rdf:Statement
+    description: rdf:type of generic:Association should be fixed at rdf:Statement
     from_schema: https://w3id.org/lmodel/generic
     rank: 1000
     slot_uri: rdf:type
@@ -844,10 +844,10 @@ attributes:
     description: "Name of the high level OntologyClass in which this entity is categorized.\
       \ Corresponds to the label for the base entity type class.\n * In a neo4j database\
       \ this MAY correspond to the neo4j label tag.\n * In an RDF database it should\
-      \ be a universal model class URI.\nThis field is multi-valued. It should include\
-      \ values for ancestors of the universal class\nIn an RDF database, nodes will\
-      \ typically have an rdf:type triples. This can be to the most specific base\
-      \ class, or potentially to a class more specific than something in base."
+      \ be a generic-model class URI.\nThis field is multi-valued. It should include\
+      \ values for ancestors of the generic-model class\nIn an RDF database, nodes\
+      \ will typically have an rdf:type triples. This can be to the most specific\
+      \ base class, or potentially to a class more specific than something in base."
     from_schema: https://w3id.org/lmodel/generic
     rank: 1000
     is_a: type

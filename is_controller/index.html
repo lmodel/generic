@@ -8,14 +8,14 @@
       
       
       
-        <link rel="canonical" href="https://lmodel.github.io/generic/in_taxon/">
+        <link rel="canonical" href="https://lmodel.github.io/generic/is_controller/">
       
       <link rel="icon" href="../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-8.5.10">
     
     
       
-        <title>Slot: in_taxon - generic</title>
+        <title>Slot: is_controller - generic</title>
       
     
     
@@ -64,7 +64,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#slot-in_taxon" class="md-skip">
+        <a href="#slot-is_controller" class="md-skip">
           Skip to content
         </a>
       
@@ -97,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Slot: in_taxon
+              Slot: is_controller
             
           </span>
         </div>
@@ -285,13 +285,6 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#annotations" class="md-nav__link">
-    Annotations
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
   <a href="#schema-source" class="md-nav__link">
     Schema Source
   </a>
@@ -324,22 +317,19 @@
                 
                   
 
-  <a href="https://github.com/lmodel/generic/edit/master/docs/in_taxon.md" title="Edit this page" class="md-content__button md-icon">
+  <a href="https://github.com/lmodel/generic/edit/master/docs/is_controller.md" title="Edit this page" class="md-content__button md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
   </a>
 
 
-<h1 id="slot-in_taxon">Slot: in_taxon</h1>
-<p><em>connects an entity to its taxonomic classification. Only certain kinds of entities can be taxonomically classified; see 'ThingWithTaxon'</em></p>
-<p>URI: <a href="https://w3id.org/lmodel/generic/in_taxon">generic:in_taxon</a></p>
+<h1 id="slot-is_controller">Slot: is_controller</h1>
+<p><em>indicates whether a desired state is a controller</em></p>
+<p>URI: <a href="https://w3id.org/lmodel/generic/is_controller">generic:is_controller</a></p>
 <h2 id="inheritance">Inheritance</h2>
 <ul>
-<li><a href="../related_to/">related_to</a><ul>
-<li><a href="../related_to_at_instance_level/">related_to_at_instance_level</a><ul>
-<li><strong>in_taxon</strong></li>
-</ul>
-</li>
+<li><a href="../node_property/">node_property</a><ul>
+<li><strong>is_controller</strong></li>
 </ul>
 </li>
 </ul>
@@ -354,82 +344,17 @@
 </thead>
 <tbody>
 <tr>
-<td><a href="../ThingWithTaxon/">ThingWithTaxon</a></td>
-<td>A mixin that can be used on any entity that can be taxonomically classified</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Device/">Device</a></td>
-<td>A thing made or adapted for a particular purpose, especially a piece of mecha...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../SoftwareOrDevice/">SoftwareOrDevice</a></td>
-<td>Either software or hardware</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Software/">Software</a></td>
-<td>A set of instructions in a computer programming language that can be executed...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Hardware/">Hardware</a></td>
-<td>physical components of a computer</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../System/">System</a></td>
-<td>An entity that intends to perform some functions, interacting with other syst...</td>
-<td>no</td>
-</tr>
-<tr>
 <td><a href="../OperationalEntity/">OperationalEntity</a></td>
 <td>A operational entity is a control entity</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../IndividualSystem/">IndividualSystem</a></td>
-<td>An instance of an system</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Environment/">Environment</a></td>
-<td>Part of the universe outside the boundaries of a given system, interacting wi...</td>
-<td>no</td>
-</tr>
-<tr>
-<td><a href="../Component/">Component</a></td>
-<td>The component is the smallest system entity that can be deployed, isolated, a...</td>
 <td>no</td>
 </tr>
 </tbody>
 </table>
 <h2 id="properties">Properties</h2>
 <ul>
-<li>
-<p>Range: <a href="../NamedThing/">NamedThing</a></p>
-</li>
-<li>
-<p>Multivalued: True</p>
-</li>
+<li>Range: <a href="http://www.w3.org/2001/XMLSchema#boolean">xsd:boolean</a></li>
 </ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
-<h3 id="annotations">Annotations</h3>
-<table>
-<thead>
-<tr>
-<th>property</th>
-<th>value</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>canonical_predicate</td>
-<td>True</td>
-</tr>
-</tbody>
-</table>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
 <li>from schema: https://w3id.org/lmodel/generic</li>
@@ -437,28 +362,18 @@
 <h2 id="linkml-source">LinkML Source</h2>
 <details>
 
-<pre><code class="language-yaml">name: in taxon
-annotations:
-  canonical_predicate:
-    tag: canonical_predicate
-    value: 'True'
-description: connects an entity to its taxonomic classification. Only certain kinds
-  of entities can be taxonomically classified; see 'ThingWithTaxon'
+<pre><code class="language-yaml">name: is controller
+description: indicates whether a desired state is a controller
 from_schema: https://w3id.org/lmodel/generic
 exact_mappings:
-- RO:0002162
-- WIKIDATA.PROPERTY:P703
-narrow_mappings:
-- RO:0002160
+- SAN:isController
 rank: 1000
-is_a: related to at instance level
-domain: ThingWithTaxon
-multivalued: true
-inherited: true
-alias: in_taxon
+is_a: node property
+domain: OperationalEntity
+alias: is_controller
 domain_of:
-- ThingWithTaxon
-range: NamedThing
+- OperationalEntity
+range: boolean
 
 </code></pre>
 

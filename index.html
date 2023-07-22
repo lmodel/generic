@@ -394,7 +394,7 @@
 <tbody>
 <tr>
 <td><a href="Annotation/">Annotation</a></td>
-<td>Universal Model root class for entity annotations.</td>
+<td>Generic Model root class for entity annotations.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="QuantityValue/">QuantityValue</a></td>
@@ -402,7 +402,7 @@
 </tr>
 <tr>
 <td><a href="Entity/">Entity</a></td>
-<td>Root Universal Model class for all things and informational relationships, real or imagined.</td>
+<td>Root Generic Model class for all things and informational relationships, real or imagined.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Association/">Association</a></td>
@@ -522,7 +522,7 @@
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Publication/">Publication</a></td>
-<td>Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Universal category subclasses.</td>
+<td>Any published piece of information. Can refer to a whole publication, its encompassing publication (i.e. journal or book) or to a part of a publication, if of significant knowledge scope (e.g. a figure, figure legend, or section highlighted by NLP). The scope is intended to be general and include information published on the web, as well as printed materials, either directly or in one of the Publication Generic category subclasses.</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Article/">Article</a></td>
@@ -581,6 +581,10 @@
 <td>An instance of an system. For example, human. Computer, my pet cat.</td>
 </tr>
 <tr>
+<td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="OperationalEntity/">OperationalEntity</a></td>
+<td>A operational entity is a control entity</td>
+</tr>
+<tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="SoftwareOrDevice/">SoftwareOrDevice</a></td>
 <td>Either software or hardware</td>
 </tr>
@@ -614,7 +618,7 @@
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="Occurrent/">Occurrent</a></td>
-<td>A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. universal:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin universal:NamedThing</td>
+<td>A processual entity that has temporal parts and happens, unfolds or develops through time. Occurrents have phases. generic:Occurrent is most consistently used as a mixin thus it should be declared as such and cannot inherit from the non-mixin generic:NamedThing</td>
 </tr>
 <tr>
 <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="TangibleEssence/">TangibleEssence</a></td>
@@ -988,6 +992,10 @@
 <td>Entity responsible for assessing another entity</td>
 </tr>
 <tr>
+<td><a href="is_controller/">is_controller</a></td>
+<td>indicates whether a desired state is a controller</td>
+</tr>
+<tr>
 <td><a href="is_defined_by/">is_defined_by</a></td>
 <td>indicates something that specifies the meaning associated with the subject</td>
 </tr>
@@ -1343,7 +1351,7 @@
 <tbody>
 <tr>
 <td><a href="CategoryType/">CategoryType</a></td>
-<td>A primitive type in which the value denotes a class within the universal mode...</td>
+<td>A primitive type in which the value denotes a class within the generic-model</td>
 </tr>
 <tr>
 <td><a href="ComputationalSequence/">ComputationalSequence</a></td>
@@ -1375,7 +1383,7 @@
 </tr>
 <tr>
 <td><a href="PredicateType/">PredicateType</a></td>
-<td>A CURIE from the universal related_to hierarchy</td>
+<td>A CURIE from the generic-model related_to hierarchy</td>
 </tr>
 <tr>
 <td><a href="Quotient/">Quotient</a></td>

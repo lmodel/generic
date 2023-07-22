@@ -205,7 +205,7 @@
 <svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"></path></svg>
 </a>
 <h1 id="class-entity">Class: Entity</h1>
-<p><em>Root Universal Model class for all things and informational relationships, real or imagined.</em></p>
+<p><em>Root Generic Model class for all things and informational relationships, real or imagined.</em></p>
 <ul>
 <li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
 </ul>
@@ -942,6 +942,24 @@
 <td><a href="./">Entity</a></td>
 </tr>
 <tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
+<td><a href="../category/">category</a></td>
+<td>domain</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
+<td><a href="../name/">name</a></td>
+<td>domain</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
+<td><a href="../has_attribute/">has_attribute</a></td>
+<td>domain</td>
+<td><a href="./">Entity</a></td>
+</tr>
+<tr>
 <td><a href="../IndividualSystem/">IndividualSystem</a></td>
 <td><a href="../category/">category</a></td>
 <td>domain</td>
@@ -1206,7 +1224,7 @@
 <h3 id="direct">Direct</h3>
 <details>
 <pre><code class="language-yaml">name: Entity
-description: Root Universal Model class for all things and informational relationships,
+description: Root Generic Model class for all things and informational relationships,
   real or imagined.
 from_schema: https://w3id.org/lmodel/generic
 abstract: true
@@ -1224,7 +1242,7 @@ slots:
 <h3 id="induced">Induced</h3>
 <details>
 <pre><code class="language-yaml">name: Entity
-description: Root Universal Model class for all things and informational relationships,
+description: Root Generic Model class for all things and informational relationships,
   real or imagined.
 from_schema: https://w3id.org/lmodel/generic
 abstract: true
@@ -1323,10 +1341,10 @@ attributes:
     description: "Name of the high level OntologyClass in which this entity is categorized.\
       \ Corresponds to the label for the base entity type class.\n * In a neo4j database\
       \ this MAY correspond to the neo4j label tag.\n * In an RDF database it should\
-      \ be a universal model class URI.\nThis field is multi-valued. It should include\
-      \ values for ancestors of the universal class\nIn an RDF database, nodes will\
-      \ typically have an rdf:type triples. This can be to the most specific base\
-      \ class, or potentially to a class more specific than something in base."
+      \ be a generic-model class URI.\nThis field is multi-valued. It should include\
+      \ values for ancestors of the generic-model class\nIn an RDF database, nodes\
+      \ will typically have an rdf:type triples. This can be to the most specific\
+      \ base class, or potentially to a class more specific than something in base."
     from_schema: https://w3id.org/lmodel/generic
     exact_mappings:
     - gr:category

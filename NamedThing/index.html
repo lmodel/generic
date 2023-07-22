@@ -898,12 +898,6 @@
 <td><a href="./">NamedThing</a></td>
 </tr>
 <tr>
-<td><a href="../ThingWithTaxon/">ThingWithTaxon</a></td>
-<td><a href="../in_taxon/">in_taxon</a></td>
-<td>range</td>
-<td><a href="./">NamedThing</a></td>
-</tr>
-<tr>
 <td><a href="../System/">System</a></td>
 <td><a href="../in_taxon/">in_taxon</a></td>
 <td>range</td>
@@ -917,6 +911,30 @@
 </tr>
 <tr>
 <td><a href="../System/">System</a></td>
+<td><a href="../xref/">xref</a></td>
+<td>domain</td>
+<td><a href="./">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../ThingWithTaxon/">ThingWithTaxon</a></td>
+<td><a href="../in_taxon/">in_taxon</a></td>
+<td>range</td>
+<td><a href="./">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
+<td><a href="../in_taxon/">in_taxon</a></td>
+<td>range</td>
+<td><a href="./">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
+<td><a href="../provided_by/">provided_by</a></td>
+<td>domain</td>
+<td><a href="./">NamedThing</a></td>
+</tr>
+<tr>
+<td><a href="../OperationalEntity/">OperationalEntity</a></td>
 <td><a href="../xref/">xref</a></td>
 <td>domain</td>
 <td><a href="./">NamedThing</a></td>
@@ -1195,7 +1213,7 @@ slot_usage:
     - Entity
     - Association
     required: true
-    pattern: ^universal:[A-Z][A-Za-z]+$
+    pattern: ^generic:[A-Z][A-Za-z]+$
 class_uri: schema:Thing
 
 </code></pre>
@@ -1217,7 +1235,7 @@ slot_usage:
     - Entity
     - Association
     required: true
-    pattern: ^universal:[A-Z][A-Za-z]+$
+    pattern: ^generic:[A-Z][A-Za-z]+$
 attributes:
   provided by:
     name: provided by
@@ -1358,10 +1376,10 @@ attributes:
     description: "Name of the high level OntologyClass in which this entity is categorized.\
       \ Corresponds to the label for the base entity type class.\n * In a neo4j database\
       \ this MAY correspond to the neo4j label tag.\n * In an RDF database it should\
-      \ be a universal model class URI.\nThis field is multi-valued. It should include\
-      \ values for ancestors of the universal class\nIn an RDF database, nodes will\
-      \ typically have an rdf:type triples. This can be to the most specific base\
-      \ class, or potentially to a class more specific than something in base."
+      \ be a generic-model class URI.\nThis field is multi-valued. It should include\
+      \ values for ancestors of the generic-model class\nIn an RDF database, nodes\
+      \ will typically have an rdf:type triples. This can be to the most specific\
+      \ base class, or potentially to a class more specific than something in base."
     from_schema: https://w3id.org/lmodel/generic
     rank: 1000
     is_a: type
@@ -1376,7 +1394,7 @@ attributes:
     is_class_field: true
     range: category type
     required: true
-    pattern: ^universal:[A-Z][A-Za-z]+$
+    pattern: ^generic:[A-Z][A-Za-z]+$
   type:
     name: type
     description: Clasification of an entity, or anchoring point (of a name) in taxonomy

@@ -152,6 +152,11 @@
   </a>
 </li>
 <li class="md-nav__item">
+<a class="md-nav__link" href="#aliases">
+    Aliases
+  </a>
+</li>
+<li class="md-nav__item">
 <a class="md-nav__link" href="#identifier-and-mapping-information">
     Identifier and Mapping Information
   </a>
@@ -201,6 +206,9 @@
 </a>
 <h1 id="class-system">Class: System</h1>
 <p><em>An entity that intends to perform some functions, interacting with other systems. Relative to a given system, the entities with which it interacts, are considered its environment. A system is structurally composed of a set of components bound together.</em></p>
+<ul>
+<li><strong>NOTE</strong>: this is an abstract class and should not be instantiated directly</li>
+</ul>
 <p>URI: <a href="https://w3id.org/lmodel/generic/System">generic:System</a></p>
 <div class="mermaid"> classDiagram
     class System
@@ -210,6 +218,7 @@
 
       System &lt;|-- Device
       System &lt;|-- SoftwareOrDevice
+      System &lt;|-- OperationalEntity
       System &lt;|-- IndividualSystem
       System &lt;|-- Environment
       System &lt;|-- Component
@@ -256,6 +265,7 @@
 <li><strong>System</strong> [ <a href="../ThingWithTaxon/">ThingWithTaxon</a>]<ul>
 <li><a href="../Device/">Device</a></li>
 <li><a href="../SoftwareOrDevice/">SoftwareOrDevice</a></li>
+<li><a href="../OperationalEntity/">OperationalEntity</a></li>
 <li><a href="../IndividualSystem/">IndividualSystem</a></li>
 <li><a href="../Environment/">Environment</a></li>
 <li><a href="../Component/">Component</a></li>
@@ -339,6 +349,10 @@
 </tr>
 </tbody>
 </table>
+<h2 id="aliases">Aliases</h2>
+<ul>
+<li>ComputationalEntity</li>
+</ul>
 <h2 id="identifier-and-mapping-information">Identifier and Mapping Information</h2>
 <h3 id="schema-source">Schema Source</h3>
 <ul>
@@ -363,7 +377,11 @@
 </tr>
 <tr>
 <td>exact</td>
-<td>csrc:system, NCIT:C25700, RO:0002577, ssn:System, WIKIDATA:Q58778</td>
+<td>csrc:system, NCIT:C25700, RO:0002577, ssn:System, sumo:ComputationalSystem, WIKIDATA:Q58778</td>
+</tr>
+<tr>
+<td>narrow</td>
+<td>CSO:computational_grid, CSO:computational_resource, CSO:computational_power, REPR:ComputationalTool, schema:SoftwareApplication, SIO:000097, SIO:000602</td>
 </tr>
 <tr>
 <td>broad</td>
@@ -381,15 +399,27 @@ description: An entity that intends to perform some functions, interacting with 
   its environment. A system is structurally composed of a set of components bound
   together.
 from_schema: https://w3id.org/lmodel/generic
+aliases:
+- ComputationalEntity
 exact_mappings:
 - csrc:system
 - NCIT:C25700
 - RO:0002577
 - ssn:System
+- sumo:ComputationalSystem
 - WIKIDATA:Q58778
+narrow_mappings:
+- CSO:computational_grid
+- CSO:computational_resource
+- CSO:computational_power
+- REPR:ComputationalTool
+- schema:SoftwareApplication
+- SIO:000097
+- SIO:000602
 broad_mappings:
 - WIKIDATA:Q99527517
 is_a: NamedThing
+abstract: true
 mixins:
 - ThingWithTaxon
 
@@ -403,15 +433,27 @@ description: An entity that intends to perform some functions, interacting with 
   its environment. A system is structurally composed of a set of components bound
   together.
 from_schema: https://w3id.org/lmodel/generic
+aliases:
+- ComputationalEntity
 exact_mappings:
 - csrc:system
 - NCIT:C25700
 - RO:0002577
 - ssn:System
+- sumo:ComputationalSystem
 - WIKIDATA:Q58778
+narrow_mappings:
+- CSO:computational_grid
+- CSO:computational_resource
+- CSO:computational_power
+- REPR:ComputationalTool
+- schema:SoftwareApplication
+- SIO:000097
+- SIO:000602
 broad_mappings:
 - WIKIDATA:Q99527517
 is_a: NamedThing
+abstract: true
 mixins:
 - ThingWithTaxon
 attributes:
@@ -578,10 +620,10 @@ attributes:
     description: "Name of the high level OntologyClass in which this entity is categorized.\
       \ Corresponds to the label for the base entity type class.\n * In a neo4j database\
       \ this MAY correspond to the neo4j label tag.\n * In an RDF database it should\
-      \ be a universal model class URI.\nThis field is multi-valued. It should include\
-      \ values for ancestors of the universal class\nIn an RDF database, nodes will\
-      \ typically have an rdf:type triples. This can be to the most specific base\
-      \ class, or potentially to a class more specific than something in base."
+      \ be a generic-model class URI.\nThis field is multi-valued. It should include\
+      \ values for ancestors of the generic-model class\nIn an RDF database, nodes\
+      \ will typically have an rdf:type triples. This can be to the most specific\
+      \ base class, or potentially to a class more specific than something in base."
     from_schema: https://w3id.org/lmodel/generic
     rank: 1000
     is_a: type
@@ -596,7 +638,7 @@ attributes:
     is_class_field: true
     range: category type
     required: true
-    pattern: ^universal:[A-Z][A-Za-z]+$
+    pattern: ^generic:[A-Z][A-Za-z]+$
   type:
     name: type
     description: Clasification of an entity, or anchoring point (of a name) in taxonomy
